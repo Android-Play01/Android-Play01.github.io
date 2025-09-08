@@ -13,7 +13,7 @@
     .chip { background: rgba(255,255,255,0.03); padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
     table td, table th { border-bottom: 1px solid rgba(255,255,255,0.03); }
     .small-muted { color: #9ca3af; font-size: .85rem }
-    .selected-player-row { border-left: 3px solid #f97316; }
+    .selected-player-row { background-color: rgba(249, 115, 22, 0.15) !important; border-left: 3px solid #f97316; }
 
     /* Estilos para los bordes de ranking */
     .rank-1-border { border-left: 3px solid #FFD700; /* Oro */ }
@@ -46,72 +46,60 @@
       position: absolute;
       bottom: -4px;
       right: -10px;
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       border-radius: 9999px;
       padding: 2px;
       background: rgba(0,0,0,0.5);
       backdrop-filter: blur(2px);
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
+      justify-content: center; }
     .rank-badge img {
       width: 100%;
-      height: 100%;
-    }
+      height: 100%; }
 
     /* Adjust badge size and position for Top 3 */
     .top3-img-container .rank-badge {
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       right: -16px;
       bottom: -4px;
     }
 
     /* Estilos para el buscador de personajes */
     .character-select-container {
-      position: relative;
-    }
+      position: relative; }
     .character-input {
       padding: 8px 12px;
       border: 1px solid #4a5568;
-      background-color: #1a202c;
-      border-radius: 10px;
+      background-color: #1a202c; border-radius: 10px;
       width: 100%;
     }
     .character-list {
       position: absolute;
-      top: 100%;
-      left: 0;
+      top: 100%; left: 0;
       right: 0;
       z-index: 10;
       background-color: #1a202c;
       border: 1px solid #4a5568;
       border-top: none;
-      border-radius: 0 0 10px 10px;
-      max-height: 200px;
+      border-radius: 0 0 10px 10px; max-height: 200px;
       overflow-y: auto;
     }
     .character-list-item {
       padding: 8px 12px;
-      cursor: pointer;
-      color: white;
+      cursor: pointer; color: white;
     }
     .character-list-item:hover {
-      background-color: #2d3748;
-    }
+      background-color: #2d3748; }
     .character-selected {
       background-color: #f97316;
       color: black;
       font-weight: 600;
-      border-radius: 10px;
-      padding: 8px 12px;
+      border-radius: 10px; padding: 8px 12px;
     }
     .result-cell-player1, .result-cell-player2 {
       padding: 8px 12px;
-      border-radius: 10px;
-      text-align: center;
+      border-radius: 10px; text-align: center;
       transition: background-color 0.3s ease;
     }
     .result-cell-player1.winner-color {
@@ -121,29 +109,24 @@
       background-color: rgba(239, 68, 68, 0.2); /* red-500 with opacity */
     }
     .result-cell-player2.winner-color {
-      background-color: rgba(34, 197, 94, 0.2);
-    }
+      background-color: rgba(34, 197, 94, 0.2); }
     .result-cell-player2.loser-color {
-      background-color: rgba(239, 68, 68, 0.2);
-    }
+      background-color: rgba(239, 68, 68, 0.2); }
 
     /* Player profile avatar zoom on hover */
     .player-profile-link:hover .player-avatar-img-zoom { transform: scale(1.1); transition: transform 0.2s ease-in-out; }
     
     .profile-avatar {
-      width: 90px;
-      height: 90px;
+      width: 90px; height: 90px;
       border-radius: 1.5rem;
       object-fit: cover;
     }
     .profile-tabs button.active {
-      background-color: rgba(255,255,255,0.05);
-      border-bottom: 2px solid #f97316;
+      background-color: rgba(255,255,255,0.05); border-bottom: 2px solid #f97316;
       font-weight: bold;
     }
     .profile-tabs button {
-      border-bottom: 2px solid transparent;
-      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent; padding-bottom: 0.5rem;
     }
     
     /* Hover effects for ranking row */
@@ -153,37 +136,38 @@
 
     /* Hover effect for name and avatar when inside ranking row*/
     #rankingBody .profile-link:hover .player-avatar-img-zoom {
-      transform: scale(1.1);
-      transition: transform 0.2s ease-in-out;
+      transform: scale(1.1); transition: transform 0.2s ease-in-out;
     }
     #rankingBody .profile-link:hover .player-name-text {
       color: #f97316; /* Naranja */
-      transition: color 0.2s ease-in-out;
-    }
+      transition: color 0.2s ease-in-out; }
     
     /* Adjust the hitbox for the ranking table profile link */
     #rankingBody .profile-link {
-        display: inline-flex;
-        cursor: pointer;
+        display: inline-flex; cursor: pointer;
     }
 
     .clickable-profile-opponent {
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
+        cursor: pointer; transition: background-color 0.2s ease-in-out;
     }
     .clickable-profile-opponent:hover {
-        background-color: rgba(249, 115, 22, 0.1);
-    }
+        background-color: rgba(249, 115, 22, 0.1); }
     
     /* Versus Button Style */
     .btn-versus {
-      background: linear-gradient(135deg, #16a34a 49.9%, #f97316 50.1%);
-      border-color: rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, #16a34a 49.9%, #f97316 50.1%); border-color: rgba(255,255,255,0.1);
       transition: all 0.2s;
     }
     .btn-versus:hover {
-      opacity: 0.9;
+      opacity: 0.9; }
+    
+    /* --- INICIO DE LA MEJORA: Estilo para botones deshabilitados --- */
+    button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        background: #4a5568;
     }
+    /* --- FIN DE LA MEJORA --- */
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -261,7 +245,7 @@
           <h3 class="font-semibold">Esquema de puntuación</h3>
           <div class="mt-3 text-center small-muted space-y-3">
             <div>
-              <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
+               <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
               <div class="grid grid-cols-3 gap-2">
                 <div class="p-2 rounded-lg border">
                   <div>FT3</div>
@@ -363,7 +347,6 @@
     let selectedPlayers = [];
 
     const JSON_URL = 'https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json';
-    
     // Función para cargar los datos desde GitHub y luego renderizar la página
     async function loadAndRenderData() {
         try {
@@ -372,15 +355,12 @@
                 throw new Error(`Error HTTP: ${response.status}`);
             }
             const data = await response.json();
-
             // Asignar los datos cargados a nuestras variables
             players = data.players || [];
             ligaMatches = data.ligaMatches || [];
             allMatches = data.allMatches || [];
-
             // Una vez que tenemos los datos, llamamos a la función para renderizar todo
             renderAll();
-
         } catch (error) {
             console.error("No se pudieron cargar los datos de la liga:", error);
             // Mostrar un mensaje de error en la UI
@@ -398,7 +378,6 @@
       ft5: { perRound: 0.6, winnerBonus: 0 },
       ft10: { perRound: 0.5, winnerBonus: 0 }
     };
-    
     const RANK_BONUS = {
       'S': 2.5,
       'A': 2.5,
@@ -407,7 +386,6 @@
       'D': 1.0,
       'E': 0.5
     };
-
     const RANK_IMAGES = {
         'S': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
         'A': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
@@ -416,7 +394,6 @@
         'D': 'https://i.postimg.cc/zfy9Qg45/rank2.png',
         'E': 'https://i.postimg.cc/nhRyTkR0/rank1.png'
     };
-    
     const CHARACTER_IMAGES = {
         'Akuma': 'https://i.postimg.cc/WpqZ5Lby/akuma.png',
         'Alex': 'https://i.postimg.cc/909q0Tn2/alex.png',
@@ -438,11 +415,9 @@
         'Yang': 'https://i.postimg.cc/rpbm4sWw/yang.png',
         'Q': 'https://i.postimg.cc/Bb2X43jQ/q.png',
     };
-
     const ROSTER_3RD_STRIKE = [
         'Akuma', 'Alex', 'Chun-Li', 'Dudley', 'Elena', 'Hugo', 'Ibuki', 'Ken', 'Makoto', 'Necro', 'Oro', 'Remy', 'Ryu', 'Sean', 'Twelve', 'Urien', 'Yun', 'Yang', 'Q'
     ];
-
     const HISTORY_LIMIT = 7;
     const PROFILE_LIST_LIMIT = 4;
 
@@ -459,6 +434,7 @@
     const quickAddMatchFT3Btn = document.getElementById('quickAddMatchFT3');
     const quickAddMatchFT5Btn = document.getElementById('quickAddMatchFT5');
     const quickAddMatchFT10Btn = document.getElementById('quickAddMatchFT10');
+    const btnVersus = document.getElementById('btnVersus');
     const searchInput = document.getElementById('search');
     const top3Container = document.getElementById('top3Container');
     const top3MoreBtnContainer = document.getElementById('top3MoreBtnContainer');
@@ -469,6 +445,24 @@
     // LÓGICA DE RENDERIZADO Y UI
     // =================================================================
     
+    // --- INICIO DE LA MEJORA: Lógica para seleccionar jugadores ---
+    function togglePlayerSelection(id) {
+        const index = selectedPlayers.indexOf(id);
+        if (index > -1) {
+            selectedPlayers.splice(index, 1); // Deseleccionar
+        } else {
+            if (selectedPlayers.length < 2) {
+                selectedPlayers.push(id); // Seleccionar
+            } else {
+                // Opcional: Reemplazar el último seleccionado
+                selectedPlayers.shift();
+                selectedPlayers.push(id);
+            }
+        }
+        renderAll();
+    }
+    // --- FIN DE LA MEJORA ---
+
     function renderAll(){
       // ranking
       const active = players.filter(p=>p.activos!==false)
@@ -493,13 +487,24 @@
           const tr = document.createElement('tr');
           tr.dataset.id = p.id;
           tr.className = `${isSelected ? 'selected-player-row' : ''} ${rankBorderClass} cursor-pointer`;
+          
+          // --- INICIO DE LA MEJORA: Se añade el evento onclick a la fila completa ---
+          tr.onclick = (e) => {
+              // Evita que el click se propague a los botones dentro de la fila
+              if (e.target.closest('button') || e.target.closest('.profile-link')) {
+                  return;
+              }
+              togglePlayerSelection(p.id);
+          };
+          // --- FIN DE LA MEJORA ---
+          
           tr.innerHTML = `
             <td class="px-3 py-3 font-semibold flex items-center gap-2">
               <input type="checkbox" ${isSelected ? 'checked' : ''} class="pointer-events-none" />
               <span>${i+1}</span>
             </td>
             <td class="px-3 py-3">
-              <div class="profile-link flex items-center gap-3" onclick="showPlayerProfile('${p.id}')">
+              <div class="profile-link flex items-center gap-3" onclick="event.stopPropagation(); showPlayerProfile('${p.id}')">
                 <div class="player-avatar-container">
                   <div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center player-avatar-img-zoom">
                     ${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}
@@ -517,8 +522,8 @@
             <td class="px-3 py-3">${p.perdidos}</td>
             <td class="px-3 py-3">
               <div class="flex gap-2">
-                <button data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button>
-                <button data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button>
+                <button onclick="event.stopPropagation();" data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button>
+                <button onclick="event.stopPropagation();" data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button>
               </div>
             </td>
           `
@@ -626,6 +631,8 @@
     function bindActionButtons() {
         // bind action buttons
       document.querySelectorAll('.editPlayer').forEach(btn=>btn.onclick = ()=>{ const id=btn.dataset.id; showEditPlayer(id); })
+      document.querySelectorAll('.deletePlayer').forEach(btn => btn.onclick = () => alert("La función de borrar está deshabilitada."));
+
       if(document.getElementById('showMoreLigaBtn')) {
         document.getElementById('showMoreLigaBtn').onclick = () => showHistoryModal(ligaMatches, 'Historial de liga actual');
       }
@@ -706,12 +713,9 @@
         }, 10);
     }
     
-    // El resto de tus funciones (showPlayerStatsModal, showPlayerProfile, etc.) deben ir aquí.
-    // Como el código estaba cortado, las he omitido, pero asegúrate de pegarlas aquí.
-    // Por ejemplo:
     function closeModal() {
         const root = document.getElementById('modalRoot');
-        const modalContent = document.getElementById('historyModalContent') || document.querySelector('[id$="ModalContent"]');
+        const modalContent = root.querySelector('.transform'); // Target any modal content
         if (modalContent) {
             modalContent.classList.add('scale-95', 'opacity-0');
             setTimeout(() => {
@@ -723,22 +727,159 @@
              document.body.classList.remove('modal-open');
         }
     }
-
-    function updateQuickMatchButtons(){
-        // Dummy function para que no falle.
-    }
     
+    // --- INICIO DE LA MEJORA: Lógica de botones de acciones rápidas y Versus ---
+    function updateQuickMatchButtons(){
+        const twoPlayersSelected = selectedPlayers.length === 2;
+        quickAddMatchFT3Btn.disabled = !twoPlayersSelected;
+        quickAddMatchFT5Btn.disabled = !twoPlayersSelected;
+        quickAddMatchFT10Btn.disabled = !twoPlayersSelected;
+        btnVersus.disabled = !twoPlayersSelected;
+    }
+    // --- FIN DE LA MEJORA ---
+    
+    // --- INICIO DE LA MEJORA: Funciones de modales restauradas ---
     function showEditPlayer(id){
-        alert(`Funcionalidad 'Editar Jugador' (ID: ${id}) deshabilitada en modo lectura.`);
+        const player = players.find(p => p.id === id);
+        if (!player) return;
+
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        root.innerHTML = `
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+                <div id="editModalContent" class="relative w-full max-w-md glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    <h3 class="text-lg font-semibold mb-4">Editar Jugador</h3>
+                    <form onsubmit="event.preventDefault(); alert('Guardado deshabilitado'); closeModal();">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400">Nombre</label>
+                                <input type="text" value="${player.nombre}" class="mt-1 w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400">URL del Avatar</label>
+                                <input type="text" value="${player.avatarUrl || ''}" class="mt-1 w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
+                            </div>
+                             <div>
+                                <label class="block text-sm font-medium text-slate-400">Rango</label>
+                                <select class="mt-1 w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
+                                    ${Object.keys(RANK_BONUS).map(r => `<option value="${r}" ${player.rango === r ? 'selected' : ''}>${r}</option>`).join('')}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end gap-3">
+                            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl border">Cancelar</button>
+                            <button type="submit" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-semibold">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>`;
+        setTimeout(() => {
+          document.getElementById('editModalContent').classList.remove('scale-95', 'opacity-0');
+        }, 10);
     }
 
     function showPlayerStatsModal(){
-        alert(`Funcionalidad 'Ver más estadísticas' deshabilitada en modo lectura.`);
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        let statsRows = '';
+        const sorted = [...players].sort((a,b)=> (b.puntos - a.puntos));
+
+        sorted.forEach(p => {
+            const winRate = p.jugados > 0 ? ((p.ganados / p.jugados) * 100).toFixed(1) : 0;
+            let winRateClass = 'text-slate-400';
+            if (winRate >= 60) winRateClass = 'win-rate-green';
+            else if (winRate >= 40) winRateClass = 'win-rate-yellow';
+            else if (p.jugados > 0) winRateClass = 'win-rate-red';
+
+            statsRows += `
+                <tr>
+                    <td class="px-3 py-2">${p.nombre}</td>
+                    <td class="px-3 py-2 font-medium">${p.puntos.toFixed(2)}</td>
+                    <td class="px-3 py-2">${p.jugados}</td>
+                    <td class="px-3 py-2">${p.ganados}</td>
+                    <td class="px-3 py-2">${p.perdidos}</td>
+                    <td class="px-3 py-2 font-semibold ${winRateClass}">${winRate}%</td>
+                </tr>
+            `;
+        });
+
+        root.innerHTML = `
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+                <div id="statsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    <h3 class="text-lg font-semibold mb-4">Estadísticas de Jugadores</h3>
+                    <table class="w-full text-left text-sm">
+                        <thead class="text-slate-400 text-xs">
+                            <tr>
+                                <th class="px-3 py-2">Jugador</th>
+                                <th class="px-3 py-2">Puntos</th>
+                                <th class="px-3 py-2">PJ</th>
+                                <th class="px-3 py-2">G</th>
+                                <th class="px-3 py-2">P</th>
+                                <th class="px-3 py-2">Win Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>${statsRows}</tbody>
+                    </table>
+                     <div class="mt-4 text-right">
+                        <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+                    </div>
+                </div>
+            </div>`;
+        setTimeout(() => {
+          document.getElementById('statsModalContent').classList.remove('scale-95', 'opacity-0');
+        }, 10);
     }
 
     function showPlayerProfile(id){
-        alert(`Funcionalidad 'Ver Perfil' (ID: ${id}) deshabilitada en modo lectura.`);
+        const player = players.find(p => p.id === id);
+        if (!player) return;
+
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        const winRate = player.jugados > 0 ? ((player.ganados / player.jugados) * 100).toFixed(1) : 0;
+        let winRateClass = 'text-slate-400';
+        if (winRate >= 60) winRateClass = 'win-rate-green';
+        else if (winRate >= 40) winRateClass = 'win-rate-yellow';
+        else if (player.jugados > 0) winRateClass = 'win-rate-red';
+        
+        root.innerHTML = `
+         <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+            <div id="profileModalContent" class="relative w-full max-w-lg glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                <div class="flex items-start gap-4">
+                    <div class="profile-avatar bg-slate-800 flex items-center justify-center">
+                        ${player.avatarUrl ? `<img src="${player.avatarUrl}" class="h-full w-full object-cover rounded-2xl"/>` : '👤'}
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold">${player.nombre}</h3>
+                        <div class="small-muted">Rango: ${player.rango || 'N/A'}</div>
+                        <div class="mt-2 flex gap-4 text-center">
+                            <div>
+                                <div class="font-bold text-lg">${player.puntos.toFixed(2)}</div>
+                                <div class="small-muted text-xs">Puntos</div>
+                            </div>
+                             <div>
+                                <div class="font-bold text-lg ${winRateClass}">${winRate}%</div>
+                                <div class="small-muted text-xs">Win Rate</div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-lg">${player.ganados}G - ${player.perdidos}P</div>
+                                <div class="small-muted text-xs">Partidas</div>
+                            </div>
+                        </div>
+                    </div>
+                     <button onclick="closeModal()" class="px-3 py-1 rounded-xl border text-xs">Cerrar</button>
+                </div>
+                <div class="mt-4 small-muted">Perfil del jugador (funcionalidad en desarrollo).</div>
+            </div>
+        </div>`;
+         setTimeout(() => {
+          document.getElementById('profileModalContent').classList.remove('scale-95', 'opacity-0');
+        }, 10);
     }
+    // --- FIN DE LA MEJORA ---
 
 
     // =================================================================
@@ -750,7 +891,7 @@
         loadAndRenderData();
 
         // Puedes agregar aquí los listeners de los botones principales que no dependen de los datos
-        document.getElementById('btnAddPlayer').onclick = () => alert("La función de añadir jugador está deshabilitada en esta versión de solo lectura.");
+        document.getElementById('btnAddPlayer').onclick = () => alert("La función de añadir jugador está deshabilitada.");
         // etc.
     });
 
