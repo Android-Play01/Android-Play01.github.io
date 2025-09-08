@@ -347,14 +347,10 @@
   <script>
     /**
      * App en vanilla JS
-     * - Almacena players, matches, schema en localStorage
      * - Funciones: agregar jugador, registrar FT5, export/import, resetear
      */
 
-    const LS_PLAYERS = 'liga3s_players_v1';
-    const LS_LIGA_MATCHES = 'liga3s_liga_matches_v1';
-    const LS_ALL_MATCHES = 'liga3s_all_matches_v1';
-
+   
     // Puntuación fija
     const SCORING = {
       ft3: { perRound: 0.67, winnerBonus: 0 },
@@ -416,16 +412,7 @@
     function nowISO(){return new Date().toISOString()}
     function fmtDate(iso){return new Date(iso).toLocaleString()}
 
-    // load/save
-    function load(key, fallback){try{const r=localStorage.getItem(key);return r?JSON.parse(r):fallback}catch(e){return fallback}}
-    function save(key,v){localStorage.setItem(key,JSON.stringify(v))}
-
-    // state
-    let players = load(LS_PLAYERS, []);
-    let ligaMatches = load(LS_LIGA_MATCHES, load('liga3s_season_matches_v1', [])); // Support old key for migration
-    let allMatches = load(LS_ALL_MATCHES, []);
-    let selectedPlayers = [];
-
+ 
     // UI refs
     const rankingBody = document.getElementById('rankingBody');
     const ligaHistoryBody = document.getElementById('ligaHistoryBody');
@@ -593,7 +580,6 @@
       metaSummary.textContent = `${players.length} jugadores · ${ligaMatches.length} sets`
 
       // bind action buttons
-      document.querySelectorAll('.deletePlayer').forEach(btn=>btn.onclick = ()=>{ if(confirm('¿Borrar jugador? Esta acción no elimina el historial.')){ const id=btn.dataset.id; players = players.filter(p=>p.id!==id); save(LS_PLAYERS,players); renderAll()} })
       document.querySelectorAll('.editPlayer').forEach(btn=>btn.onclick = ()=>{ const id=btn.dataset.id; showEditPlayer(id); })
       if(document.getElementById('showMoreLigaBtn')) {
         document.getElementById('showMoreLigaBtn').onclick = () => showHistoryModal(ligaMatches, 'Historial de liga actual');
@@ -1323,7 +1309,6 @@
         const avatar = document.getElementById('newAvatar').value.trim();
         const rango = document.getElementById('newRank').value;
         const nuevo = { id: uid(), nombre: nombre[0].toUpperCase()+nombre.slice(1), avatarUrl: avatar||undefined, puntos:0, jugados:0, ganados:0, perdidos:0, rondasGanadas: 0, rondasPerdidas: 0, activos:true, rango: rango||'E' }
-        players.push(nuevo); save(LS_PLAYERS,players); closeModal(); renderAll();
       }
     }
 
@@ -1381,7 +1366,6 @@
           }
           return p;
         });
-        save(LS_PLAYERS, players);
         closeModal();
         renderAll();
       };
@@ -1654,9 +1638,6 @@
                 return player;
             });
 
-            save(LS_LIGA_MATCHES, ligaMatches);
-            save(LS_ALL_MATCHES, allMatches);
-            save(LS_PLAYERS, players);
             closeModal();
             selectedPlayers = [];
             renderAll();
@@ -1712,9 +1693,7 @@
             players=d.players;
             allMatches=d.allMatches;
             ligaMatches=d.ligaMatches || d.seasonMatches;
-            save(LS_PLAYERS,players);
-            save(LS_ALL_MATCHES,allMatches);
-            save(LS_LIGA_MATCHES,ligaMatches);
+          
             closeModal();
             renderAll();
           } else alert('Archivo inválido');
@@ -1727,9 +1706,7 @@
       if(!confirm('¿Resetear puntos y estadísticas de todos los jugadores de la liga actual?')) return;
       players = players.map(p=>({...p, puntos:0,jugados:0,ganados:0,perdidos:0,rondasGanadas:0,rondasPerdidas:0}));
       ligaMatches = [];
-      save(LS_PLAYERS,players);
-      save(LS_LIGA_MATCHES,ligaMatches);
-      renderAll()
+         renderAll()
     }
 
     function clearHistory(){
@@ -1737,9 +1714,7 @@
       allMatches=[];
       ligaMatches=[];
       players = players.map(p=>({...p, puntos:0,jugados:0,ganados:0,perdidos:0,rondasGanadas:0,rondasPerdidas:0}));
-      save(LS_ALL_MATCHES,allMatches);
-      save(LS_LIGA_MATCHES,ligaMatches);
-      save(LS_PLAYERS,players);
+     
       renderAll()
     }
     
@@ -1987,32 +1962,26 @@
       }
     });
 
-    // initial save if empty
-if(players.length === 0 && ligaMatches.length === 0) {
-  // Intenta cargar el JSON desde la URL de GitHub
-  fetch('https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json')
-    .then(response => response.json())
-    .then(data => {
-      players = data.players;
-      ligaMatches = data.allMatches.filter(m => m.ftType !== 'all');
-      allMatches = data.allMatches;
-      
-      save(LS_PLAYERS, players);
-      save(LS_LIGA_MATCHES, ligaMatches);
-      save(LS_ALL_MATCHES, allMatches);
-      
-      renderAll();
-      console.log("Datos del JSON cargados correctamente.");
-    })
-    .catch(error => {
-      console.error("Error al cargar el archivo JSON:", error);
-      save(LS_PLAYERS, []);
-      save(LS_LIGA_MATCHES, []);
-      save(LS_ALL_MATCHES, []);
-      renderAll();
+    let players = [];
+let ligaMatches = [];
+let allMatches = [];
+
+// Cargar los datos del JSON cada vez que se carga la página
+fetch('https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json')
+  .then(response => response.json())
+  .then(data => {
+    players = data.players;
+    ligaMatches = data.allMatches.filter(m => m.ftType !== 'all');
+    allMatches = data.allMatches;
+    renderAll();
+    console.log("Datos del JSON cargados correctamente.");
+  })
+  .catch(error => {
+    console.error("Error al cargar el archivo JSON:", error);
+    alert("No se pudieron cargar los datos de la liga. Vuelve a intentarlo más tarde.");
+  });
     });
 } else {
-  // Si ya hay datos en localStorage, no se hace nada
   renderAll();
 }
 
@@ -2022,3 +1991,4 @@ if(players.length === 0 && ligaMatches.length === 0) {
 </body>
 
 </html>
+
