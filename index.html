@@ -13,7 +13,7 @@
     .chip { background: rgba(255,255,255,0.03); padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
     table td, table th { border-bottom: 1px solid rgba(255,255,255,0.03); }
     .small-muted { color: #9ca3af; font-size: .85rem }
-    .selected-player-row { background-color: rgba(249, 115, 22, 0.15) !important; border-left: 3px solid #f97316; }
+    .selected-player-row { border-left: 3px solid #f97316; background-color: rgba(249, 115, 22, 0.1); }
 
     /* Estilos para los bordes de ranking */
     .rank-1-border { border-left: 3px solid #FFD700; /* Oro */ }
@@ -46,60 +46,72 @@
       position: absolute;
       bottom: -4px;
       right: -10px;
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       border-radius: 9999px;
       padding: 2px;
       background: rgba(0,0,0,0.5);
       backdrop-filter: blur(2px);
       display: flex;
       align-items: center;
-      justify-content: center; }
+      justify-content: center;
+    }
     .rank-badge img {
       width: 100%;
-      height: 100%; }
+      height: 100%;
+    }
 
     /* Adjust badge size and position for Top 3 */
     .top3-img-container .rank-badge {
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       right: -16px;
       bottom: -4px;
     }
 
     /* Estilos para el buscador de personajes */
     .character-select-container {
-      position: relative; }
+      position: relative;
+    }
     .character-input {
       padding: 8px 12px;
       border: 1px solid #4a5568;
-      background-color: #1a202c; border-radius: 10px;
+      background-color: #1a202c;
+      border-radius: 10px;
       width: 100%;
     }
     .character-list {
       position: absolute;
-      top: 100%; left: 0;
+      top: 100%;
+      left: 0;
       right: 0;
       z-index: 10;
       background-color: #1a202c;
       border: 1px solid #4a5568;
       border-top: none;
-      border-radius: 0 0 10px 10px; max-height: 200px;
+      border-radius: 0 0 10px 10px;
+      max-height: 200px;
       overflow-y: auto;
     }
     .character-list-item {
       padding: 8px 12px;
-      cursor: pointer; color: white;
+      cursor: pointer;
+      color: white;
     }
     .character-list-item:hover {
-      background-color: #2d3748; }
+      background-color: #2d3748;
+    }
     .character-selected {
       background-color: #f97316;
       color: black;
       font-weight: 600;
-      border-radius: 10px; padding: 8px 12px;
+      border-radius: 10px;
+      padding: 8px 12px;
     }
     .result-cell-player1, .result-cell-player2 {
       padding: 8px 12px;
-      border-radius: 10px; text-align: center;
+      border-radius: 10px;
+      text-align: center;
       transition: background-color 0.3s ease;
     }
     .result-cell-player1.winner-color {
@@ -109,24 +121,29 @@
       background-color: rgba(239, 68, 68, 0.2); /* red-500 with opacity */
     }
     .result-cell-player2.winner-color {
-      background-color: rgba(34, 197, 94, 0.2); }
+      background-color: rgba(34, 197, 94, 0.2);
+    }
     .result-cell-player2.loser-color {
-      background-color: rgba(239, 68, 68, 0.2); }
+      background-color: rgba(239, 68, 68, 0.2);
+    }
 
     /* Player profile avatar zoom on hover */
     .player-profile-link:hover .player-avatar-img-zoom { transform: scale(1.1); transition: transform 0.2s ease-in-out; }
     
     .profile-avatar {
-      width: 90px; height: 90px;
+      width: 90px;
+      height: 90px;
       border-radius: 1.5rem;
       object-fit: cover;
     }
     .profile-tabs button.active {
-      background-color: rgba(255,255,255,0.05); border-bottom: 2px solid #f97316;
+      background-color: rgba(255,255,255,0.05);
+      border-bottom: 2px solid #f97316;
       font-weight: bold;
     }
     .profile-tabs button {
-      border-bottom: 2px solid transparent; padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.5rem;
     }
     
     /* Hover effects for ranking row */
@@ -136,38 +153,37 @@
 
     /* Hover effect for name and avatar when inside ranking row*/
     #rankingBody .profile-link:hover .player-avatar-img-zoom {
-      transform: scale(1.1); transition: transform 0.2s ease-in-out;
+      transform: scale(1.1);
+      transition: transform 0.2s ease-in-out;
     }
     #rankingBody .profile-link:hover .player-name-text {
       color: #f97316; /* Naranja */
-      transition: color 0.2s ease-in-out; }
+      transition: color 0.2s ease-in-out;
+    }
     
     /* Adjust the hitbox for the ranking table profile link */
     #rankingBody .profile-link {
-        display: inline-flex; cursor: pointer;
+        display: inline-flex;
+        cursor: pointer;
     }
 
     .clickable-profile-opponent {
-        cursor: pointer; transition: background-color 0.2s ease-in-out;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
     }
     .clickable-profile-opponent:hover {
-        background-color: rgba(249, 115, 22, 0.1); }
+        background-color: rgba(249, 115, 22, 0.1);
+    }
     
     /* Versus Button Style */
     .btn-versus {
-      background: linear-gradient(135deg, #16a34a 49.9%, #f97316 50.1%); border-color: rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, #16a34a 49.9%, #f97316 50.1%);
+      border-color: rgba(255,255,255,0.1);
       transition: all 0.2s;
     }
     .btn-versus:hover {
-      opacity: 0.9; }
-    
-    /* --- INICIO DE LA MEJORA: Estilo para botones deshabilitados --- */
-    button:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-        background: #4a5568;
+      opacity: 0.9;
     }
-    /* --- FIN DE LA MEJORA --- */
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -211,7 +227,7 @@
               </tr>
             </thead>
             <tbody id="rankingBody">
-                <tr><td colspan="7" class="px-3 py-6 text-slate-400 text-center">Cargando datos...</td></tr>
+              <tr><td colspan="7" class="px-3 py-6 text-slate-400 text-center">Cargando datos...</td></tr>
             </tbody>
           </table>
         </div>
@@ -245,7 +261,7 @@
           <h3 class="font-semibold">Esquema de puntuación</h3>
           <div class="mt-3 text-center small-muted space-y-3">
             <div>
-               <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
+              <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
               <div class="grid grid-cols-3 gap-2">
                 <div class="p-2 rounded-lg border">
                   <div>FT3</div>
@@ -333,51 +349,73 @@
   <script>
     /**
      * App en vanilla JS
-     * - Carga de datos desde JSON en GitHub
+     * - Carga datos iniciales desde GitHub JSON.
+     * - Guarda los cambios en localStorage para persistencia de sesión.
      */
 
-    // =================================================================
-    // INICIO DE LA LÓGICA DE DATOS
-    // =================================================================
+    // --- INICIO DE LA MEJORA: Lógica de Carga y Guardado ---
+    const JSON_URL = 'https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json';
+    const LS_PLAYERS = 'liga3s_players_v1';
+    const LS_LIGA_MATCHES = 'liga3s_liga_matches_v1';
+    const LS_ALL_MATCHES = 'liga3s_all_matches_v1';
 
-    // Declaración de variables principales. Se llenarán con el fetch.
+    // state
     let players = [];
     let ligaMatches = [];
     let allMatches = [];
     let selectedPlayers = [];
 
-    const JSON_URL = 'https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json';
-    // Función para cargar los datos desde GitHub y luego renderizar la página
-    async function loadAndRenderData() {
+    // Funciones para leer y escribir en localStorage
+    function load(key, fallback){try{const r=localStorage.getItem(key);return r?JSON.parse(r):fallback}catch(e){return fallback}}
+    function save(key,v){localStorage.setItem(key,JSON.stringify(v))}
+    
+    // Función principal de inicialización
+    async function initializeApp() {
+      // Intenta cargar desde localStorage primero
+      const localPlayers = load(LS_PLAYERS);
+      
+      if (localPlayers && localPlayers.length > 0) {
+        // Si hay datos locales, úsalos
+        console.log("Cargando datos desde localStorage.");
+        players = localPlayers;
+        ligaMatches = load(LS_LIGA_MATCHES, []);
+        allMatches = load(LS_ALL_MATCHES, []);
+        renderAll();
+      } else {
+        // Si no hay datos locales, carga desde GitHub
+        console.log("localStorage vacío. Cargando datos iniciales desde GitHub.");
         try {
-            const response = await fetch(JSON_URL);
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
-            }
+            const response = await fetch(`${JSON_URL}?cachebust=${new Date().getTime()}`); // Evita el caché
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+            
             const data = await response.json();
-            // Asignar los datos cargados a nuestras variables
             players = data.players || [];
             ligaMatches = data.ligaMatches || [];
             allMatches = data.allMatches || [];
-            // Una vez que tenemos los datos, llamamos a la función para renderizar todo
+            
+            // Guarda los datos iniciales en localStorage para futuros usos
+            save(LS_PLAYERS, players);
+            save(LS_LIGA_MATCHES, ligaMatches);
+            save(LS_ALL_MATCHES, allMatches);
+
             renderAll();
         } catch (error) {
-            console.error("No se pudieron cargar los datos de la liga:", error);
-            // Mostrar un mensaje de error en la UI
-            rankingBody.innerHTML = `<tr><td colspan="7" class="px-3 py-6 text-red-400 text-center">Error al cargar los datos desde GitHub. Revisa la consola para más detalles.</td></tr>`;
+            console.error("No se pudieron cargar los datos de la liga desde GitHub:", error);
+            rankingBody.innerHTML = `<tr><td colspan="7" class="px-3 py-6 text-red-400 text-center">Error al cargar los datos iniciales desde GitHub. Revisa la consola.</td></tr>`;
         }
+      }
     }
+    // --- FIN DE LA MEJORA ---
 
 
-    // =================================================================
-    // CONSTANTES Y CONFIGURACIÓN
-    // =================================================================
-    
+    // Puntuación fija
     const SCORING = {
       ft3: { perRound: 0.67, winnerBonus: 0 },
       ft5: { perRound: 0.6, winnerBonus: 0 },
       ft10: { perRound: 0.5, winnerBonus: 0 }
     };
+    
+    // Bonificación por Rango
     const RANK_BONUS = {
       'S': 2.5,
       'A': 2.5,
@@ -386,6 +424,7 @@
       'D': 1.0,
       'E': 0.5
     };
+
     const RANK_IMAGES = {
         'S': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
         'A': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
@@ -394,6 +433,8 @@
         'D': 'https://i.postimg.cc/zfy9Qg45/rank2.png',
         'E': 'https://i.postimg.cc/nhRyTkR0/rank1.png'
     };
+    
+    // Character images
     const CHARACTER_IMAGES = {
         'Akuma': 'https://i.postimg.cc/WpqZ5Lby/akuma.png',
         'Alex': 'https://i.postimg.cc/909q0Tn2/alex.png',
@@ -415,9 +456,12 @@
         'Yang': 'https://i.postimg.cc/rpbm4sWw/yang.png',
         'Q': 'https://i.postimg.cc/Bb2X43jQ/q.png',
     };
+
     const ROSTER_3RD_STRIKE = [
         'Akuma', 'Alex', 'Chun-Li', 'Dudley', 'Elena', 'Hugo', 'Ibuki', 'Ken', 'Makoto', 'Necro', 'Oro', 'Remy', 'Ryu', 'Sean', 'Twelve', 'Urien', 'Yun', 'Yang', 'Q'
     ];
+
+    // Limits
     const HISTORY_LIMIT = 7;
     const PROFILE_LIST_LIMIT = 4;
 
@@ -425,7 +469,6 @@
     function nowISO(){return new Date().toISOString()}
     function fmtDate(iso){return new Date(iso).toLocaleString()}
 
- 
     // UI refs
     const rankingBody = document.getElementById('rankingBody');
     const ligaHistoryBody = document.getElementById('ligaHistoryBody');
@@ -434,35 +477,13 @@
     const quickAddMatchFT3Btn = document.getElementById('quickAddMatchFT3');
     const quickAddMatchFT5Btn = document.getElementById('quickAddMatchFT5');
     const quickAddMatchFT10Btn = document.getElementById('quickAddMatchFT10');
-    const btnVersus = document.getElementById('btnVersus');
     const searchInput = document.getElementById('search');
     const top3Container = document.getElementById('top3Container');
     const top3MoreBtnContainer = document.getElementById('top3MoreBtnContainer');
     const ligaMoreBtnContainer = document.getElementById('ligaMoreBtnContainer');
     const allHistoryMoreBtnContainer = document.getElementById('allHistoryMoreBtnContainer');
 
-    // =================================================================
-    // LÓGICA DE RENDERIZADO Y UI
-    // =================================================================
-    
-    // --- INICIO DE LA MEJORA: Lógica para seleccionar jugadores ---
-    function togglePlayerSelection(id) {
-        const index = selectedPlayers.indexOf(id);
-        if (index > -1) {
-            selectedPlayers.splice(index, 1); // Deseleccionar
-        } else {
-            if (selectedPlayers.length < 2) {
-                selectedPlayers.push(id); // Seleccionar
-            } else {
-                // Opcional: Reemplazar el último seleccionado
-                selectedPlayers.shift();
-                selectedPlayers.push(id);
-            }
-        }
-        renderAll();
-    }
-    // --- FIN DE LA MEJORA ---
-
+    // initial render
     function renderAll(){
       // ranking
       const active = players.filter(p=>p.activos!==false)
@@ -487,24 +508,13 @@
           const tr = document.createElement('tr');
           tr.dataset.id = p.id;
           tr.className = `${isSelected ? 'selected-player-row' : ''} ${rankBorderClass} cursor-pointer`;
-          
-          // --- INICIO DE LA MEJORA: Se añade el evento onclick a la fila completa ---
-          tr.onclick = (e) => {
-              // Evita que el click se propague a los botones dentro de la fila
-              if (e.target.closest('button') || e.target.closest('.profile-link')) {
-                  return;
-              }
-              togglePlayerSelection(p.id);
-          };
-          // --- FIN DE LA MEJORA ---
-          
           tr.innerHTML = `
             <td class="px-3 py-3 font-semibold flex items-center gap-2">
               <input type="checkbox" ${isSelected ? 'checked' : ''} class="pointer-events-none" />
               <span>${i+1}</span>
             </td>
             <td class="px-3 py-3">
-              <div class="profile-link flex items-center gap-3" onclick="event.stopPropagation(); showPlayerProfile('${p.id}')">
+              <div class="profile-link flex items-center gap-3">
                 <div class="player-avatar-container">
                   <div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center player-avatar-img-zoom">
                     ${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}
@@ -522,8 +532,8 @@
             <td class="px-3 py-3">${p.perdidos}</td>
             <td class="px-3 py-3">
               <div class="flex gap-2">
-                <button onclick="event.stopPropagation();" data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button>
-                <button onclick="event.stopPropagation();" data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button>
+                <button data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button>
+                <button data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button>
               </div>
             </td>
           `
@@ -557,6 +567,7 @@
         top3Container.innerHTML = '<div class="text-center w-full small-muted">No hay suficientes jugadores en el ranking.</div>';
       }
 
+      // Add "Ver más" button to the Top 3 container
       if (players.length > 0) {
         top3MoreBtnContainer.innerHTML = `<button id="showPlayerStatsBtn" class="px-4 py-2 rounded-2xl w-full border border-transparent hover:border-white transition-colors">Ver más</button>`;
       } else {
@@ -624,15 +635,9 @@
 
       metaSummary.textContent = `${players.length} jugadores · ${ligaMatches.length} sets`
 
-      bindActionButtons();
-      updateQuickMatchButtons();
-    }
-
-    function bindActionButtons() {
-        // bind action buttons
+      // bind action buttons
+      document.querySelectorAll('.deletePlayer').forEach(btn=>btn.onclick = ()=>{ if(confirm('¿Borrar jugador? Esta acción no elimina el historial.')){ const id=btn.dataset.id; players = players.filter(p=>p.id!==id); save(LS_PLAYERS,players); renderAll()} })
       document.querySelectorAll('.editPlayer').forEach(btn=>btn.onclick = ()=>{ const id=btn.dataset.id; showEditPlayer(id); })
-      document.querySelectorAll('.deletePlayer').forEach(btn => btn.onclick = () => alert("La función de borrar está deshabilitada."));
-
       if(document.getElementById('showMoreLigaBtn')) {
         document.getElementById('showMoreLigaBtn').onclick = () => showHistoryModal(ligaMatches, 'Historial de liga actual');
       }
@@ -648,6 +653,8 @@
           showPlayerProfile(playerId);
         };
       });
+
+      updateQuickMatchButtons();
     }
 
     // New history modal
@@ -712,188 +719,1299 @@
           document.getElementById('historyModalContent').classList.add('scale-100', 'opacity-100');
         }, 10);
     }
-    
-    function closeModal() {
-        const root = document.getElementById('modalRoot');
-        const modalContent = root.querySelector('.transform'); // Target any modal content
-        if (modalContent) {
-            modalContent.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                root.innerHTML = '';
-                document.body.classList.remove('modal-open');
-            }, 300);
-        } else {
-             root.innerHTML = '';
-             document.body.classList.remove('modal-open');
-        }
-    }
-    
-    // --- INICIO DE LA MEJORA: Lógica de botones de acciones rápidas y Versus ---
-    function updateQuickMatchButtons(){
-        const twoPlayersSelected = selectedPlayers.length === 2;
-        quickAddMatchFT3Btn.disabled = !twoPlayersSelected;
-        quickAddMatchFT5Btn.disabled = !twoPlayersSelected;
-        quickAddMatchFT10Btn.disabled = !twoPlayersSelected;
-        btnVersus.disabled = !twoPlayersSelected;
-    }
-    // --- FIN DE LA MEJORA ---
-    
-    // --- INICIO DE LA MEJORA: Funciones de modales restauradas ---
-    function showEditPlayer(id){
-        const player = players.find(p => p.id === id);
-        if (!player) return;
 
+    // New modal for all player stats
+    function showPlayerStatsModal() {
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
-        root.innerHTML = `
-            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
-                <div id="editModalContent" class="relative w-full max-w-md glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
-                    <h3 class="text-lg font-semibold mb-4">Editar Jugador</h3>
-                    <form onsubmit="event.preventDefault(); alert('Guardado deshabilitado'); closeModal();">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-slate-400">Nombre</label>
-                                <input type="text" value="${player.nombre}" class="mt-1 w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-400">URL del Avatar</label>
-                                <input type="text" value="${player.avatarUrl || ''}" class="mt-1 w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
-                            </div>
-                             <div>
-                                <label class="block text-sm font-medium text-slate-400">Rango</label>
-                                <select class="mt-1 w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
-                                    ${Object.keys(RANK_BONUS).map(r => `<option value="${r}" ${player.rango === r ? 'selected' : ''}>${r}</option>`).join('')}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mt-6 flex justify-end gap-3">
-                            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl border">Cancelar</button>
-                            <button type="submit" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-semibold">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>`;
-        setTimeout(() => {
-          document.getElementById('editModalContent').classList.remove('scale-95', 'opacity-0');
-        }, 10);
-    }
 
-    function showPlayerStatsModal(){
-        document.body.classList.add('modal-open');
-        const root = document.getElementById('modalRoot');
-        let statsRows = '';
-        const sorted = [...players].sort((a,b)=> (b.puntos - a.puntos));
+        const sortedPlayers = [...players].sort((a,b)=> (b.puntos - a.puntos) || (b.ganados - a.ganados) || a.nombre.localeCompare(b.nombre));
 
-        sorted.forEach(p => {
-            const winRate = p.jugados > 0 ? ((p.ganados / p.jugados) * 100).toFixed(1) : 0;
-            let winRateClass = 'text-slate-400';
-            if (winRate >= 60) winRateClass = 'win-rate-green';
-            else if (winRate >= 40) winRateClass = 'win-rate-yellow';
-            else if (p.jugados > 0) winRateClass = 'win-rate-red';
+        let tableRows = '';
+        sortedPlayers.forEach((p, i) => {
+          const totalRondas = p.rondasGanadas + p.rondasPerdidas;
+          const winRateSets = p.jugados > 0 ? (p.ganados / p.jugados) * 100 : 0;
+          const winRateRondas = totalRondas > 0 ? (p.rondasGanadas / totalRondas) * 100 : 0;
 
-            statsRows += `
-                <tr>
-                    <td class="px-3 py-2">${p.nombre}</td>
-                    <td class="px-3 py-2 font-medium">${p.puntos.toFixed(2)}</td>
-                    <td class="px-3 py-2">${p.jugados}</td>
-                    <td class="px-3 py-2">${p.ganados}</td>
-                    <td class="px-3 py-2">${p.perdidos}</td>
-                    <td class="px-3 py-2 font-semibold ${winRateClass}">${winRate}%</td>
-                </tr>
-            `;
+          const setsColorClass = getWinRateColor(winRateSets);
+          const roundsColorClass = getWinRateColor(winRateRondas);
+
+          tableRows += `
+            <tr data-id="${p.id}" class="clickable-player-row hover:bg-slate-900 cursor-pointer">
+              <td class="px-3 py-2">${i+1}</td>
+              <td class="px-3 py-2">${p.nombre}</td>
+              <td class="px-3 py-2">${p.jugados}</td>
+              <td class="px-3 py-2">${p.ganados}-${p.perdidos}</td>
+              <td class="px-3 py-2">${p.rondasGanadas}-${p.rondasPerdidas}</td>
+              <td class="px-3 py-2 font-semibold ${setsColorClass}">${winRateSets.toFixed(1)}%</td>
+              <td class="px-3 py-2 font-semibold ${roundsColorClass}">${winRateRondas.toFixed(1)}%</td>
+            </tr>
+          `;
         });
 
         root.innerHTML = `
             <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
-                <div id="statsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                <div id="playerStatsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     <h3 class="text-lg font-semibold mb-4">Estadísticas de Jugadores</h3>
-                    <table class="w-full text-left text-sm">
-                        <thead class="text-slate-400 text-xs">
-                            <tr>
-                                <th class="px-3 py-2">Jugador</th>
-                                <th class="px-3 py-2">Puntos</th>
-                                <th class="px-3 py-2">PJ</th>
-                                <th class="px-3 py-2">G</th>
-                                <th class="px-3 py-2">P</th>
-                                <th class="px-3 py-2">Win Rate</th>
-                            </tr>
-                        </thead>
-                        <tbody>${statsRows}</tbody>
-                    </table>
-                     <div class="mt-4 text-right">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-slate-400 text-xs">
+                                <tr>
+                                    <th class="px-3 py-2">Pos</th>
+                                    <th class="px-3 py-2">Jugador</th>
+                                    <th class="px-3 py-2">PJ</th>
+                                    <th class="px-3 py-2">Sets<br>(G/P)</th>
+                                    <th class="px-3 py-2">Rondas<br>(G/P)</th>
+                                    <th class="px-3 py-2">Sets<br>Win Rate</th>
+                                    <th class="px-3 py-2">Rondas<br>Win Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${tableRows}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-center small-muted">
+                        <div>Clasificación del Win Rate:</div>
+                        <div class="mt-1 flex items-center justify-center gap-2">
+                          <span class="win-rate-green font-semibold">Positivo</span>
+                          (100% - 60%)
+                          <span class="win-rate-yellow font-semibold">Neutro</span>
+                          (59% - 45%)
+                          <span class="win-rate-red font-semibold">Negativo</span>
+                          (44% - 0%)
+                        </div>
+                    </div>
+                    <div class="mt-4 text-right">
                         <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
                     </div>
                 </div>
-            </div>`;
+            </div>
+        `;
+
         setTimeout(() => {
-          document.getElementById('statsModalContent').classList.remove('scale-95', 'opacity-0');
+          document.getElementById('playerStatsModalContent').classList.remove('scale-95', 'opacity-0');
+          document.getElementById('playerStatsModalContent').classList.add('scale-100', 'opacity-100');
+
+          document.querySelectorAll('.clickable-player-row').forEach(row => {
+            row.onclick = (e) => {
+              const playerId = e.currentTarget.dataset.id;
+              closeModal();
+              setTimeout(() => showPlayerProfile(playerId), 300); // Small delay for effect
+            };
+          });
+        }, 10);
+    }
+    
+    // Player Profile Modal
+    function showPlayerProfile(playerId) {
+        document.body.classList.add('modal-open');
+        const player = players.find(p => p.id === playerId);
+        if (!player) return;
+
+        // Process data for both ligas and total history
+        const statsLiga = getPlayerStats(player.id, ligaMatches);
+        const statsTotal = getPlayerStats(player.id, allMatches);
+        const playerCharacters = getPlayerCharactersUsed(player.id, allMatches);
+
+        const root = document.getElementById('modalRoot');
+        root.innerHTML = `
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+                <div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    <div class="flex justify-between items-start pb-4 border-b border-slate-700">
+                      <div class="flex items-center gap-6">
+                          <div class="flex-shrink-0 relative profile-link">
+                              <img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />
+                              ${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}
+                          </div>
+                          <div>
+                              <div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>
+                              <div class="mt-2 text-md">
+                                  <span class="font-bold">Sets:</span> ${statsTotal.sets.ganados}-${statsTotal.sets.perdidos}
+                                  <span class="mx-2 small-muted">|</span>
+                                  <span class="font-bold">Rondas:</span> ${statsTotal.rondas.ganadas}-${statsTotal.rondas.perdidas}
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div id="playerCharactersContainer" class="flex flex-col items-center">
+                          <div class="text-xs small-muted">Personajes</div>
+                          <div class="flex items-center gap-2 mt-2">
+                          </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist">
+                        <button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button>
+                        <button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button>
+                    </div>
+
+                    <div id="profileContent" class="mt-4"></div>
+
+                    <div class="mt-4 text-right">
+                        <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        function renderCharacters() {
+            const container = document.querySelector('#playerCharactersContainer div.flex');
+            container.innerHTML = '';
+            
+            playerCharacters.forEach((char) => {
+                const charHtml = `
+                    <div class="flex flex-col items-center">
+                        <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
+                        <div class="font-bold text-xs text-white">${char}</div>
+                    </div>
+                `;
+                container.innerHTML += charHtml;
+            });
+        }
+
+        function renderTab(tabId) {
+          const stats = tabId === 'ligaTab' ? statsLiga : statsTotal;
+          const content = document.getElementById('profileContent');
+
+          // Highlight the correct tab
+          const ligaTabBtn = document.getElementById('ligaTab');
+          const totalTabBtn = document.getElementById('totalTab');
+          if (tabId === 'ligaTab') {
+            ligaTabBtn.classList.add('active');
+            totalTabBtn.classList.remove('active');
+          } else {
+            totalTabBtn.classList.add('active');
+            ligaTabBtn.classList.remove('active');
+          }
+
+
+          const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
+          const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
+
+          const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
+          const visibleOpponents = sortedOpponents.slice(0, PROFILE_LIST_LIMIT);
+          
+          let vsOpponentsHTML = '';
+          if (Object.keys(stats.vsOpponents).length > 0) {
+              vsOpponentsHTML = `
+                  <h4 class="font-semibold mb-2">Vs. Oponentes</h4>
+                  <div class="space-y-2">
+                      ${visibleOpponents.map(([oppId, oppStats]) => {
+                          const opponent = players.find(p => p.id === oppId);
+                          if (!opponent) return '';
+                          const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
+                          const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                          return `
+                              <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-id="${oppId}">
+                                  <img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/>
+                                  <div class="flex-1">
+                                      <div class="font-bold player-name-text">${opponent.nombre}</div>
+                                  </div>
+                                  <div class="text-right">
+                                      <div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div>
+                                      <div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div>
+                                  </div>
+                                  <div class="w-16 text-right">
+                                      <div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div>
+                                      <div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div>
+                                  </div>
+                              </div>
+                          `;
+                      }).join('')}
+                  </div>
+              `;
+              if (sortedOpponents.length > PROFILE_LIST_LIMIT) {
+                  vsOpponentsHTML += `<div class="mt-4 text-center"><button id="showMoreOpponentsBtn" class="px-4 py-2 rounded-2xl border">Ver más oponentes</button></div>`;
+              }
+          } else {
+              vsOpponentsHTML = '<div class="text-center small-muted py-4">No hay datos de oponentes para mostrar.</div>';
+          }
+
+          const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
+          const visibleCharacters = sortedCharacters.slice(0, PROFILE_LIST_LIMIT);
+          
+          let vsCharactersHTML = '';
+          if (Object.keys(stats.vsCharacters).length > 0) {
+              vsCharactersHTML = `
+                  <h4 class="font-semibold mb-2 mt-4">Vs. Personajes</h4>
+                  <div class="space-y-2">
+                      ${visibleCharacters.map(([char, charStats]) => {
+                          const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
+                          const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                          return `
+                              <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
+                                  <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/>
+                                  <div class="flex-1">
+                                      <div class="font-bold">${char}</div>
+                                  </div>
+                                  <div class="text-right">
+                                      <div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div>
+                                      <div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div>
+                                  </div>
+                                  <div class="w-16 text-right">
+                                      <div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div>
+                                      <div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div>
+                                  </div>
+                              </div>
+                          `;
+                      }).join('')}
+                  </div>
+              `;
+              if (sortedCharacters.length > PROFILE_LIST_LIMIT) {
+                  vsCharactersHTML += `<div class="mt-4 text-center"><button id="showMoreCharactersBtn" class="px-4 py-2 rounded-2xl border">Ver más personajes</button></div>`;
+              }
+          } else {
+              vsCharactersHTML = '<div class="text-center small-muted py-4">No hay datos de personajes para mostrar.</div>';
+          }
+
+          content.innerHTML = `
+            <div class="flex justify-around text-center mb-4">
+              <div>
+                <div class="text-xs small-muted">Sets (G/P)</div>
+                <div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div>
+                <div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div>
+              </div>
+              <div>
+                <div class="text-xs small-muted">Rondas (G/P)</div>
+                <div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div>
+                <div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div>
+              </div>
+            </div>
+            
+            ${vsOpponentsHTML}
+            ${vsCharactersHTML}
+          `;
+
+          // Bind event listeners for clickable opponents
+          document.querySelectorAll('.clickable-profile-opponent').forEach(el => {
+              el.addEventListener('click', () => {
+                  const opponentId = el.dataset.id;
+                  showPlayerProfile(opponentId);
+              });
+          });
+          
+          if(document.getElementById('showMoreOpponentsBtn')) {
+            document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent');
+          }
+          if(document.getElementById('showMoreCharactersBtn')) {
+            document.getElementById('showMoreCharactersBtn').onclick = () => showDetailedVsModal(player, stats, 'character');
+          }
+        }
+        
+        document.getElementById('ligaTab').onclick = () => renderTab('ligaTab');
+        document.getElementById('totalTab').onclick = () => renderTab('totalTab');
+
+        setTimeout(() => {
+          document.getElementById('playerProfileModalContent').classList.remove('scale-95', 'opacity-0');
+          document.getElementById('playerProfileModalContent').classList.add('scale-100', 'opacity-100');
+          renderCharacters();
+          renderTab('ligaTab');
+        }, 10);
+    }
+    
+    // New modal for detailed VS stats
+    function showDetailedVsModal(player, stats, type) {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+
+        let title = '';
+        let listItemsHTML = '';
+        
+        if (type === 'opponent') {
+            title = `Historial contra oponentes de ${player.nombre}`;
+            const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
+            listItemsHTML = sortedOpponents.map(([oppId, oppStats]) => {
+                const opponent = players.find(p => p.id === oppId);
+                if (!opponent) return '';
+                const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `
+                    <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent cursor-pointer" data-id="${oppId}">
+                        <img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/>
+                        <div class="flex-1">
+                            <div class="font-bold player-name-text">${opponent.nombre}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div>
+                            <div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div>
+                        </div>
+                        <div class="w-16 text-right">
+                            <div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div>
+                            <div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } else if (type === 'character') {
+            title = `Historial contra personajes de ${player.nombre}`;
+            const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
+            listItemsHTML = sortedCharacters.map(([char, charStats]) => {
+                const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `
+                    <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
+                        <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/>
+                        <div class="flex-1">
+                            <div class="font-bold">${char}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div>
+                            <div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div>
+                        </div>
+                        <div class="w-16 text-right">
+                            <div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div>
+                            <div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        root.innerHTML = `
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+                <div id="detailedVsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    <h3 class="text-lg font-semibold mb-4">${title}</h3>
+                    <div class="space-y-2">
+                        ${listItemsHTML}
+                    </div>
+                    <div class="mt-4 text-right">
+                        <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        setTimeout(() => {
+          document.getElementById('detailedVsModalContent').classList.remove('scale-95', 'opacity-0');
+          document.getElementById('detailedVsModalContent').classList.add('scale-100', 'opacity-100');
+          
+          if (type === 'opponent') {
+              document.querySelectorAll('.clickable-profile-opponent').forEach(el => {
+                  el.addEventListener('click', () => {
+                      const opponentId = el.dataset.id;
+                      closeModal();
+                      setTimeout(() => showPlayerProfile(opponentId), 300);
+                  });
+              });
+          }
         }, 10);
     }
 
-    function showPlayerProfile(id){
-        const player = players.find(p => p.id === id);
-        if (!player) return;
+
+    // Helper to get player's main and top 2 other characters
+    function getPlayerCharactersUsed(playerId, matchesHistory) {
+        const charCount = {};
+        
+        matchesHistory.forEach(m => {
+            if (m.roundsData) {
+                m.roundsData.forEach(round => {
+                    if (m.jugador1Id === playerId && round.p1Char) {
+                        charCount[round.p1Char] = (charCount[round.p1Char] || 0) + 1;
+                    } else if (m.jugador2Id === playerId && round.p2Char) {
+                        charCount[round.p2Char] = (charCount[round.p2Char] || 0) + 1;
+                    }
+                });
+            }
+        });
+
+        const sortedChars = Object.entries(charCount).sort(([, a], [, b]) => b - a).map(([char,]) => char);
+        
+        return sortedChars.slice(0, 3);
+    }
+
+    // Helper to process match data for a player
+    function getPlayerStats(playerId, matchesHistory) {
+        const stats = {
+            sets: { jugados: 0, ganados: 0, perdidos: 0 },
+            rondas: { ganadas: 0, perdidas: 0 },
+            vsOpponents: {},
+            vsCharacters: {}
+        };
+
+        matchesHistory.forEach(m => {
+            const isPlayer1 = m.jugador1Id === playerId;
+            const isPlayer2 = m.jugador2Id === playerId;
+            
+            if (isPlayer1 || isPlayer2) {
+                const isWinner = m.ganadorId === playerId;
+                
+                stats.sets.jugados++;
+                if (isWinner) {
+                    stats.sets.ganados++;
+                } else {
+                    stats.sets.perdidos++;
+                }
+                
+                let playerRoundsWon = 0;
+                let playerRoundsLost = 0;
+                let opponentId;
+
+                if (isPlayer1) {
+                    opponentId = m.jugador2Id;
+                } else { // isPlayer2
+                    opponentId = m.jugador1Id;
+                }
+                
+                // Set stats against opponent
+                if (!stats.vsOpponents[opponentId]) {
+                    stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
+                }
+                stats.vsOpponents[opponentId].setsJugados++;
+                if (isWinner) {
+                    stats.vsOpponents[opponentId].setsGanados++;
+                } else {
+                    stats.vsOpponents[opponentId].setsPerdidos++;
+                }
+
+                if (m.roundsData) {
+                    m.roundsData.forEach(round => {
+                        let opponentChar;
+                        
+                        if(isPlayer1) {
+                            opponentChar = round.p2Char;
+                        } else {
+                            opponentChar = round.p1Char;
+                        }
+                        
+                        // Increment rounds based on who won the round
+                        if (round.winnerId === playerId) {
+                            playerRoundsWon++;
+                        } else {
+                            playerRoundsLost++;
+                        }
+                        
+                        // Stats against character
+                        if (opponentChar) {
+                            if (!stats.vsCharacters[opponentChar]) {
+                                stats.vsCharacters[opponentChar] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
+                            }
+                            // Tallying rounds won/lost against this character
+                            if (round.winnerId === playerId) {
+                                stats.vsCharacters[opponentChar].rondasGanadas++;
+                            } else {
+                                stats.vsCharacters[opponentChar].rondasPerdidas++;
+                            }
+                            
+                            // Sets won/lost against this character is more complex.
+                            if (!stats.vsCharacters[opponentChar].setsHandled) {
+                                stats.vsCharacters[opponentChar].setsHandled = new Set();
+                            }
+                            if (!stats.vsCharacters[opponentChar].setsHandled.has(m.id)) {
+                                stats.vsCharacters[opponentChar].setsJugados++;
+                                if (isWinner) {
+                                    stats.vsCharacters[opponentChar].setsGanados++;
+                                } else {
+                                    stats.vsCharacters[opponentChar].setsPerdidos++;
+                                }
+                                stats.vsCharacters[opponentChar].setsHandled.add(m.id);
+                            }
+                        }
+                    });
+                }
+                
+                stats.rondas.ganadas += playerRoundsWon;
+                stats.rondas.perdidas += playerRoundsLost;
+
+                stats.vsOpponents[opponentId].rondasGanadas += playerRoundsWon;
+                stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLost;
+            }
+        });
+        
+        // Cleanup the temporary setsHandled property
+        Object.keys(stats.vsCharacters).forEach(char => delete stats.vsCharacters[char].setsHandled);
+        
+        return stats;
+    }
+
+    function getWinRateColor(rate) {
+        if (rate >= 60) return 'win-rate-green';
+        if (rate >= 45 && rate < 60) return 'win-rate-yellow';
+        return 'win-rate-red';
+    }
+
+
+    function updateQuickMatchButtons() {
+        const isReady = selectedPlayers.length === 2;
+        const ftButtons = [quickAddMatchFT3Btn, quickAddMatchFT5Btn, quickAddMatchFT10Btn];
+        const versusBtn = document.getElementById('btnVersus');
+
+        // Handle FT buttons
+        ftButtons.forEach(btn => {
+            btn.disabled = !isReady;
+            if (isReady) {
+                btn.classList.remove('bg-gray-500', 'opacity-50', 'pointer-events-none');
+                btn.classList.add('bg-amber-500', 'text-black');
+            } else {
+                btn.classList.add('bg-gray-500', 'opacity-50', 'pointer-events-none');
+                btn.classList.remove('bg-amber-500', 'text-black');
+            }
+        });
+        
+        // Handle Versus button
+        versusBtn.disabled = !isReady;
+        if (isReady) {
+            versusBtn.classList.remove('opacity-50', 'bg-gray-600', 'pointer-events-none');
+            versusBtn.classList.add('btn-versus');
+        } else {
+            versusBtn.classList.add('opacity-50', 'bg-gray-600', 'pointer-events-none');
+            versusBtn.classList.remove('btn-versus');
+        }
+    }
+
+    rankingBody.addEventListener('click', (e) => {
+      const tr = e.target.closest('tr');
+      if (!tr) return;
+
+      const playerId = tr.dataset.id;
+      
+      const isProfileLinkClick = e.target.closest('.profile-link');
+      
+      if (e.target.classList.contains('deletePlayer') || e.target.classList.contains('editPlayer')) {
+        return;
+      }
+      
+      if (isProfileLinkClick) {
+        showPlayerProfile(playerId);
+        return;
+      }
+      
+      const index = selectedPlayers.indexOf(playerId);
+      
+      if (index > -1) {
+        selectedPlayers.splice(index, 1);
+      } else {
+        if (selectedPlayers.length < 2) {
+          selectedPlayers.push(playerId);
+        } else {
+          alert('Solo puedes seleccionar 2 jugadores a la vez.');
+        }
+      }
+
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+      }
+
+      renderAll();
+    });
+
+    // helpers
+    function validarMarcador(ft, a, b) {
+      const max = Math.max(a, b);
+      const min = Math.min(a, b);
+      return max === ft && min >= 0 && min < ft && a !== b && Number.isInteger(a) && Number.isInteger(b);
+    }
+
+    function calcularPuntos(ft, rondasGanador, rondasPerdedor, rangoPerdedor){
+      const config = SCORING['ft' + ft];
+      const bonusGanador = RANK_BONUS[rangoPerdedor] || 0;
+
+      const puntosGanador = (rondasGanador * config.perRound) + bonusGanador;
+      const puntosPerdedor = (rondasPerdedor * config.perRound);
+
+      return { ganador: puntosGanador, perdedor: puntosPerdedor };
+    }
+
+    function closeModal() {
+        document.getElementById('modalRoot').innerHTML = '';
+        document.body.classList.remove('modal-open');
+    }
+
+    // add player modal
+    function showAddPlayer(){
+      document.body.classList.add('modal-open');
+      const root = document.getElementById('modalRoot');
+      const ranks = ['A', 'B', 'C', 'D', 'E'];
+      const rankOptions = ranks.map(rank => `<option value="${rank}">${rank}</option>`).join('');
+
+      root.innerHTML = `
+        <div class="fixed inset-0 z-50 flex items-center justify-center">
+          <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+          <div id="addPlayerModalContent" class="relative w-full max-w-md glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+            <h3 class="text-lg font-semibold">Agregar jugador</h3>
+            <div class="mt-3 space-y-2">
+              <input id="newName" placeholder="Nombre / Nick" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+              <input id="newAvatar" placeholder="Avatar URL (opcional)" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+              <div>
+                <label class="small-muted">Rango inicial</label>
+                <select id="newRank" class="w-full px-3 py-2 rounded-xl bg-slate-900 border">
+                  ${rankOptions}
+                </select>
+              </div>
+            </div>
+            <div class="mt-4 flex justify-end gap-2">
+              <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
+              <button id="savePlayerBtn" class="px-3 py-2 rounded-2xl bg-amber-500 text-black font-semibold">Guardar</button>
+            </div>
+          </div>
+        </div>
+      `;
+      setTimeout(() => {
+        document.getElementById('addPlayerModalContent').classList.remove('scale-95', 'opacity-0');
+        document.getElementById('addPlayerModalContent').classList.add('scale-100', 'opacity-100');
+      }, 10);
+
+      document.getElementById('savePlayerBtn').onclick = ()=>{
+        const nombre = document.getElementById('newName').value.trim();
+        if(!nombre){ alert('Escribe un nombre.'); return }
+        const avatar = document.getElementById('newAvatar').value.trim();
+        const rango = document.getElementById('newRank').value;
+        const nuevo = { id: uid(), nombre: nombre[0].toUpperCase()+nombre.slice(1), avatarUrl: avatar||undefined, puntos:0, jugados:0, ganados:0, perdidos:0, rondasGanadas: 0, rondasPerdidas: 0, activos:true, rango: rango||'E' }
+        players.push(nuevo); save(LS_PLAYERS,players); closeModal(); renderAll();
+      }
+    }
+
+    // edit player modal
+    function showEditPlayer(playerId) {
+      document.body.classList.add('modal-open');
+      const player = players.find(p => p.id === playerId);
+      if (!player) return;
+
+      const ranks = ['A', 'B', 'C', 'D', 'E'];
+      const rankOptions = ranks.map(rank => `<option value="${rank}" ${player.rango === rank ? 'selected' : ''}>${rank}</option>`).join('');
+
+      const root = document.getElementById('modalRoot');
+      root.innerHTML = `
+        <div class="fixed inset-0 z-50 flex items-center justify-center">
+          <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+          <div id="editPlayerModalContent" class="relative w-full max-w-md glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+            <h3 class="text-lg font-semibold">Editar jugador</h3>
+            <div class="mt-3 space-y-2">
+              <input id="editName" placeholder="Nombre / Nick" value="${player.nombre}" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+              <input id="editAvatar" placeholder="Avatar URL (opcional)" value="${player.avatarUrl || ''}" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+              <div>
+                <label class="small-muted">Rango</label>
+                <select id="editRank" class="w-full px-3 py-2 rounded-xl bg-slate-900 border">
+                  ${rankOptions}
+                </select>
+              </div>
+            </div>
+            <div class="mt-4 flex justify-end gap-2">
+              <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
+              <button id="updatePlayerBtn" class="px-3 py-2 rounded-2xl bg-amber-500 text-black font-semibold">Guardar cambios</button>
+            </div>
+          </div>
+        </div>
+      `;
+      setTimeout(() => {
+        document.getElementById('editPlayerModalContent').classList.remove('scale-95', 'opacity-0');
+        document.getElementById('editPlayerModalContent').classList.add('scale-100', 'opacity-100');
+      }, 10);
+
+      document.getElementById('updatePlayerBtn').onclick = () => {
+        const newName = document.getElementById('editName').value.trim();
+        if (!newName) { alert('Escribe un nombre.'); return; }
+        const newAvatar = document.getElementById('editAvatar').value.trim();
+        const newRank = document.getElementById('editRank').value;
+
+        players = players.map(p => {
+          if (p.id === playerId) {
+            return {
+              ...p,
+              nombre: newName[0].toUpperCase() + newName.slice(1),
+              avatarUrl: newAvatar || undefined,
+              rango: newRank
+            };
+          }
+          return p;
+        });
+        save(LS_PLAYERS, players);
+        closeModal();
+        renderAll();
+      };
+    }
+    
+    // Character search and select logic
+    function setupCharacterSearch(inputId, listId, charImageEl) {
+        const input = document.getElementById(inputId);
+        const list = document.getElementById(listId);
+        
+        input.addEventListener('focus', () => {
+            renderCharacterList('');
+            list.classList.remove('hidden');
+        });
+
+        input.addEventListener('blur', (e) => {
+            setTimeout(() => {
+                if (!list.contains(document.activeElement)) {
+                    list.classList.add('hidden');
+                }
+            }, 100);
+        });
+
+        input.addEventListener('input', (e) => {
+            renderCharacterList(e.target.value);
+        });
+        
+        input.addEventListener('change', () => {
+            const charName = input.value.trim();
+            if (charImageEl) {
+                charImageEl.src = CHARACTER_IMAGES[charName] || 'https://via.placeholder.com/48x48?text=??';
+            }
+        });
+
+        list.addEventListener('mousedown', (e) => {
+            if (e.target.classList.contains('character-list-item')) {
+                e.preventDefault(); 
+                input.value = e.target.textContent;
+                list.classList.add('hidden');
+                input.dispatchEvent(new Event('change')); 
+            }
+        });
+
+        function renderCharacterList(filter = '') {
+            const filteredRoster = ROSTER_3RD_STRIKE.filter(char =>
+                char.toLowerCase().includes(filter.toLowerCase())
+            ).slice(0, 10); 
+            
+            list.innerHTML = '';
+            if (filteredRoster.length > 0) {
+                filteredRoster.forEach(char => {
+                    const li = document.createElement('li');
+                    li.textContent = char;
+                    li.classList.add('character-list-item');
+                    list.appendChild(li);
+                });
+                list.classList.remove('hidden');
+            } else {
+                list.classList.add('hidden');
+            }
+        }
+    }
+
+
+    // New add match modal
+    function showAddMatch(ftType) {
+        document.body.classList.add('modal-open');
+        if (selectedPlayers.length < 2) { alert('Selecciona 2 jugadores en el ranking primero.'); return; }
+
+        const [p1, p2] = selectedPlayers.map(id => players.find(p => p.id === id));
+
+        const root = document.getElementById('modalRoot');
+        root.innerHTML = `
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+                <div id="addMatchModalContent" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    <h3 class="text-lg font-semibold">Registrar resultado FT${ftType}</h3>
+                    <div class="mt-3 flex justify-around text-center border-b pb-4 mb-4">
+                        <div>
+                            <img src="${p1.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
+                            <div class="font-bold text-lg">${p1.nombre}</div>
+                        </div>
+                        <div class="flex items-center text-4xl font-bold">
+                            <span id="scoreP1">0</span>
+                            <span class="mx-2">-</span>
+                            <span id="scoreP2">0</span>
+                        </div>
+                        <div>
+                            <img src="${p2.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
+                            <div class="font-bold text-lg">${p2.nombre}</div>
+                        </div>
+                    </div>
+
+                    <div id="roundInputContainer" class="space-y-4">
+                        </div>
+
+                    <div id="gameResult" class="mt-4 hidden">
+                        <div class="text-center font-bold text-xl">Partida terminada</div>
+                    </div>
+
+                    <div class="mt-4" id="noteContainer">
+                      <label class="small-muted">Nota (opcional)</label>
+                      <input id="mNote" placeholder="Ej. Dominio total" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+                    </div>
+
+                    <div class="mt-4 flex justify-end gap-2">
+                        <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
+                        <button id="saveMatchBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar partida</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        setTimeout(() => {
+          document.getElementById('addMatchModalContent').classList.remove('scale-95', 'opacity-0');
+          document.getElementById('addMatchModalContent').classList.add('scale-100', 'opacity-100');
+        }, 10);
+
+        const scoreP1El = document.getElementById('scoreP1');
+        const scoreP2El = document.getElementById('scoreP2');
+        const roundInputContainer = document.getElementById('roundInputContainer');
+        const mNote = document.getElementById('mNote');
+        const saveMatchBtn = document.getElementById('saveMatchBtn');
+        const gameResultEl = document.getElementById('gameResult');
+        
+        let p1Char, p2Char;
+        let roundsData = [];
+        let currentRound = 1;
+
+        function renderRoundInput() {
+            roundInputContainer.innerHTML = '';
+            gameResultEl.classList.add('hidden');
+            saveMatchBtn.classList.add('bg-gray-500', 'opacity-50', 'pointer-events-none');
+            
+            const p1Score = parseInt(scoreP1El.textContent);
+            const p2Score = parseInt(scoreP2El.textContent);
+
+            if (p1Score === ftType || p2Score === ftType) {
+                gameResultEl.classList.remove('hidden');
+                saveMatchBtn.classList.remove('bg-gray-500', 'opacity-50', 'pointer-events-none');
+                saveMatchBtn.classList.add('bg-amber-500', 'text-black', 'cursor-pointer');
+                return;
+            }
+
+            const round = document.createElement('div');
+            round.className = 'p-4 rounded-xl bg-slate-800';
+            
+            round.innerHTML = `
+                <div class="font-semibold mb-2">Ronda ${currentRound}</div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <img id="char-img-p1-round-${currentRound}" src="${p1Char ? CHARACTER_IMAGES[p1Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
+                            <button class="winner-button w-full text-left px-3 py-2 rounded-xl border" data-winner="${p1.id}">${p1.nombre} ganó</button>
+                        </div>
+                        <div class="character-select-container">
+                            <input id="char-p1-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p1Char || ''}"/>
+                            <ul id="char-list-p1-round-${currentRound}" class="character-list hidden"></ul>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <img id="char-img-p2-round-${currentRound}" src="${p2Char ? CHARACTER_IMAGES[p2Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
+                            <button class="winner-button w-full text-left px-3 py-2 rounded-xl border" data-winner="${p2.id}">${p2.nombre} ganó</button>
+                        </div>
+                        <div class="character-select-container">
+                            <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p2Char || ''}"/>
+                            <ul id="char-list-p2-round-${currentRound}" class="character-list hidden"></ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+            roundInputContainer.appendChild(round);
+
+            setupCharacterSearch(`char-p1-round-${currentRound}`, `char-list-p1-round-${currentRound}`, document.getElementById(`char-img-p1-round-${currentRound}`));
+            setupCharacterSearch(`char-p2-round-${currentRound}`, `char-list-p2-round-${currentRound}`, document.getElementById(`char-img-p2-round-${currentRound}`));
+
+            const winnerButtons = round.querySelectorAll('.winner-button');
+            winnerButtons.forEach(button => {
+                button.onclick = () => {
+                    const winnerId = button.dataset.winner;
+                    const loserId = (winnerId === p1.id) ? p2.id : p1.id;
+                    const p1CharRound = document.getElementById(`char-p1-round-${currentRound}`).value.trim();
+                    const p2CharRound = document.getElementById(`char-p2-round-${currentRound}`).value.trim();
+                    
+                    if (!p1CharRound || !p2CharRound) {
+                        alert('Por favor, selecciona los personajes para ambos jugadores.');
+                        return;
+                    }
+                    
+                    p1Char = p1CharRound;
+                    p2Char = p2CharRound;
+
+                    roundsData.push({
+                        winnerId,
+                        loserId,
+                        p1Char: p1CharRound,
+                        p2Char: p2CharRound
+                    });
+
+                    if (winnerId === p1.id) {
+                        scoreP1El.textContent = parseInt(scoreP1El.textContent) + 1;
+                    } else {
+                        scoreP2El.textContent = parseInt(scoreP2El.textContent) + 1;
+                    }
+                    
+                    currentRound++;
+                    renderRoundInput();
+                };
+            });
+        }
+        
+        renderRoundInput(); 
+
+        saveMatchBtn.onclick = () => {
+            const roundsWonByP1 = roundsData.filter(r => r.winnerId === p1.id).length;
+            const roundsWonByP2 = roundsData.filter(r => r.winnerId === p2.id).length;
+            
+            const ganadorId = roundsWonByP1 > roundsWonByP2 ? p1.id : p2.id;
+            const perdedorId = roundsWonByP1 > roundsWonByP2 ? p2.id : p1.id;
+            const rondasGanador = Math.max(roundsWonByP1, roundsWonByP2);
+            const rondasPerdedor = Math.min(roundsWonByP1, roundsWonByP2);
+
+            const perdedor = players.find(p => p.id === perdedorId);
+            
+            const puntos = calcularPuntos(ftType, rondasGanador, rondasPerdedor, perdedor.rango);
+
+            const nuevo = { 
+                id: uid(), 
+                fechaISO: nowISO(), 
+                ftType, 
+                jugador1Id: p1.id, 
+                jugador2Id: p2.id, 
+                marcador: `${roundsWonByP1}-${roundsWonByP2}`, 
+                rondas: { j1: roundsWonByP1, j2: roundsWonByP2 }, 
+                ganadorId, 
+                puntosGanador: puntos.ganador, 
+                puntosPerdedor: puntos.perdedor, 
+                nota: mNote.value.trim() || undefined,
+                roundsData
+            };
+            
+            ligaMatches.unshift(nuevo);
+            allMatches.unshift(nuevo);
+
+            players = players.map(player => {
+                if (player.id === p1.id) {
+                    return {
+                        ...player,
+                        puntos: (player.puntos || 0) + (roundsWonByP1 > roundsWonByP2 ? puntos.ganador : puntos.perdedor),
+                        jugados: (player.jugados || 0) + 1,
+                        ganados: (player.ganados || 0) + (roundsWonByP1 > roundsWonByP2 ? 1 : 0),
+                        perdidos: (player.perdidos || 0) + (roundsWonByP1 > roundsWonByP2 ? 0 : 1),
+                        rondasGanadas: (player.rondasGanadas || 0) + roundsWonByP1,
+                        rondasPerdidas: (player.rondasPerdidas || 0) + roundsWonByP2
+                    };
+                }
+                if (player.id === p2.id) {
+                    return {
+                        ...player,
+                        puntos: (player.puntos || 0) + (roundsWonByP2 > roundsWonByP1 ? puntos.ganador : puntos.perdedor),
+                        jugados: (player.jugados || 0) + 1,
+                        ganados: (player.ganados || 0) + (roundsWonByP2 > roundsWonByP1 ? 1 : 0),
+                        perdidos: (player.perdidos || 0) + (roundsWonByP2 > roundsWonByP1 ? 0 : 1),
+                        rondasGanadas: (player.rondasGanadas || 0) + roundsWonByP2,
+                        rondasPerdidas: (player.rondasPerdidas || 0) + roundsWonByP1
+                    };
+                }
+                return player;
+            });
+
+            save(LS_LIGA_MATCHES, ligaMatches);
+            save(LS_ALL_MATCHES, allMatches);
+            save(LS_PLAYERS, players);
+            closeModal();
+            selectedPlayers = [];
+            renderAll();
+        };
+    }
+
+
+    // settings modal
+    function showSettings(){
+      document.body.classList.add('modal-open');
+      const root = document.getElementById('modalRoot');
+      root.innerHTML = `
+        <div class="fixed inset-0 z-50 flex items-center justify-center">
+          <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+          <div id="settingsModalContent" class="relative w-full max-w-xl glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+            <h3 class="text-lg font-semibold">Ajustes</h3>
+            <div class="mt-3 space-y-2">
+                <div class="flex flex-col gap-2">
+                    <button id="exportJson" class="px-3 py-2 rounded-2xl border">Exportar JSON</button>
+                    <label class="cursor-pointer inline-flex items-center justify-center gap-2 px-3 py-2 rounded-2xl border">
+                        Importar JSON <input id="importFile" type="file" accept="application/json" class="hidden" />
+                    </label>
+                </div>
+            </div>
+            <div class="mt-3 small-muted">Los valores de puntuación están fijos según el sistema propuesto.</div>
+            <div class="mt-4 flex justify-end gap-2">
+              <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      `;
+      setTimeout(() => {
+        document.getElementById('settingsModalContent').classList.remove('scale-95', 'opacity-0');
+        document.getElementById('settingsModalContent').classList.add('scale-100', 'opacity-100');
+      }, 10);
+
+      document.getElementById('exportJson').onclick = exportJson;
+      document.getElementById('importFile').onchange = (e) => { if (e.target.files && e.target.files[0]) importJson(e.target.files[0]); };
+    }
+
+    // export/import
+    function exportJson(){
+      const blob = new Blob([JSON.stringify({players, allMatches, ligaMatches},null,2)],{type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download = `liga-3rd-strike-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url);
+    }
+    function importJson(file){
+      const r = new FileReader(); r.onload = ()=>{
+        try{
+          const d = JSON.parse(String(r.result));
+          if(d.players && d.allMatches && (d.ligaMatches || d.seasonMatches)){ 
+            players=d.players;
+            allMatches=d.allMatches;
+            ligaMatches=d.ligaMatches || d.seasonMatches;
+            save(LS_PLAYERS,players);
+            save(LS_ALL_MATCHES,allMatches);
+            save(LS_LIGA_MATCHES,ligaMatches);
+            closeModal();
+            renderAll();
+          } else alert('Archivo inválido');
+        }catch(e){alert('No se pudo leer el archivo JSON')}
+      }; r.readAsText(file)
+    }
+
+    // other actions
+    function resetLiga(){
+      if(!confirm('¿Resetear puntos y estadísticas de todos los jugadores de la liga actual?')) return;
+      players = players.map(p=>({...p, puntos:0,jugados:0,ganados:0,perdidos:0,rondasGanadas:0,rondasPerdidas:0}));
+      ligaMatches = [];
+      save(LS_PLAYERS,players);
+      save(LS_LIGA_MATCHES,ligaMatches);
+      renderAll()
+    }
+
+    function clearHistory(){
+      if(!confirm('¿Borrar TODO el historial? Esta acción es irreversible.')) return;
+      allMatches=[];
+      ligaMatches=[];
+      players = players.map(p=>({...p, puntos:0,jugados:0,ganados:0,perdidos:0,rondasGanadas:0,rondasPerdidas:0}));
+      save(LS_ALL_MATCHES,allMatches);
+      save(LS_LIGA_MATCHES,ligaMatches);
+      save(LS_PLAYERS,players);
+      renderAll()
+    }
+    
+    // --- VERSUS FEATURE START ---
+    
+    function getVersusStats(player1Id, player2Id, matchesHistory) {
+        const stats = {
+            p1_sets_won: 0,
+            p2_sets_won: 0,
+            p1_rounds_won: 0,
+            p2_rounds_won: 0,
+            char_matchups: {}, 
+            p1_vs_top5: {},
+            p2_vs_top5: {},
+        };
+
+        const headToHeadMatches = matchesHistory.filter(m =>
+            (m.jugador1Id === player1Id && m.jugador2Id === player2Id) ||
+            (m.jugador1Id === player2Id && m.jugador2Id === player1Id)
+        );
+
+        headToHeadMatches.forEach(m => {
+            if (m.ganadorId === player1Id) stats.p1_sets_won++;
+            else stats.p2_sets_won++;
+
+            const isP1Jugador1 = m.jugador1Id === player1Id;
+            stats.p1_rounds_won += isP1Jugador1 ? m.rondas.j1 : m.rondas.j2;
+            stats.p2_rounds_won += isP1Jugador1 ? m.rondas.j2 : m.rondas.j1;
+            
+            if (m.roundsData) {
+                m.roundsData.forEach(round => {
+                    const p1Char = isP1Jugador1 ? round.p1Char : round.p2Char;
+                    const p2Char = isP1Jugador1 ? round.p2Char : round.p1Char;
+                    const key = `${p1Char} vs ${p2Char}`;
+                    if (!stats.char_matchups[key]) {
+                        stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char };
+                    }
+                    if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++;
+                    else stats.char_matchups[key].p2_wins++;
+                });
+            }
+        });
+        
+        const sortedPlayers = [...players].sort((a,b)=> b.puntos - a.puntos);
+        const top5Ids = sortedPlayers.slice(0, 5).map(p => p.id).filter(id => id !== player1Id && id !== player2Id);
+
+        top5Ids.forEach(topPlayerId => {
+            const topPlayer = players.find(p => p.id === topPlayerId);
+            if(!topPlayer) return;
+
+            stats.p1_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
+            matchesHistory.filter(m => (m.jugador1Id === player1Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player1Id))
+                .forEach(m => {
+                    if (m.ganadorId === player1Id) stats.p1_vs_top5[topPlayerId].wins++;
+                    else stats.p1_vs_top5[topPlayerId].losses++;
+                });
+
+            stats.p2_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
+            matchesHistory.filter(m => (m.jugador1Id === player2Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player2Id))
+                .forEach(m => {
+                    if (m.ganadorId === player2Id) stats.p2_vs_top5[topPlayerId].wins++;
+                    else stats.p2_vs_top5[topPlayerId].losses++;
+                });
+        });
+        
+        return stats;
+    }
+    
+    function showVersusComparisonModal(player1Id, player2Id) {
+        const p1 = players.find(p => p.id === player1Id);
+        const p2 = players.find(p => p.id === player2Id);
+        if (!p1 || !p2) return;
 
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
-        const winRate = player.jugados > 0 ? ((player.ganados / player.jugados) * 100).toFixed(1) : 0;
-        let winRateClass = 'text-slate-400';
-        if (winRate >= 60) winRateClass = 'win-rate-green';
-        else if (winRate >= 40) winRateClass = 'win-rate-yellow';
-        else if (player.jugados > 0) winRateClass = 'win-rate-red';
-        
+
         root.innerHTML = `
-         <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
-            <div id="profileModalContent" class="relative w-full max-w-lg glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
-                <div class="flex items-start gap-4">
-                    <div class="profile-avatar bg-slate-800 flex items-center justify-center">
-                        ${player.avatarUrl ? `<img src="${player.avatarUrl}" class="h-full w-full object-cover rounded-2xl"/>` : '👤'}
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold">${player.nombre}</h3>
-                        <div class="small-muted">Rango: ${player.rango || 'N/A'}</div>
-                        <div class="mt-2 flex gap-4 text-center">
-                            <div>
-                                <div class="font-bold text-lg">${player.puntos.toFixed(2)}</div>
-                                <div class="small-muted text-xs">Puntos</div>
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+                <div id="versusCompareModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    
+                    <div class="flex justify-around items-center text-center pb-4 border-b border-slate-700">
+                        <div class="flex flex-col items-center">
+                            <div class="relative">
+                                <img src="${p1.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>
+                                ${p1.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p1.rango] || ''}" alt="Rank ${p1.rango}" /></div>` : ''}
                             </div>
-                             <div>
-                                <div class="font-bold text-lg ${winRateClass}">${winRate}%</div>
-                                <div class="small-muted text-xs">Win Rate</div>
+                            <div class="text-xl font-bold mt-2">${p1.nombre}</div>
+                        </div>
+                        
+                        <div class="text-5xl font-bold text-slate-500">VS</div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="relative">
+                                <img src="${p2.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>
+                                ${p2.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p2.rango] || ''}" alt="Rank ${p2.rango}" /></div>` : ''}
                             </div>
-                            <div>
-                                <div class="font-bold text-lg">${player.ganados}G - ${player.perdidos}P</div>
-                                <div class="small-muted text-xs">Partidas</div>
-                            </div>
+                            <div class="text-xl font-bold mt-2">${p2.nombre}</div>
                         </div>
                     </div>
-                     <button onclick="closeModal()" class="px-3 py-1 rounded-xl border text-xs">Cerrar</button>
+
+                    <div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist">
+                        <button id="vsLigaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button>
+                        <button id="vsTotalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button>
+                    </div>
+
+                    <div id="versusContent" class="mt-4 space-y-2 text-sm"></div>
+
                 </div>
-                <div class="mt-4 small-muted">Perfil del jugador (funcionalidad en desarrollo).</div>
             </div>
-        </div>`;
-         setTimeout(() => {
-          document.getElementById('profileModalContent').classList.remove('scale-95', 'opacity-0');
+        `;
+
+        const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img) => {
+            const total = p1_wins + p2_wins;
+            if (total === 0) return '';
+            const p1_wr = total > 0 ? (p1_wins / total * 100) : 0;
+            const p2_wr = total > 0 ? (p2_wins / total * 100) : 0;
+
+            const p1_img_html = p1_img ? `<img src="${p1_img}" class="w-6 h-6 rounded-md"/>` : '';
+            const p2_img_html = p2_img ? `<img src="${p2_img}" class="w-6 h-6 rounded-md"/>` : '';
+
+            return `
+                <div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">
+                    <div class="text-left flex items-center gap-2">
+                        <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
+                        <span class="font-semibold">${p1_wins}-${p2_wins}</span>
+                    </div>
+                    <div class="font-bold flex items-center justify-center gap-2">${p1_img_html}<span>${label}</span>${p2_img_html}</div>
+                    <div class="text-right flex items-center justify-end gap-2">
+                         <span class="font-semibold">${p2_wins}-${p1_wins}</span>
+                        <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderTab = (tabId) => {
+            document.getElementById('vsLigaTab').classList.toggle('active', tabId === 'liga');
+            document.getElementById('vsTotalTab').classList.toggle('active', tabId === 'total');
+            
+            const history = tabId === 'liga' ? ligaMatches : allMatches;
+            const stats = getVersusStats(p1.id, p2.id, history);
+            const contentEl = document.getElementById('versusContent');
+
+            let contentHTML = '';
+            
+            contentHTML += createStatRowHTML(stats.p1_sets_won, stats.p2_sets_won, 'Sets');
+            contentHTML += createStatRowHTML(stats.p1_rounds_won, stats.p2_rounds_won, 'Rondas');
+
+            if (Object.keys(stats.char_matchups).length > 0) {
+                contentHTML += '<div class="font-semibold mt-4 mb-2 px-1">Enfrentamientos vs Personajes (Rondas)</div>';
+                Object.values(stats.char_matchups).sort((a,b) => (b.p1_wins + b.p2_wins) - (a.p1_wins + a.p2_wins)).forEach(matchup => {
+                    contentHTML += createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char]);
+                });
+            }
+
+            const allTopOpponents = { ...stats.p1_vs_top5, ...stats.p2_vs_top5 };
+            const topOpponentIds = Object.keys(allTopOpponents);
+
+            if (topOpponentIds.length > 0) {
+                let vsTop5HTML = '';
+                const sortedTopOpponentIds = topOpponentIds.sort((a,b) => allTopOpponents[a].name.localeCompare(allTopOpponents[b].name));
+
+                sortedTopOpponentIds.forEach(topId => {
+                    const p1Data = stats.p1_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
+                    const p2Data = stats.p2_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
+
+                    if ((p1Data.wins + p1Data.losses > 0) || (p2Data.wins + p2Data.losses > 0)) {
+                        const p1_total = p1Data.wins + p1Data.losses;
+                        const p1_wr = p1_total > 0 ? (p1Data.wins / p1_total * 100) : 0;
+                        
+                        const p2_total = p2Data.wins + p2Data.losses;
+                        const p2_wr = p2_total > 0 ? (p2Data.wins / p2_total * 100) : 0;
+
+                        vsTop5HTML += `
+                            <div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">
+                                <div class="text-left flex items-center gap-2 justify-start">
+                                    <span class="font-semibold w-12 text-center">${p1Data.wins}-${p1Data.losses}</span>
+                                    <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
+                                </div>
+                                <div class="font-bold">${p1Data.name}</div>
+                                <div class="text-right flex items-center gap-2 justify-end">
+                                    <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
+                                    <span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                if (vsTop5HTML) {
+                    contentHTML += '<div class="font-semibold mt-4 mb-2 px-1">Rendimiento vs. Top 5 (Sets)</div>';
+                    contentHTML += vsTop5HTML;
+                }
+            }
+            
+            contentEl.innerHTML = contentHTML || '<div class="text-center small-muted py-8">No hay enfrentamientos registrados entre estos jugadores.</div>';
+        };
+
+        document.getElementById('vsLigaTab').onclick = () => renderTab('liga');
+        document.getElementById('vsTotalTab').onclick = () => renderTab('total');
+
+        setTimeout(() => {
+            const modalContent = document.getElementById('versusCompareModalContent');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+            renderTab('liga'); 
         }, 10);
     }
-    // --- FIN DE LA MEJORA ---
-
-
-    // =================================================================
-    // INICIALIZACIÓN DE LA APLICACIÓN
-    // =================================================================
     
-    // Event listener para iniciar la carga de datos cuando el DOM esté listo
-    document.addEventListener('DOMContentLoaded', () => {
-        loadAndRenderData();
+    // --- VERSUS FEATURE END ---
 
-        // Puedes agregar aquí los listeners de los botones principales que no dependen de los datos
-        document.getElementById('btnAddPlayer').onclick = () => alert("La función de añadir jugador está deshabilitada.");
-        // etc.
+    // events
+    document.getElementById('btnAddPlayer').onclick = showAddPlayer;
+    document.getElementById('quickAddMatchFT3').onclick = () => showAddMatch(3);
+    document.getElementById('quickAddMatchFT5').onclick = () => showAddMatch(5);
+    document.getElementById('quickAddMatchFT10').onclick = () => showAddMatch(10);
+    document.getElementById('btnSettings').onclick = showSettings;
+    document.getElementById('resetLiga').onclick = resetLiga;
+    document.getElementById('clearHistory').onclick = clearHistory;
+    document.getElementById('btnVersus').onclick = () => {
+        if (selectedPlayers.length === 2) {
+            showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]);
+        }
+    };
+    document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        selectedPlayers = [];
+        renderAll();
+      }
     });
+
+    // --- INICIO DE LA MEJORA: Llamar a la función de inicialización ---
+    document.addEventListener('DOMContentLoaded', initializeApp);
+    // --- FIN DE LA MEJORA ---
 
   </script>
 </body>
