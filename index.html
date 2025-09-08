@@ -1988,13 +1988,37 @@
     });
 
     // initial save if empty
-    save(LS_PLAYERS,players);
-    save(LS_LIGA_MATCHES,ligaMatches);
-    save(LS_ALL_MATCHES,allMatches);
-    renderAll();
+if(players.length === 0 && ligaMatches.length === 0) {
+  // Intenta cargar el JSON desde la URL de GitHub
+  fetch('https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json')
+    .then(response => response.json())
+    .then(data => {
+      players = data.players;
+      ligaMatches = data.allMatches.filter(m => m.ftType !== 'all');
+      allMatches = data.allMatches;
+      
+      save(LS_PLAYERS, players);
+      save(LS_LIGA_MATCHES, ligaMatches);
+      save(LS_ALL_MATCHES, allMatches);
+      
+      renderAll();
+      console.log("Datos del JSON cargados correctamente.");
+    })
+    .catch(error => {
+      console.error("Error al cargar el archivo JSON:", error);
+      save(LS_PLAYERS, []);
+      save(LS_LIGA_MATCHES, []);
+      save(LS_ALL_MATCHES, []);
+      renderAll();
+    });
+} else {
+  // Si ya hay datos en localStorage, no se hace nada
+  renderAll();
+}
 
     // expose fmtDate for table usage
     window.fmtDate = fmtDate
   </script>
 </body>
+
 </html>
