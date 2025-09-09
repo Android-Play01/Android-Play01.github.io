@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Liga 3rd Strike — Ranking</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liga 3rd Strike — Ranking</title>
   <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/logo.ico">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
     /* Small extra polish */
     body { background: linear-gradient(180deg,#050507 0%, #0b0b0b 100%); }
     .glass { background: rgba(17,17,20,0.55); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.03); }
@@ -47,72 +47,60 @@
       position: absolute;
       bottom: -4px;
       right: -10px;
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       border-radius: 9999px;
       padding: 2px;
       background: rgba(0,0,0,0.5);
       backdrop-filter: blur(2px);
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
+      justify-content: center; }
     .rank-badge img {
       width: 100%;
-      height: 100%;
-    }
+      height: 100%; }
 
     /* Adjust badge size and position for Top 3 */
     .top3-img-container .rank-badge {
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       right: -16px;
       bottom: -4px;
     }
 
     /* Estilos para el buscador de personajes */
     .character-select-container {
-      position: relative;
-    }
+      position: relative; }
     .character-input {
       padding: 8px 12px;
       border: 1px solid #4a5568;
-      background-color: #1a202c;
-      border-radius: 10px;
+      background-color: #1a202c; border-radius: 10px;
       width: 100%;
     }
     .character-list {
       position: absolute;
-      top: 100%;
-      left: 0;
+      top: 100%; left: 0;
       right: 0;
       z-index: 10;
       background-color: #1a202c;
       border: 1px solid #4a5568;
       border-top: none;
-      border-radius: 0 0 10px 10px;
-      max-height: 200px;
+      border-radius: 0 0 10px 10px; max-height: 200px;
       overflow-y: auto;
     }
     .character-list-item {
       padding: 8px 12px;
-      cursor: pointer;
-      color: white;
+      cursor: pointer; color: white;
     }
     .character-list-item:hover {
-      background-color: #2d3748;
-    }
+      background-color: #2d3748; }
     .character-selected {
       background-color: #f97316;
       color: black;
       font-weight: 600;
-      border-radius: 10px;
-      padding: 8px 12px;
+      border-radius: 10px; padding: 8px 12px;
     }
     .result-cell-player1, .result-cell-player2 {
       padding: 8px 12px;
-      border-radius: 10px;
-      text-align: center;
+      border-radius: 10px; text-align: center;
       transition: background-color 0.3s ease;
     }
     .result-cell-player1.winner-color {
@@ -122,29 +110,24 @@
       background-color: rgba(239, 68, 68, 0.2); /* red-500 with opacity */
     }
     .result-cell-player2.winner-color {
-      background-color: rgba(34, 197, 94, 0.2);
-    }
+      background-color: rgba(34, 197, 94, 0.2); }
     .result-cell-player2.loser-color {
-      background-color: rgba(239, 68, 68, 0.2);
-    }
+      background-color: rgba(239, 68, 68, 0.2); }
 
     /* Player profile avatar zoom on hover */
     .player-profile-link:hover .player-avatar-img-zoom { transform: scale(1.1); transition: transform 0.2s ease-in-out; }
     
     .profile-avatar {
-      width: 90px;
-      height: 90px;
+      width: 90px; height: 90px;
       border-radius: 1.5rem;
       object-fit: cover;
     }
     .profile-tabs button.active {
-      background-color: rgba(255,255,255,0.05);
-      border-bottom: 2px solid #f97316;
+      background-color: rgba(255,255,255,0.05); border-bottom: 2px solid #f97316;
       font-weight: bold;
     }
     .profile-tabs button {
-      border-bottom: 2px solid transparent;
-      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent; padding-bottom: 0.5rem;
     }
     
     /* Hover effects for ranking row */
@@ -154,37 +137,30 @@
 
     /* Hover effect for name and avatar when inside ranking row*/
     #rankingBody .profile-link:hover .player-avatar-img-zoom {
-      transform: scale(1.1);
-      transition: transform 0.2s ease-in-out;
+      transform: scale(1.1); transition: transform 0.2s ease-in-out;
     }
     #rankingBody .profile-link:hover .player-name-text {
       color: #f97316; /* Naranja */
-      transition: color 0.2s ease-in-out;
-    }
+      transition: color 0.2s ease-in-out; }
     
     /* Adjust the hitbox for the ranking table profile link */
     #rankingBody .profile-link {
-        display: inline-flex;
-        cursor: pointer;
+        display: inline-flex; cursor: pointer;
     }
 
     .clickable-profile-opponent {
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
+        cursor: pointer; transition: background-color 0.2s ease-in-out;
     }
     .clickable-profile-opponent:hover {
-        background-color: rgba(249, 115, 22, 0.1);
-    }
+        background-color: rgba(249, 115, 22, 0.1); }
     
     /* Versus Button Style */
     .btn-versus {
-      background: linear-gradient(135deg, #16a34a 49.9%, #f97316 50.1%);
-      border-color: rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, #16a34a 49.9%, #f97316 50.1%); border-color: rgba(255,255,255,0.1);
       transition: all 0.2s;
     }
     .btn-versus:hover {
-      opacity: 0.9;
-    }
+      opacity: 0.9; }
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -197,7 +173,7 @@
           <div class="small-muted">Fight A New Rival!</div>
         </div>
       </div>
-      <div class="flex items-center gap-2">
+       <div class="flex items-center gap-2">
         <input id="search" placeholder="Buscar jugador..." class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-100" />
         <button id="btnAddPlayer" class="px-4 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-rose-600 font-semibold">+ Jugador</button>
         <button id="btnSettings" class="px-3 py-2 rounded-xl border border-slate-700">Ajustes</button>
@@ -207,7 +183,7 @@
     <main class="grid lg:grid-cols-3 gap-6">
       <section class="lg:col-span-2 glass card p-4">
         <div class="flex items-center justify-between mb-3">
-          <div>
+           <div>
             <h2 class="text-lg font-semibold">Ranking</h2>
             <div class="small-muted" id="metaSummary">Cargando...</div>
           </div>
@@ -217,19 +193,19 @@
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm">
             <thead class="text-slate-400 text-xs">
-              <tr>
+               <tr>
                 <th class="px-3 py-2">Pos</th>
                 <th class="px-3 py-2">Jugador</th>
                 <th class="px-3 py-2">Puntos</th>
                 <th class="px-3 py-2">PJ</th>
-                <th class="px-3 py-2">G</th>
+                 <th class="px-3 py-2">G</th>
                 <th class="px-3 py-2">P</th>
                 <th class="px-3 py-2">Acciones</th>
               </tr>
             </thead>
             <tbody id="rankingBody">
               <tr><td colspan="7" class="px-3 py-6 text-slate-400 text-center">Cargando datos...</td></tr>
-            </tbody>
+             </tbody>
           </table>
         </div>
       </section>
@@ -239,13 +215,13 @@
           <h3 class="font-semibold">Acciones rápidas</h3>
           <div class="mt-3 flex gap-2">
             <button id="quickAddMatchFT3" class="px-3 py-2 flex-1 rounded-2xl bg-amber-500 text-black font-semibold">FT3</button>
-            <button id="quickAddMatchFT5" class="px-3 py-2 flex-1 rounded-2xl bg-amber-500 text-black font-semibold">FT5</button>
+             <button id="quickAddMatchFT5" class="px-3 py-2 flex-1 rounded-2xl bg-amber-500 text-black font-semibold">FT5</button>
             <button id="quickAddMatchFT10" class="px-3 py-2 flex-1 rounded-2xl bg-amber-500 text-black font-semibold">FT10</button>
           </div>
           <div class="mt-2 flex flex-col gap-2">
             <button id="btnVersus" class="px-3 py-2 rounded-2xl border font-semibold text-white">Versus</button>
             <button id="resetLiga" class="px-3 py-2 rounded-2xl border hover:text-red-600">Resetear Liga</button>
-            <button id="clearHistory" class="px-3 py-2 rounded-2xl border hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-200">Borrar historial</button>
+             <button id="clearHistory" class="px-3 py-2 rounded-2xl border hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-200">Borrar historial</button>
           </div>
         </div>
 
@@ -253,7 +229,7 @@
           <h3 class="font-semibold">Top 3 Jugadores</h3>
           <div id="top3Container" class="flex justify-around items-end mt-3 gap-2 text-center">
              <div class="text-center w-full small-muted">Cargando...</div>
-          </div>
+           </div>
           <div id="top3MoreBtnContainer" class="mt-4 text-center">
           </div>
         </div>
@@ -262,37 +238,37 @@
           <h3 class="font-semibold">Esquema de puntuación</h3>
           <div class="mt-3 text-center small-muted space-y-3">
             <div>
-              <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
+               <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
               <div class="grid grid-cols-3 gap-2">
                 <div class="p-2 rounded-lg border">
                   <div>FT3</div>
                   <div class="font-semibold text-white">0.67</div>
                 </div>
-                <div class="p-2 rounded-lg border">
+                 <div class="p-2 rounded-lg border">
                   <div>FT5</div>
                   <div class="font-semibold text-white">0.6</div>
                 </div>
                 <div class="p-2 rounded-lg border">
-                  <div>FT10</div>
+                   <div>FT10</div>
                   <div class="font-semibold text-white">0.5</div>
                 </div>
               </div>
             </div>
             <div>
-              <div class="text-sm font-medium text-slate-300 mb-1">Bonificación al Ganador (por Rango)</div>
+              <div class="text-sm font-medium text-slate-300  mb-1">Bonificación al Ganador (por Rango)</div>
               <div class="grid grid-cols-5 gap-2">
                 <div class="p-2 rounded-lg border"><div>A</div><div class="font-semibold text-white">+2.5</div></div>
                 <div class="p-2 rounded-lg border"><div>B</div><div class="font-semibold text-white">+2.0</div></div>
                 <div class="p-2 rounded-lg border"><div>C</div><div class="font-semibold text-white">+1.5</div></div>
-                <div class="p-2 rounded-lg border"><div>D</div><div class="font-semibold text-white">+1.0</div></div>
+                 <div class="p-2 rounded-lg border"><div>D</div><div class="font-semibold text-white">+1.0</div></div>
                 <div class="p-2 rounded-lg border"><div>E</div><div class="font-semibold text-white">+0.5</div></div>
               </div>
             </div>
           </div>
           <div class="mt-3 small-muted text-center text-xs leading-relaxed">
             <b>Ganador:</b> (Puntos por W ronda) + Bonificación.<br>
-            <b>Perdedor:</b> (Puntos por W ronda).
-          </div>
+             <b>Perdedor:</b> (Puntos por W ronda).
+ </div>
         </div>
       </aside>
 
@@ -302,19 +278,19 @@
           <table class="w-full text-left text-sm">
             <thead class="text-slate-400 text-xs">
               <tr>
-                <th class="px-3 py-2">Fecha</th>
+                 <th class="px-3 py-2">Fecha</th>
                 <th class="px-3 py-2">FT</th>
                 <th class="px-3 py-2">Jugador 1</th>
                 <th class="px-3 py-2">Jugador 2</th>
                 <th class="px-3 py-2">Marcador</th>
                 <th class="px-3 py-2">Rondas</th>
-                <th class="px-3 py-2">Ganador</th>
+                 <th class="px-3 py-2">Ganador</th>
                 <th class="px-3 py-2">Puntos</th>
-                <th class="px-3 py-2">Nota</th>
+                <th class="px-3 py-2">Replay</th>
               </tr>
             </thead>
             <tbody id="ligaHistoryBody"></tbody>
-          </table>
+           </table>
         </div>
         <div id="ligaMoreBtnContainer" class="mt-4 text-center"></div>
       </section>
@@ -325,19 +301,19 @@
           <table class="w-full text-left text-sm">
             <thead class="text-slate-400 text-xs">
               <tr>
-                <th class="px-3 py-2">Fecha</th>
+                 <th class="px-3 py-2">Fecha</th>
                 <th class="px-3 py-2">FT</th>
                 <th class="px-3 py-2">Jugador 1</th>
                 <th class="px-3 py-2">Jugador 2</th>
                 <th class="px-3 py-2">Marcador</th>
-                <th class="px-3 py-2">Ganador</th>
+                 <th class="px-3 py-2">Ganador</th>
                 <th class="px-3 py-2">Puntos</th>
-                <th class="px-3 py-2">Nota</th>
+                <th class="px-3 py-2">Replay</th>
               </tr>
             </thead>
             <tbody id="historyBody"></tbody>
           </table>
-        </div>
+         </div>
         <div id="allHistoryMoreBtnContainer" class="mt-4 text-center"></div>
       </section>
     </main>
@@ -356,7 +332,6 @@
 
     // --- INICIO DE LA MEJORA: Lógica de carga desde GitHub ---
     const JSON_URL = 'https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json';
-    
     // state
     let players = [];
     let ligaMatches = [];
@@ -372,7 +347,6 @@
                 throw new Error(`Error HTTP: ${response.status}`);
             }
             const data = await response.json();
-            
             // Asigna los datos frescos a las variables de estado
             players = data.players || [];
             ligaMatches = data.ligaMatches || [];
@@ -394,7 +368,6 @@
       ft5: { perRound: 0.6, winnerBonus: 0 },
       ft10: { perRound: 0.5, winnerBonus: 0 }
     };
-    
     // Bonificación por Rango
     const RANK_BONUS = {
       'S': 2.5,
@@ -404,7 +377,6 @@
       'D': 1.0,
       'E': 0.5
     };
-
     const RANK_IMAGES = {
         'S': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
         'A': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
@@ -413,7 +385,6 @@
         'D': 'https://i.postimg.cc/zfy9Qg45/rank2.png',
         'E': 'https://i.postimg.cc/nhRyTkR0/rank1.png'
     };
-    
     // Character images
     const CHARACTER_IMAGES = {
         'Akuma': 'https://i.postimg.cc/WpqZ5Lby/akuma.png',
@@ -426,6 +397,7 @@
         'Ken': 'https://i.postimg.cc/Hkz8rTBr/ken.png',
         'Makoto': 'https://i.postimg.cc/GpSBjq0r/makoto.png',
         'Necro': 'https://i.postimg.cc/nzjXSBZm/necro.png',
+ 
         'Oro': 'https://i.postimg.cc/sXkvkxDN/oro.png',
         'Remy': 'https://i.postimg.cc/ZYN9r8wt/remy.png',
         'Ryu': 'https://i.postimg.cc/BQGjNjz8/ryu.png',
@@ -436,15 +408,12 @@
         'Yang': 'https://i.postimg.cc/rpbm4sWw/yang.png',
         'Q': 'https://i.postimg.cc/Bb2X43jQ/q.png',
     };
-
     const ROSTER_3RD_STRIKE = [
         'Akuma', 'Alex', 'Chun-Li', 'Dudley', 'Elena', 'Hugo', 'Ibuki', 'Ken', 'Makoto', 'Necro', 'Oro', 'Remy', 'Ryu', 'Sean', 'Twelve', 'Urien', 'Yun', 'Yang', 'Q'
     ];
-
     // Limits
     const HISTORY_LIMIT = 7;
     const PROFILE_LIST_LIMIT = 4;
-
     function uid(){return Math.random().toString(36).slice(2,9)}
     function nowISO(){return new Date().toISOString()}
     function fmtDate(iso){return new Date(iso).toLocaleString()}
@@ -478,6 +447,7 @@
           if (p.puntos > 0) { // Solo aplicar si tiene puntos
             if (i === 0) {
               rankBorderClass = 'rank-1-border';
+ 
             } else if (i === 1) {
               rankBorderClass = 'rank-2-border';
             } else if (i === 2) {
@@ -485,19 +455,20 @@
             }
           }
 
-          const tr = document.createElement('tr');
+          const 
+          tr = document.createElement('tr');
           tr.dataset.id = p.id;
           tr.className = `${isSelected ? 'selected-player-row' : ''} ${rankBorderClass} cursor-pointer`;
           tr.innerHTML = `
             <td class="px-3 py-3 font-semibold flex items-center gap-2">
               <input type="checkbox" ${isSelected ? 'checked' : ''} class="pointer-events-none" />
               <span>${i+1}</span>
-            </td>
+             </td>
             <td class="px-3 py-3">
               <div class="profile-link flex items-center gap-3">
                 <div class="player-avatar-container">
                   <div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center player-avatar-img-zoom">
-                    ${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}
+                   ${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}
                   </div>
                   ${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}
                 </div>
@@ -505,14 +476,14 @@
                   <div class="font-medium text-white player-name-text">${p.nombre}</div>
                 </div>
               </div>
-            </td>
+             </td>
             <td class="px-3 py-3 font-semibold text-amber-400">${p.puntos.toFixed(2)}</td>
             <td class="px-3 py-3">${p.jugados}</td>
             <td class="px-3 py-3">${p.ganados}</td>
             <td class="px-3 py-3">${p.perdidos}</td>
             <td class="px-3 py-3">
               <div class="flex gap-2">
-                <button data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button>
+                 <button data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button>
                 <button data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button>
               </div>
             </td>
@@ -534,11 +505,11 @@
                   <div class="top3-img-container">
                     <div class="top3-img flex items-center justify-center bg-slate-800">
                       ${p.avatarUrl ? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-full player-avatar-img-zoom"/>` : '👤'}
-                    </div>
+                     </div>
                     ${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}
                   </div>
                   <div class="top3-name">${p.nombre}</div>
-                  <div class="top3-games">${p.ganados}-${p.perdidos}</div>
+                   <div class="top3-games">${p.ganados}-${p.perdidos}</div>
                   <div class="small-muted top3-rounds">${p.rondasGanadas}-${p.rondasPerdidas}</div>
               `;
               top3Container.appendChild(playerEl);
@@ -566,16 +537,18 @@
           const j2 = players.find(p => p.id === m.jugador2Id);
           const g = players.find(p => p.id === m.ganadorId);
           const tr = document.createElement('tr');
+          // MODIFICACIÓN: Añadido enlace para replay
+          const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
           tr.innerHTML = `
-            <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+             <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
             <td class="px-3 py-2">FT${m.ftType}</td>
             <td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td>
             <td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td>
             <td class="px-3 py-2 font-medium">${m.marcador}</td>
             <td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>
-            <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>
+             <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>
             <td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td>
-            <td class="px-3 py-2 small-muted">${m.nota || '—'}</td>
+            <td class="px-3 py-2 small-muted">${replayLink}</td>
           `
           ligaHistoryBody.appendChild(tr);
         })
@@ -596,15 +569,17 @@
           const j2 = players.find(p=>p.id===m.jugador2Id);
           const g = players.find(p=>p.id===m.ganadorId);
           const tr = document.createElement('tr');
+          // MODIFICACIÓN: Añadido enlace para replay
+          const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
           tr.innerHTML = `
             <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
-            <td class="px-3 py-2">FT${m.ftType}</td>
+             <td class="px-3 py-2">FT${m.ftType}</td>
             <td class="px-3 py-2">${j1? j1.nombre: '?'} </td>
             <td class="px-3 py-2">${j2? j2.nombre: '?'} </td>
             <td class="px-3 py-2 font-medium">${m.marcador}</td>
             <td class="px-3 py-2 font-semibold text-amber-400">${g? g.nombre: '?'}</td>
             <td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td>
-            <td class="px-3 py-2 small-muted">${m.nota|| '—'}</td>
+             <td class="px-3 py-2 small-muted">${replayLink}</td>
           `
           historyBody.appendChild(tr);
         })
@@ -633,7 +608,6 @@
           showPlayerProfile(playerId);
         };
       });
-
       updateQuickMatchButtons();
     }
 
@@ -648,17 +622,19 @@
             const j1 = players.find(p => p.id === m.jugador1Id);
             const j2 = players.find(p => p.id === m.jugador2Id);
             const g = players.find(p => p.id === m.ganadorId);
+            // MODIFICACIÓN: Añadido enlace para replay
+            const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
             tableRows += `
                 <tr>
-                    <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                     <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
                     <td class="px-3 py-2">FT${m.ftType}</td>
                     <td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td>
                     <td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td>
-                    <td class="px-3 py-2 font-medium">${m.marcador}</td>
+                     <td class="px-3 py-2 font-medium">${m.marcador}</td>
                     ${isLigaHistory ? `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>` : ''}
                     <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>
                     <td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td>
-                    <td class="px-3 py-2 small-muted">${m.nota || '—'}</td>
+                     <td class="px-3 py-2 small-muted">${replayLink}</td>
                 </tr>
             `;
         });
@@ -668,31 +644,31 @@
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
                 <div id="historyModalContent" class="relative w-full max-w-4xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     <h3 class="text-lg font-semibold mb-4">${title}</h3>
-                    <div class="overflow-x-auto">
+                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm">
                             <thead class="text-slate-400 text-xs">
-                                <tr>
+                               <tr>
                                     <th class="px-3 py-2">Fecha</th>
                                     <th class="px-3 py-2">FT</th>
-                                    <th class="px-3 py-2">Jugador 1</th>
+                                     <th class="px-3 py-2">Jugador 1</th>
                                     <th class="px-3 py-2">Jugador 2</th>
                                     <th class="px-3 py-2">Marcador</th>
-                                    ${isLigaHistory ? `<th class="px-3 py-2">Rondas</th>` : ''}
+                                     ${isLigaHistory ? `<th class="px-3 py-2">Rondas</th>` : ''}
                                     <th class="px-3 py-2">Ganador</th>
                                     <th class="px-3 py-2">Puntos</th>
-                                    <th class="px-3 py-2">Nota</th>
+                                     <th class="px-3 py-2">Replay</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                             <tbody>
                                 ${tableRows}
                             </tbody>
                         </table>
-                    </div>
+                       </div>
                     <div class="mt-4 text-right">
                         <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
                     </div>
                 </div>
-            </div>
+             </div>
         `;
         setTimeout(() => {
           document.getElementById('historyModalContent').classList.remove('scale-95', 'opacity-0');
@@ -706,7 +682,6 @@
         const root = document.getElementById('modalRoot');
 
         const sortedPlayers = [...players].sort((a,b)=> (b.puntos - a.puntos) || (b.ganados - a.ganados) || a.nombre.localeCompare(b.nombre));
-
         let tableRows = '';
         sortedPlayers.forEach((p, i) => {
           const totalRondas = p.rondasGanadas + p.rondasPerdidas;
@@ -716,13 +691,13 @@
           const setsColorClass = getWinRateColor(winRateSets);
           const roundsColorClass = getWinRateColor(winRateRondas);
 
-          tableRows += `
+           tableRows += `
             <tr data-id="${p.id}" class="clickable-player-row hover:bg-slate-900 cursor-pointer">
               <td class="px-3 py-2">${i+1}</td>
               <td class="px-3 py-2">${p.nombre}</td>
               <td class="px-3 py-2">${p.jugados}</td>
               <td class="px-3 py-2">${p.ganados}-${p.perdidos}</td>
-              <td class="px-3 py-2">${p.rondasGanadas}-${p.rondasPerdidas}</td>
+               <td class="px-3 py-2">${p.rondasGanadas}-${p.rondasPerdidas}</td>
               <td class="px-3 py-2 font-semibold ${setsColorClass}">${winRateSets.toFixed(1)}%</td>
               <td class="px-3 py-2 font-semibold ${roundsColorClass}">${winRateRondas.toFixed(1)}%</td>
             </tr>
@@ -734,42 +709,41 @@
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
                 <div id="playerStatsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     <h3 class="text-lg font-semibold mb-4">Estadísticas de Jugadores</h3>
-                    <div class="overflow-x-auto">
+                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm">
                             <thead class="text-slate-400 text-xs">
-                                <tr>
+                                 <tr>
                                     <th class="px-3 py-2">Pos</th>
                                     <th class="px-3 py-2">Jugador</th>
-                                    <th class="px-3 py-2">PJ</th>
+                                     <th class="px-3 py-2">PJ</th>
                                     <th class="px-3 py-2">Sets<br>(G/P)</th>
                                     <th class="px-3 py-2">Rondas<br>(G/P)</th>
-                                    <th class="px-3 py-2">Sets<br>Win Rate</th>
+                                     <th class="px-3 py-2">Sets<br>Win Rate</th>
                                     <th class="px-3 py-2">Rondas<br>Win Rate</th>
-                                </tr>
+                                 </tr>
                             </thead>
                             <tbody>
                                 ${tableRows}
-                            </tbody>
+                             </tbody>
                         </table>
                     </div>
                     <div class="mt-4 text-center small-muted">
-                        <div>Clasificación del Win Rate:</div>
+                         <div>Clasificación del Win Rate:</div>
                         <div class="mt-1 flex items-center justify-center gap-2">
                           <span class="win-rate-green font-semibold">Positivo</span>
-                          (100% - 60%)
+                           (100% - 60%)
                           <span class="win-rate-yellow font-semibold">Neutro</span>
                           (59% - 45%)
                           <span class="win-rate-red font-semibold">Negativo</span>
-                          (44% - 0%)
+                           (44% - 0%)
                         </div>
                     </div>
                     <div class="mt-4 text-right">
-                        <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+                       <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
                     </div>
                 </div>
             </div>
         `;
-
         setTimeout(() => {
           document.getElementById('playerStatsModalContent').classList.remove('scale-95', 'opacity-0');
           document.getElementById('playerStatsModalContent').classList.add('scale-100', 'opacity-100');
@@ -778,7 +752,8 @@
             row.onclick = (e) => {
               const playerId = e.currentTarget.dataset.id;
               closeModal();
-              setTimeout(() => showPlayerProfile(playerId), 300); // Small delay for effect
+              setTimeout(() => showPlayerProfile(playerId), 
+              300); // Small delay for effect
             };
           });
         }, 10);
@@ -789,11 +764,17 @@
         document.body.classList.add('modal-open');
         const player = players.find(p => p.id === playerId);
         if (!player) return;
-
         // Process data for both ligas and total history
         const statsLiga = getPlayerStats(player.id, ligaMatches);
         const statsTotal = getPlayerStats(player.id, allMatches);
         const playerCharacters = getPlayerCharactersUsed(player.id, allMatches);
+
+        // MODIFICACIÓN: Crear HTML para el enlace de Discord si existe
+        const discordHTML = player.discord ? `
+            <a href="${player.discord}" target="_blank" rel="noopener noreferrer" class="mt-2 flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+                <img src="https://i.postimg.cc/yN0DgFj7/pngimg-com-discord-PNG7.png" class="w-5 h-5"/>
+                <span class="font-semibold">${player.discord.replace('https://discord.gg/', '')}</span>
+            </a>` : '';
 
         const root = document.getElementById('modalRoot');
         root.innerHTML = `
@@ -801,28 +782,29 @@
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
                 <div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     <div class="flex justify-between items-start pb-4 border-b border-slate-700">
-                      <div class="flex items-center gap-6">
+                       <div class="flex items-center gap-6">
                           <div class="flex-shrink-0 relative profile-link">
                               <img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />
-                              ${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}
+                             ${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}
                           </div>
                           <div>
                               <div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>
-                              <div class="mt-2 text-md">
+                              ${discordHTML}
+                               <div class="mt-2 text-md">
                                   <span class="font-bold">Sets:</span> ${statsTotal.sets.ganados}-${statsTotal.sets.perdidos}
-                                  <span class="mx-2 small-muted">|</span>
+                                   <span class="mx-2 small-muted">|</span>
                                   <span class="font-bold">Rondas:</span> ${statsTotal.rondas.ganadas}-${statsTotal.rondas.perdidas}
                               </div>
                           </div>
-                      </div>
+                       </div>
                       
                       <div id="playerCharactersContainer" class="flex flex-col items-center">
                           <div class="text-xs small-muted">Personajes</div>
-                          <div class="flex items-center gap-2 mt-2">
+                         <div class="flex items-center gap-2 mt-2">
                           </div>
                       </div>
                     </div>
-                    
+                     
                     <div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist">
                         <button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button>
                         <button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button>
@@ -832,11 +814,10 @@
 
                     <div class="mt-4 text-right">
                         <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
-                    </div>
+                     </div>
                 </div>
             </div>
         `;
-
         function renderCharacters() {
             const container = document.querySelector('#playerCharactersContainer div.flex');
             container.innerHTML = '';
@@ -845,7 +826,7 @@
                 const charHtml = `
                     <div class="flex flex-col items-center">
                         <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
-                        <div class="font-bold text-xs text-white">${char}</div>
+                         <div class="font-bold text-xs text-white">${char}</div>
                     </div>
                 `;
                 container.innerHTML += charHtml;
@@ -853,7 +834,8 @@
         }
 
         function renderTab(tabId) {
-          const stats = tabId === 'ligaTab' ? statsLiga : statsTotal;
+          const stats = tabId === 'ligaTab' ?
+          statsLiga : statsTotal;
           const content = document.getElementById('profileContent');
 
           // Highlight the correct tab
@@ -868,8 +850,10 @@
           }
 
 
-          const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
-          const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
+          const setsWinRate = stats.sets.jugados > 0 ?
+          (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
+          const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ?
+          (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
 
           const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
           const visibleOpponents = sortedOpponents.slice(0, PROFILE_LIST_LIMIT);
@@ -881,23 +865,23 @@
                   <div class="space-y-2">
                       ${visibleOpponents.map(([oppId, oppStats]) => {
                           const opponent = players.find(p => p.id === oppId);
-                          if (!opponent) return '';
+                           if (!opponent) return '';
                           const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
                           const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
-                          return `
+                           return `
                               <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-id="${oppId}">
                                   <img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/>
-                                  <div class="flex-1">
+                                   <div class="flex-1">
                                       <div class="font-bold player-name-text">${opponent.nombre}</div>
-                                  </div>
+                                   </div>
                                   <div class="text-right">
                                       <div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div>
-                                      <div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div>
+                                       <div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div>
                                   </div>
                                   <div class="w-16 text-right">
-                                      <div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div>
+                                       <div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div>
                                       <div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div>
-                                  </div>
+                                   </div>
                               </div>
                           `;
                       }).join('')}
@@ -920,20 +904,20 @@
                   <div class="space-y-2">
                       ${visibleCharacters.map(([char, charStats]) => {
                           const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
-                          const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                           const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
                           return `
                               <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
-                                  <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/>
+                                 <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/>
                                   <div class="flex-1">
-                                      <div class="font-bold">${char}</div>
+                                     <div class="font-bold">${char}</div>
                                   </div>
                                   <div class="text-right">
-                                      <div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div>
+                                       <div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div>
                                       <div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div>
                                   </div>
-                                  <div class="w-16 text-right">
+                                   <div class="w-16 text-right">
                                       <div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div>
-                                      <div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div>
+                                       <div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div>
                                   </div>
                               </div>
                           `;
@@ -952,19 +936,18 @@
               <div>
                 <div class="text-xs small-muted">Sets (G/P)</div>
                 <div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div>
-                <div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div>
+                <div class="text-sm font-semibold  ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div>
               </div>
               <div>
                 <div class="text-xs small-muted">Rondas (G/P)</div>
                 <div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div>
                 <div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div>
-              </div>
+               </div>
             </div>
             
             ${vsOpponentsHTML}
             ${vsCharactersHTML}
           `;
-
           // Bind event listeners for clickable opponents
           document.querySelectorAll('.clickable-profile-opponent').forEach(el => {
               el.addEventListener('click', () => {
@@ -972,7 +955,6 @@
                   showPlayerProfile(opponentId);
               });
           });
-          
           if(document.getElementById('showMoreOpponentsBtn')) {
             document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent');
           }
@@ -999,7 +981,6 @@
 
         let title = '';
         let listItemsHTML = '';
-        
         if (type === 'opponent') {
             title = `Historial contra oponentes de ${player.nombre}`;
             const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
@@ -1007,22 +988,23 @@
                 const opponent = players.find(p => p.id === oppId);
                 if (!opponent) return '';
                 const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
-                const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 
+                ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
                 return `
                     <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent cursor-pointer" data-id="${oppId}">
                         <img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/>
-                        <div class="flex-1">
+                         <div class="flex-1">
                             <div class="font-bold player-name-text">${opponent.nombre}</div>
                         </div>
                         <div class="text-right">
-                            <div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div>
+                             <div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div>
                             <div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div>
                         </div>
-                        <div class="w-16 text-right">
+                        <div class="w-16  text-right">
                             <div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div>
                             <div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div>
                         </div>
-                    </div>
+                     </div>
                 `;
             }).join('');
         } else if (type === 'character') {
@@ -1032,18 +1014,18 @@
                 const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
                 const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
                 return `
-                    <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
+                     <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
                         <img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/>
                         <div class="flex-1">
                             <div class="font-bold">${char}</div>
-                        </div>
+                         </div>
                         <div class="text-right">
                             <div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div>
-                            <div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div>
+                             <div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div>
                         </div>
                         <div class="w-16 text-right">
                             <div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div>
-                            <div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div>
+                             <div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div>
                         </div>
                     </div>
                 `;
@@ -1054,12 +1036,12 @@
             <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
                 <div id="detailedVsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
-                    <h3 class="text-lg font-semibold mb-4">${title}</h3>
+                     <h3 class="text-lg font-semibold mb-4">${title}</h3>
                     <div class="space-y-2">
                         ${listItemsHTML}
                     </div>
                     <div class="mt-4 text-right">
-                        <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+                         <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -1071,12 +1053,13 @@
           if (type === 'opponent') {
               document.querySelectorAll('.clickable-profile-opponent').forEach(el => {
                   el.addEventListener('click', () => {
-                      const opponentId = el.dataset.id;
+                       const opponentId = el.dataset.id;
                       closeModal();
                       setTimeout(() => showPlayerProfile(opponentId), 300);
                   });
               });
           }
+ 
         }, 10);
     }
 
@@ -1084,21 +1067,19 @@
     // Helper to get player's main and top 2 other characters
     function getPlayerCharactersUsed(playerId, matchesHistory) {
         const charCount = {};
-        
         matchesHistory.forEach(m => {
             if (m.roundsData) {
                 m.roundsData.forEach(round => {
                     if (m.jugador1Id === playerId && round.p1Char) {
                         charCount[round.p1Char] = (charCount[round.p1Char] || 0) + 1;
-                    } else if (m.jugador2Id === playerId && round.p2Char) {
+                       } else if (m.jugador2Id === playerId && round.p2Char) {
                         charCount[round.p2Char] = (charCount[round.p2Char] || 0) + 1;
                     }
                 });
             }
-        });
+         });
 
         const sortedChars = Object.entries(charCount).sort(([, a], [, b]) => b - a).map(([char,]) => char);
-        
         return sortedChars.slice(0, 3);
     }
 
@@ -1109,7 +1090,7 @@
             rondas: { ganadas: 0, perdidas: 0 },
             vsOpponents: {},
             vsCharacters: {}
-        };
+         };
 
         matchesHistory.forEach(m => {
             const isPlayer1 = m.jugador1Id === playerId;
@@ -1117,24 +1098,25 @@
             
             if (isPlayer1 || isPlayer2) {
                 const isWinner = m.ganadorId === playerId;
-                
+                 
                 stats.sets.jugados++;
                 if (isWinner) {
                     stats.sets.ganados++;
                 } else {
                     stats.sets.perdidos++;
-                }
+                 }
                 
                 let playerRoundsWon = 0;
                 let playerRoundsLost = 0;
                 let opponentId;
 
-                if (isPlayer1) {
+                 if (isPlayer1) {
                     opponentId = m.jugador2Id;
                 } else { // isPlayer2
                     opponentId = m.jugador1Id;
                 }
                 
+ 
                 // Set stats against opponent
                 if (!stats.vsOpponents[opponentId]) {
                     stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
@@ -1150,22 +1132,23 @@
                     m.roundsData.forEach(round => {
                         let opponentChar;
                         
-                        if(isPlayer1) {
+                         if(isPlayer1) {
                             opponentChar = round.p2Char;
                         } else {
-                            opponentChar = round.p1Char;
+                            opponentChar = 
+                            round.p1Char;
                         }
                         
                         // Increment rounds based on who won the round
-                        if (round.winnerId === playerId) {
+                         if (round.winnerId === playerId) {
                             playerRoundsWon++;
                         } else {
                             playerRoundsLost++;
-                        }
+                         }
                         
                         // Stats against character
                         if (opponentChar) {
-                            if (!stats.vsCharacters[opponentChar]) {
+                           if (!stats.vsCharacters[opponentChar]) {
                                 stats.vsCharacters[opponentChar] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
                             }
                             // Tallying rounds won/lost against this character
@@ -1199,7 +1182,6 @@
                 stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLost;
             }
         });
-        
         // Cleanup the temporary setsHandled property
         Object.keys(stats.vsCharacters).forEach(char => delete stats.vsCharacters[char].setsHandled);
         
@@ -1217,7 +1199,6 @@
         const isReady = selectedPlayers.length === 2;
         const ftButtons = [quickAddMatchFT3Btn, quickAddMatchFT5Btn, quickAddMatchFT10Btn];
         const versusBtn = document.getElementById('btnVersus');
-
         // Handle FT buttons
         ftButtons.forEach(btn => {
             btn.disabled = !isReady;
@@ -1225,11 +1206,10 @@
                 btn.classList.remove('bg-gray-500', 'opacity-50', 'pointer-events-none');
                 btn.classList.add('bg-amber-500', 'text-black');
             } else {
-                btn.classList.add('bg-gray-500', 'opacity-50', 'pointer-events-none');
+                 btn.classList.add('bg-gray-500', 'opacity-50', 'pointer-events-none');
                 btn.classList.remove('bg-amber-500', 'text-black');
             }
         });
-        
         // Handle Versus button
         versusBtn.disabled = !isReady;
         if (isReady) {
@@ -1254,7 +1234,7 @@
       }
       
       if (isProfileLinkClick) {
-        showPlayerProfile(playerId);
+         showPlayerProfile(playerId);
         return;
       }
       
@@ -1266,7 +1246,7 @@
         if (selectedPlayers.length < 2) {
           selectedPlayers.push(playerId);
         } else {
-          alert('Solo puedes seleccionar 2 jugadores a la vez.');
+           alert('Solo puedes seleccionar 2 jugadores a la vez.');
         }
       }
 
@@ -1277,7 +1257,6 @@
 
       renderAll();
     });
-
     // helpers
     function validarMarcador(ft, a, b) {
       const max = Math.max(a, b);
@@ -1291,7 +1270,6 @@
 
       const puntosGanador = (rondasGanador * config.perRound) + bonusGanador;
       const puntosPerdedor = (rondasPerdedor * config.perRound);
-
       return { ganador: puntosGanador, perdedor: puntosPerdedor };
     }
 
@@ -1306,7 +1284,6 @@
       const root = document.getElementById('modalRoot');
       const ranks = ['A', 'B', 'C', 'D', 'E'];
       const rankOptions = ranks.map(rank => `<option value="${rank}">${rank}</option>`).join('');
-
       root.innerHTML = `
         <div class="fixed inset-0 z-50 flex items-center justify-center">
           <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
@@ -1315,16 +1292,17 @@
             <div class="mt-3 space-y-2">
               <input id="newName" placeholder="Nombre / Nick" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
               <input id="newAvatar" placeholder="Avatar URL (opcional)" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+              <input id="newDiscord" placeholder="Canal de Discord (opcional)" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
               <div>
                 <label class="small-muted">Rango inicial</label>
                 <select id="newRank" class="w-full px-3 py-2 rounded-xl bg-slate-900 border">
-                  ${rankOptions}
+                   ${rankOptions}
                 </select>
               </div>
             </div>
             <div class="mt-4 flex justify-end gap-2">
               <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
-              <button id="savePlayerBtn" class="px-3 py-2 rounded-2xl bg-amber-500 text-black font-semibold">Guardar</button>
+              <button id="savePlayerBtn" class="px-3 py-2  rounded-2xl bg-amber-500 text-black font-semibold">Guardar</button>
             </div>
           </div>
         </div>
@@ -1333,14 +1311,17 @@
         document.getElementById('addPlayerModalContent').classList.remove('scale-95', 'opacity-0');
         document.getElementById('addPlayerModalContent').classList.add('scale-100', 'opacity-100');
       }, 10);
-
       document.getElementById('savePlayerBtn').onclick = ()=>{
         const nombre = document.getElementById('newName').value.trim();
-        if(!nombre){ alert('Escribe un nombre.'); return }
+        if(!nombre){ alert('Escribe un nombre.');
+        return }
         const avatar = document.getElementById('newAvatar').value.trim();
+        // MODIFICACIÓN: Obtener valor de Discord
+        const discord = document.getElementById('newDiscord').value.trim();
         const rango = document.getElementById('newRank').value;
-        const nuevo = { id: uid(), nombre: nombre[0].toUpperCase()+nombre.slice(1), avatarUrl: avatar||undefined, puntos:0, jugados:0, ganados:0, perdidos:0, rondasGanadas: 0, rondasPerdidas: 0, activos:true, rango: rango||'E' }
-        players.push(nuevo); closeModal(); renderAll();
+        const nuevo = { id: uid(), nombre: nombre[0].toUpperCase()+nombre.slice(1), avatarUrl: avatar||undefined, discord: discord||undefined, puntos:0, jugados:0, ganados:0, perdidos:0, rondasGanadas: 0, rondasPerdidas: 0, activos:true, rango: rango||'E' }
+        players.push(nuevo);
+        closeModal(); renderAll();
       }
     }
 
@@ -1362,16 +1343,17 @@
             <div class="mt-3 space-y-2">
               <input id="editName" placeholder="Nombre / Nick" value="${player.nombre}" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
               <input id="editAvatar" placeholder="Avatar URL (opcional)" value="${player.avatarUrl || ''}" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+              <input id="editDiscord" placeholder="Canal de Discord (opcional)" value="${player.discord || ''}" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
               <div>
                 <label class="small-muted">Rango</label>
                 <select id="editRank" class="w-full px-3 py-2 rounded-xl bg-slate-900 border">
-                  ${rankOptions}
+                   ${rankOptions}
                 </select>
               </div>
             </div>
             <div class="mt-4 flex justify-end gap-2">
               <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
-              <button id="updatePlayerBtn" class="px-3 py-2 rounded-2xl bg-amber-500 text-black font-semibold">Guardar cambios</button>
+              <button  id="updatePlayerBtn" class="px-3 py-2 rounded-2xl bg-amber-500 text-black font-semibold">Guardar cambios</button>
             </div>
           </div>
         </div>
@@ -1380,11 +1362,12 @@
         document.getElementById('editPlayerModalContent').classList.remove('scale-95', 'opacity-0');
         document.getElementById('editPlayerModalContent').classList.add('scale-100', 'opacity-100');
       }, 10);
-
       document.getElementById('updatePlayerBtn').onclick = () => {
         const newName = document.getElementById('editName').value.trim();
         if (!newName) { alert('Escribe un nombre.'); return; }
         const newAvatar = document.getElementById('editAvatar').value.trim();
+        // MODIFICACIÓN: Obtener valor de Discord
+        const newDiscord = document.getElementById('editDiscord').value.trim();
         const newRank = document.getElementById('editRank').value;
 
         players = players.map(p => {
@@ -1393,8 +1376,9 @@
               ...p,
               nombre: newName[0].toUpperCase() + newName.slice(1),
               avatarUrl: newAvatar || undefined,
+              discord: newDiscord || undefined,
               rango: newRank
-            };
+             };
           }
           return p;
         });
@@ -1412,7 +1396,6 @@
             renderCharacterList('');
             list.classList.remove('hidden');
         });
-
         input.addEventListener('blur', (e) => {
             setTimeout(() => {
                 if (!list.contains(document.activeElement)) {
@@ -1420,18 +1403,15 @@
                 }
             }, 100);
         });
-
         input.addEventListener('input', (e) => {
             renderCharacterList(e.target.value);
         });
-        
         input.addEventListener('change', () => {
             const charName = input.value.trim();
             if (charImageEl) {
                 charImageEl.src = CHARACTER_IMAGES[charName] || 'https://via.placeholder.com/48x48?text=??';
             }
         });
-
         list.addEventListener('mousedown', (e) => {
             if (e.target.classList.contains('character-list-item')) {
                 e.preventDefault(); 
@@ -1439,20 +1419,19 @@
                 list.classList.add('hidden');
                 input.dispatchEvent(new Event('change')); 
             }
-        });
+         });
 
         function renderCharacterList(filter = '') {
             const filteredRoster = ROSTER_3RD_STRIKE.filter(char =>
                 char.toLowerCase().includes(filter.toLowerCase())
-            ).slice(0, 10); 
-            
+            ).slice(0, 10);
             list.innerHTML = '';
             if (filteredRoster.length > 0) {
                 filteredRoster.forEach(char => {
                     const li = document.createElement('li');
                     li.textContent = char;
                     li.classList.add('character-list-item');
-                    list.appendChild(li);
+                     list.appendChild(li);
                 });
                 list.classList.remove('hidden');
             } else {
@@ -1465,47 +1444,48 @@
     // New add match modal
     function showAddMatch(ftType) {
         document.body.classList.add('modal-open');
-        if (selectedPlayers.length < 2) { alert('Selecciona 2 jugadores en el ranking primero.'); return; }
+        if (selectedPlayers.length < 2) { alert('Selecciona 2 jugadores en el ranking primero.'); return;
+        }
 
         const [p1, p2] = selectedPlayers.map(id => players.find(p => p.id === id));
-
         const root = document.getElementById('modalRoot');
         root.innerHTML = `
             <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
                 <div id="addMatchModalContent" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
-                    <h3 class="text-lg font-semibold">Registrar resultado FT${ftType}</h3>
+                    <h3 class="text-lg font-semibold">Registrar resultado  FT${ftType}</h3>
                     <div class="mt-3 flex justify-around text-center border-b pb-4 mb-4">
                         <div>
                             <img src="${p1.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
-                            <div class="font-bold text-lg">${p1.nombre}</div>
+                             <div class="font-bold text-lg">${p1.nombre}</div>
                         </div>
                         <div class="flex items-center text-4xl font-bold">
                             <span id="scoreP1">0</span>
-                            <span class="mx-2">-</span>
+                             <span class="mx-2">-</span>
                             <span id="scoreP2">0</span>
                         </div>
-                        <div>
-                            <img src="${p2.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
+                       <div>
+                            <img src="${p2.avatarUrl ||
+                            'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
                             <div class="font-bold text-lg">${p2.nombre}</div>
                         </div>
                     </div>
 
-                    <div id="roundInputContainer" class="space-y-4">
+                     <div id="roundInputContainer" class="space-y-4">
                         </div>
 
                     <div id="gameResult" class="mt-4 hidden">
                         <div class="text-center font-bold text-xl">Partida terminada</div>
                     </div>
 
-                    <div class="mt-4" id="noteContainer">
-                      <label class="small-muted">Nota (opcional)</label>
-                      <input id="mNote" placeholder="Ej. Dominio total" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
+                     <div class="mt-4" id="noteContainer">
+                      <label class="small-muted">Link de la partida (opcional)</label>
+                      <input id="mNote" placeholder="URL del replay de Fightcade" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
                     </div>
 
                     <div class="mt-4 flex justify-end gap-2">
                         <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
-                        <button id="saveMatchBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar partida</button>
+                       <button id="saveMatchBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar partida</button>
                     </div>
                 </div>
             </div>
@@ -1513,7 +1493,7 @@
 
         setTimeout(() => {
           document.getElementById('addMatchModalContent').classList.remove('scale-95', 'opacity-0');
-          document.getElementById('addMatchModalContent').classList.add('scale-100', 'opacity-100');
+           document.getElementById('addMatchModalContent').classList.add('scale-100', 'opacity-100');
         }, 10);
 
         const scoreP1El = document.getElementById('scoreP1');
@@ -1526,7 +1506,6 @@
         let p1Char, p2Char;
         let roundsData = [];
         let currentRound = 1;
-
         function renderRoundInput() {
             roundInputContainer.innerHTML = '';
             gameResultEl.classList.add('hidden');
@@ -1534,7 +1513,6 @@
             
             const p1Score = parseInt(scoreP1El.textContent);
             const p2Score = parseInt(scoreP2El.textContent);
-
             if (p1Score === ftType || p2Score === ftType) {
                 gameResultEl.classList.remove('hidden');
                 saveMatchBtn.classList.remove('bg-gray-500', 'opacity-50', 'pointer-events-none');
@@ -1550,26 +1528,28 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div class="space-y-2">
                         <div class="flex items-center gap-2">
-                            <img id="char-img-p1-round-${currentRound}" src="${p1Char ? CHARACTER_IMAGES[p1Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
+                             <img id="char-img-p1-round-${currentRound}" src="${p1Char ? CHARACTER_IMAGES[p1Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
                             <button class="winner-button w-full text-left px-3 py-2 rounded-xl border" data-winner="${p1.id}">${p1.nombre} ganó</button>
                         </div>
-                        <div class="character-select-container">
+                         <div class="character-select-container">
                             <input id="char-p1-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p1Char || ''}"/>
                             <ul id="char-list-p1-round-${currentRound}" class="character-list hidden"></ul>
-                        </div>
+                         </div>
                     </div>
                     <div class="space-y-2">
                         <div class="flex items-center gap-2">
-                            <img id="char-img-p2-round-${currentRound}" src="${p2Char ? CHARACTER_IMAGES[p2Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
+                             <img id="char-img-p2-round-${currentRound}" src="${p2Char ?
+                            CHARACTER_IMAGES[p2Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
                             <button class="winner-button w-full text-left px-3 py-2 rounded-xl border" data-winner="${p2.id}">${p2.nombre} ganó</button>
                         </div>
                         <div class="character-select-container">
-                            <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p2Char || ''}"/>
+                             <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p2Char ||
+                            ''}"/>
                             <ul id="char-list-p2-round-${currentRound}" class="character-list hidden"></ul>
                         </div>
                     </div>
                 </div>
-            `;
+             `;
             roundInputContainer.appendChild(round);
 
             setupCharacterSearch(`char-p1-round-${currentRound}`, `char-list-p1-round-${currentRound}`, document.getElementById(`char-img-p1-round-${currentRound}`));
@@ -1578,7 +1558,7 @@
             const winnerButtons = round.querySelectorAll('.winner-button');
             winnerButtons.forEach(button => {
                 button.onclick = () => {
-                    const winnerId = button.dataset.winner;
+                     const winnerId = button.dataset.winner;
                     const loserId = (winnerId === p1.id) ? p2.id : p1.id;
                     const p1CharRound = document.getElementById(`char-p1-round-${currentRound}`).value.trim();
                     const p2CharRound = document.getElementById(`char-p2-round-${currentRound}`).value.trim();
@@ -1597,7 +1577,6 @@
                         p1Char: p1CharRound,
                         p2Char: p2CharRound
                     });
-
                     if (winnerId === p1.id) {
                         scoreP1El.textContent = parseInt(scoreP1El.textContent) + 1;
                     } else {
@@ -1610,8 +1589,7 @@
             });
         }
         
-        renderRoundInput(); 
-
+        renderRoundInput();
         saveMatchBtn.onclick = () => {
             const roundsWonByP1 = roundsData.filter(r => r.winnerId === p1.id).length;
             const roundsWonByP2 = roundsData.filter(r => r.winnerId === p2.id).length;
@@ -1620,26 +1598,23 @@
             const perdedorId = roundsWonByP1 > roundsWonByP2 ? p2.id : p1.id;
             const rondasGanador = Math.max(roundsWonByP1, roundsWonByP2);
             const rondasPerdedor = Math.min(roundsWonByP1, roundsWonByP2);
-
             const perdedor = players.find(p => p.id === perdedorId);
             
             const puntos = calcularPuntos(ftType, rondasGanador, rondasPerdedor, perdedor.rango);
-
             const nuevo = { 
                 id: uid(), 
                 fechaISO: nowISO(), 
                 ftType, 
                 jugador1Id: p1.id, 
                 jugador2Id: p2.id, 
-                marcador: `${roundsWonByP1}-${roundsWonByP2}`, 
+                 marcador: `${roundsWonByP1}-${roundsWonByP2}`, 
                 rondas: { j1: roundsWonByP1, j2: roundsWonByP2 }, 
                 ganadorId, 
                 puntosGanador: puntos.ganador, 
                 puntosPerdedor: puntos.perdedor, 
-                nota: mNote.value.trim() || undefined,
+                 nota: mNote.value.trim() || undefined,
                 roundsData
             };
-            
             ligaMatches.unshift(nuevo);
             allMatches.unshift(nuevo);
 
@@ -1647,22 +1622,26 @@
                 if (player.id === p1.id) {
                     return {
                         ...player,
-                        puntos: (player.puntos || 0) + (roundsWonByP1 > roundsWonByP2 ? puntos.ganador : puntos.perdedor),
+                        puntos: (player.puntos || 0) + 
+                        (roundsWonByP1 > roundsWonByP2 ? puntos.ganador : puntos.perdedor),
                         jugados: (player.jugados || 0) + 1,
                         ganados: (player.ganados || 0) + (roundsWonByP1 > roundsWonByP2 ? 1 : 0),
-                        perdidos: (player.perdidos || 0) + (roundsWonByP1 > roundsWonByP2 ? 0 : 1),
+                        perdidos: (player.perdidos || 0) + (roundsWonByP1 
+                        > roundsWonByP2 ? 0 : 1),
                         rondasGanadas: (player.rondasGanadas || 0) + roundsWonByP1,
                         rondasPerdidas: (player.rondasPerdidas || 0) + roundsWonByP2
                     };
                 }
-                if (player.id === p2.id) {
+                 if (player.id === p2.id) {
                     return {
                         ...player,
                         puntos: (player.puntos || 0) + (roundsWonByP2 > roundsWonByP1 ? puntos.ganador : puntos.perdedor),
-                        jugados: (player.jugados || 0) + 1,
+                         jugados: (player.jugados ||
+                        0) + 1,
                         ganados: (player.ganados || 0) + (roundsWonByP2 > roundsWonByP1 ? 1 : 0),
                         perdidos: (player.perdidos || 0) + (roundsWonByP2 > roundsWonByP1 ? 0 : 1),
-                        rondasGanadas: (player.rondasGanadas || 0) + roundsWonByP2,
+                        rondasGanadas: (player.rondasGanadas || 0) 
+                        + roundsWonByP2,
                         rondasPerdidas: (player.rondasPerdidas || 0) + roundsWonByP1
                     };
                 }
@@ -1686,16 +1665,16 @@
           <div id="settingsModalContent" class="relative w-full max-w-xl glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
             <h3 class="text-lg font-semibold">Ajustes</h3>
             <div class="mt-3 space-y-2">
-                <div class="flex flex-col gap-2">
+                 <div class="flex flex-col gap-2">
                     <button id="exportJson" class="px-3 py-2 rounded-2xl border">Exportar JSON de la Sesión</button>
                     <label class="cursor-pointer inline-flex items-center justify-center gap-2 px-3 py-2 rounded-2xl border">
                         Importar JSON para esta Sesión <input id="importFile" type="file" accept="application/json" class="hidden" />
-                    </label>
+                     </label>
                 </div>
             </div>
             <div class="mt-3 small-muted">Los datos importados o exportados solo son válidos para la sesión actual y se perderán al refrescar.</div>
             <div class="mt-4 flex justify-end gap-2">
-              <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
+               <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button>
             </div>
           </div>
         </div>
@@ -1704,7 +1683,6 @@
         document.getElementById('settingsModalContent').classList.remove('scale-95', 'opacity-0');
         document.getElementById('settingsModalContent').classList.add('scale-100', 'opacity-100');
       }, 10);
-
       document.getElementById('exportJson').onclick = exportJson;
       document.getElementById('importFile').onchange = (e) => { if (e.target.files && e.target.files[0]) importJson(e.target.files[0]); };
     }
@@ -1716,7 +1694,8 @@
       const a = document.createElement('a'); a.href=url; a.download = `liga-3rd-strike-SESION-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url);
     }
     function importJson(file){
-      const r = new FileReader(); r.onload = ()=>{
+      const r = new FileReader();
+      r.onload = ()=>{
         try{
           const d = JSON.parse(String(r.result));
           if(d.players && d.allMatches && (d.ligaMatches || d.seasonMatches)){ 
@@ -1727,7 +1706,8 @@
             renderAll();
           } else alert('Archivo inválido');
         }catch(e){alert('No se pudo leer el archivo JSON')}
-      }; r.readAsText(file)
+      };
+      r.readAsText(file)
     }
 
     // other actions
@@ -1754,16 +1734,14 @@
             p2_sets_won: 0,
             p1_rounds_won: 0,
             p2_rounds_won: 0,
-            char_matchups: {}, 
+             char_matchups: {}, 
             p1_vs_top5: {},
             p2_vs_top5: {},
         };
-
         const headToHeadMatches = matchesHistory.filter(m =>
             (m.jugador1Id === player1Id && m.jugador2Id === player2Id) ||
             (m.jugador1Id === player2Id && m.jugador2Id === player1Id)
         );
-
         headToHeadMatches.forEach(m => {
             if (m.ganadorId === player1Id) stats.p1_sets_won++;
             else stats.p2_sets_won++;
@@ -1772,15 +1750,20 @@
             stats.p1_rounds_won += isP1Jugador1 ? m.rondas.j1 : m.rondas.j2;
             stats.p2_rounds_won += isP1Jugador1 ? m.rondas.j2 : m.rondas.j1;
             
-            if (m.roundsData) {
+             if (m.roundsData) {
                 m.roundsData.forEach(round => {
                     const p1Char = isP1Jugador1 ? round.p1Char : round.p2Char;
                     const p2Char = isP1Jugador1 ? round.p2Char : round.p1Char;
-                    const key = `${p1Char} vs ${p2Char}`;
+                     const key = `${p1Char} vs ${p2Char}`;
                     if (!stats.char_matchups[key]) {
-                        stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char };
+                        // MODIFICACIÓN: Añadir array de replays
+                        stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char, replays: [] };
                     }
-                    if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++;
+                    // MODIFICACIÓN: Guardar el replay si existe
+                    if (m.nota) {
+                        stats.char_matchups[key].replays.push(m.nota);
+                    }
+                     if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++;
                     else stats.char_matchups[key].p2_wins++;
                 });
             }
@@ -1788,20 +1771,21 @@
         
         const sortedPlayers = [...players].sort((a,b)=> b.puntos - a.puntos);
         const top5Ids = sortedPlayers.slice(0, 5).map(p => p.id).filter(id => id !== player1Id && id !== player2Id);
-
         top5Ids.forEach(topPlayerId => {
             const topPlayer = players.find(p => p.id === topPlayerId);
             if(!topPlayer) return;
 
             stats.p1_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
             matchesHistory.filter(m => (m.jugador1Id === player1Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player1Id))
-                .forEach(m => {
+                .forEach(m 
+                => {
                     if (m.ganadorId === player1Id) stats.p1_vs_top5[topPlayerId].wins++;
                     else stats.p1_vs_top5[topPlayerId].losses++;
                 });
 
             stats.p2_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
-            matchesHistory.filter(m => (m.jugador1Id === player2Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player2Id))
+            matchesHistory.filter(m => (m.jugador1Id === player2Id 
+            && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player2Id))
                 .forEach(m => {
                     if (m.ganadorId === player2Id) stats.p2_vs_top5[topPlayerId].wins++;
                     else stats.p2_vs_top5[topPlayerId].losses++;
@@ -1818,35 +1802,34 @@
 
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
-
         root.innerHTML = `
             <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
                 <div id="versusCompareModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     
-                    <div class="flex justify-around items-center text-center pb-4 border-b border-slate-700">
+                     <div class="flex justify-around items-center text-center pb-4 border-b border-slate-700">
                         <div class="flex flex-col items-center">
                             <div class="relative">
-                                <img src="${p1.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>
+                                 <img src="${p1.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>
                                 ${p1.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p1.rango] || ''}" alt="Rank ${p1.rango}" /></div>` : ''}
                             </div>
                             <div class="text-xl font-bold mt-2">${p1.nombre}</div>
                         </div>
-                        
+                         
                         <div class="text-5xl font-bold text-slate-500">VS</div>
 
                         <div class="flex flex-col items-center">
-                            <div class="relative">
+                             <div class="relative">
                                 <img src="${p2.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>
                                 ${p2.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p2.rango] || ''}" alt="Rank ${p2.rango}" /></div>` : ''}
                             </div>
                             <div class="text-xl font-bold mt-2">${p2.nombre}</div>
                         </div>
-                    </div>
+                     </div>
 
                     <div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist">
                         <button id="vsLigaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button>
-                        <button id="vsTotalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button>
+                        <button id="vsTotalTab"  class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button>
                     </div>
 
                     <div id="versusContent" class="mt-4 space-y-2 text-sm"></div>
@@ -1854,8 +1837,7 @@
                 </div>
             </div>
         `;
-
-        const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img) => {
+        const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img, replayUrl) => {
             const total = p1_wins + p2_wins;
             if (total === 0) return '';
             const p1_wr = total > 0 ? (p1_wins / total * 100) : 0;
@@ -1863,17 +1845,22 @@
 
             const p1_img_html = p1_img ? `<img src="${p1_img}" class="w-6 h-6 rounded-md"/>` : '';
             const p2_img_html = p2_img ? `<img src="${p2_img}" class="w-6 h-6 rounded-md"/>` : '';
-
+            
+            // MODIFICACIÓN: Crear el label como un enlace si hay replay
+            const labelHTML = replayUrl 
+              ? `<a href="${replayUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">${label}</a>` 
+              : `<span>${label}</span>`;
+              
             return `
                 <div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">
                     <div class="text-left flex items-center gap-2">
                         <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
-                        <span class="font-semibold">${p1_wins}-${p2_wins}</span>
+                        <span  class="font-semibold">${p1_wins}-${p2_wins}</span>
                     </div>
-                    <div class="font-bold flex items-center justify-center gap-2">${p1_img_html}<span>${label}</span>${p2_img_html}</div>
+                    <div class="font-bold flex items-center justify-center gap-2">${p1_img_html}${labelHTML}${p2_img_html}</div>
                     <div class="text-right flex items-center justify-end gap-2">
                          <span class="font-semibold">${p2_wins}-${p1_wins}</span>
-                        <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
+                         <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
                     </div>
                 </div>
             `;
@@ -1891,11 +1878,12 @@
             
             contentHTML += createStatRowHTML(stats.p1_sets_won, stats.p2_sets_won, 'Sets');
             contentHTML += createStatRowHTML(stats.p1_rounds_won, stats.p2_rounds_won, 'Rondas');
-
             if (Object.keys(stats.char_matchups).length > 0) {
                 contentHTML += '<div class="font-semibold mt-4 mb-2 px-1">Enfrentamientos vs Personajes (Rondas)</div>';
                 Object.values(stats.char_matchups).sort((a,b) => (b.p1_wins + b.p2_wins) - (a.p1_wins + a.p2_wins)).forEach(matchup => {
-                    contentHTML += createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char]);
+                    // MODIFICACIÓN: Pasar el primer replay encontrado al creador de la fila
+                    const firstReplay = matchup.replays && matchup.replays.length > 0 ? matchup.replays[0] : null;
+                    contentHTML += createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], firstReplay);
                 });
             }
 
@@ -1910,29 +1898,29 @@
                     const p1Data = stats.p1_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
                     const p2Data = stats.p2_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
 
-                    if ((p1Data.wins + p1Data.losses > 0) || (p2Data.wins + p2Data.losses > 0)) {
+                    if ((p1Data.wins + p1Data.losses > 0) || (p2Data.wins 
+                    + p2Data.losses > 0)) {
                         const p1_total = p1Data.wins + p1Data.losses;
                         const p1_wr = p1_total > 0 ? (p1Data.wins / p1_total * 100) : 0;
                         
-                        const p2_total = p2Data.wins + p2Data.losses;
+                         const p2_total = p2Data.wins + p2Data.losses;
                         const p2_wr = p2_total > 0 ? (p2Data.wins / p2_total * 100) : 0;
 
                         vsTop5HTML += `
-                            <div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">
+                             <div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">
                                 <div class="text-left flex items-center gap-2 justify-start">
                                     <span class="font-semibold w-12 text-center">${p1Data.wins}-${p1Data.losses}</span>
-                                    <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
+                                     <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
                                 </div>
-                                <div class="font-bold">${p1Data.name}</div>
+                                 <div class="font-bold">${p1Data.name}</div>
                                 <div class="text-right flex items-center gap-2 justify-end">
                                     <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
-                                    <span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span>
+                                       <span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span>
                                 </div>
                             </div>
-                        `;
+                         `;
                     }
                 });
-
                 if (vsTop5HTML) {
                     contentHTML += '<div class="font-semibold mt-4 mb-2 px-1">Rendimiento vs. Top 5 (Sets)</div>';
                     contentHTML += vsTop5HTML;
@@ -1968,7 +1956,8 @@
             showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]);
         }
     };
-    document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
+    document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase();
+    document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -1976,7 +1965,6 @@
         renderAll();
       }
     });
-
     // --- INICIO DE LA MEJORA: Llamar a la función de carga al iniciar la página ---
     document.addEventListener('DOMContentLoaded', loadRemoteDataAndRender);
     // --- FIN DE LA MEJORA ---
@@ -1984,6 +1972,3 @@
   </script>
 </body>
 </html>
-
-
-
