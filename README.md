@@ -11,7 +11,9 @@ Esta es una aplicación web para llevar un registro del ranking y el historial d
 
 ### Cómo Usar
 
-Para usar la aplicación, simplemente abre el archivo `index.html` en tu navegador web. Si quieres registrar nuevas partidas o jugadores, puedes modificar el archivo JSON y subir los cambios a este repositorio.
+Para usar la aplicación, simplemente abre el archivo `index.html` en tu navegador web. Si deseas registrar nuevos jugadores o partidas, puedes exportar tu archivo JSON desde la sección de Ajustes. (Ten en cuenta que el archivo JSON no es editable directamente desde la página web).
+
+Para crear tu propia base de datos, descarga el archivo `index.html`. Una vez que hayas agregado a todos los jugadores, ve a Ajustes y luego a Exportar JSON. De esta forma, obtendrás tu propio ranking, el cual será independiente y actualizable a tu gusto.
 
 ### Archivos Clave
 
