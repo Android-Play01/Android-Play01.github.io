@@ -102,32 +102,7 @@
     .character-list-item:hover {
       background-color: #2d3748;
     }
-    .character-selected {
-      background-color: #f97316;
-      color: black;
-      font-weight: 600;
-      border-radius: 10px;
-      padding: 8px 12px;
-    }
-    .result-cell-player1, .result-cell-player2 {
-      padding: 8px 12px;
-      border-radius: 10px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
-    .result-cell-player1.winner-color {
-      background-color: rgba(34, 197, 94, 0.2); /* green-500 with opacity */
-    }
-    .result-cell-player1.loser-color {
-      background-color: rgba(239, 68, 68, 0.2); /* red-500 with opacity */
-    }
-    .result-cell-player2.winner-color {
-      background-color: rgba(34, 197, 94, 0.2);
-    }
-    .result-cell-player2.loser-color {
-      background-color: rgba(239, 68, 68, 0.2);
-    }
-
+    
     /* Player profile avatar zoom on hover */
     .player-profile-link:hover .player-avatar-img-zoom { transform: scale(1.1); transition: transform 0.2s ease-in-out; }
     
@@ -149,20 +124,16 @@
     
     /* Hover effects for ranking row */
     #rankingBody tr:hover {
-        background-color: rgba(249, 115, 22, 0.1); /* Naranja con opacidad */
+        background-color: rgba(249, 115, 22, 0.1);
     }
-
-    /* Hover effect for name and avatar when inside ranking row*/
     #rankingBody .profile-link:hover .player-avatar-img-zoom {
       transform: scale(1.1);
       transition: transform 0.2s ease-in-out;
     }
     #rankingBody .profile-link:hover .player-name-text {
-      color: #f97316; /* Naranja */
+      color: #f97316;
       transition: color 0.2s ease-in-out;
     }
-    
-    /* Adjust the hitbox for the ranking table profile link */
     #rankingBody .profile-link {
         display: inline-flex;
         cursor: pointer;
@@ -185,8 +156,6 @@
     .btn-versus:hover {
       opacity: 0.9;
     }
-
-    /* New styles for clickable matchup rows */
     .clickable-matchup-row {
         cursor: pointer;
         transition: background-color 0.2s ease-in-out;
@@ -198,7 +167,7 @@
         color: #60a5fa; /* blue-400 */
     }
 
-    /* ===== NUEVOS ESTILOS PARA EL MODAL DE REGISTRAR PARTIDA ===== */
+    /* ===== NUEVOS ESTILOS PARA EL MODAL DE REGISTRAR PARTIDA Y CARRUSEL ===== */
     .character-winner-selector {
         border: 2px solid transparent;
         border-radius: 1rem;
@@ -212,19 +181,42 @@
         background-color: rgba(255, 255, 255, 0.07);
         transform: translateY(-4px);
     }
-    .character-winner-selector.selected-winner {
-        border-color: #f97316; /* Naranja */
-        box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
-    }
-    .character-portrait {
+    .character-portrait-wrapper {
         width: 100px;
         height: 100px;
-        border-radius: 0.75rem;
-        object-fit: cover;
         margin: 0 auto 0.75rem auto;
+        border-radius: 0.75rem;
         background-color: rgba(0,0,0,0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    .character-portrait {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.75rem;
     }
 
+    /* Estilos del carrusel */
+    @keyframes scrollAnimation {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .character-carousel-container {
+        width: 100%;
+        height: 100%;
+    }
+    .carousel-track {
+        display: flex;
+        width: max-content;
+        animation: scrollAnimation 40s linear infinite;
+    }
+    .carousel-track img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+    }
+    
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -476,9 +468,6 @@
         'Yang': 'https://i.postimg.cc/rpbm4sWw/yang.png',
         'Q': 'https://i.postimg.cc/Bb2X43jQ/q.png',
     };
-    
-    // ===== NUEVO: Placeholder para personaje no seleccionado =====
-    const CHARACTER_PLACEHOLDER = 'https://i.postimg.cc/138L412L/none.png';
 
     const ROSTER_3RD_STRIKE = [
         'Akuma', 'Alex', 'Chun-Li', 'Dudley', 'Elena', 'Hugo', 'Ibuki', 'Ken', 'Makoto', 'Necro', 'Oro', 'Remy', 'Ryu', 'Sean', 'Twelve', 'Urien', 'Yun', 'Yang', 'Q'
@@ -1353,16 +1342,13 @@
     function closeModal() {
         const modal = document.querySelector('#modalRoot > div');
         if (modal) {
-            // Check for nested modals
             const parentModal = modal.dataset.parent;
             if (parentModal) {
-                // Restore parent modal instead of closing everything
                 const modals = document.querySelectorAll('#modalRoot > div');
                 modals.forEach(m => {
                     if(m.id !== parentModal) m.remove();
                 });
                 document.getElementById(parentModal).style.display = 'flex';
-                // No need to remove modal-open from body if another modal is active
                 return; 
             }
         }
@@ -1478,11 +1464,23 @@
       };
     }
     
-    // Character search and select logic
+    // ===== LÓGICA DEL BUSCADOR DE PERSONAJES CORREGIDA =====
     function setupCharacterSearch(inputId, listId, charImageEl) {
         const input = document.getElementById(inputId);
         const list = document.getElementById(listId);
-        
+        const carouselContainer = charImageEl.previousElementSibling;
+
+        function updateDisplay(charName) {
+            if (charName && CHARACTER_IMAGES[charName]) {
+                charImageEl.src = CHARACTER_IMAGES[charName];
+                charImageEl.style.display = 'block';
+                carouselContainer.style.display = 'none';
+            } else {
+                charImageEl.style.display = 'none';
+                // No volver a mostrar el carrusel si el campo se vacía
+            }
+        }
+
         input.addEventListener('focus', () => {
             renderCharacterList('');
             list.classList.remove('hidden');
@@ -1497,14 +1495,12 @@
         });
 
         input.addEventListener('input', (e) => {
+            updateDisplay(e.target.value.trim());
             renderCharacterList(e.target.value);
         });
         
         input.addEventListener('change', () => {
-            const charName = input.value.trim();
-            if (charImageEl) {
-                charImageEl.src = CHARACTER_IMAGES[charName] || CHARACTER_PLACEHOLDER;
-            }
+            updateDisplay(input.value.trim());
         });
 
         list.addEventListener('mousedown', (e) => {
@@ -1517,7 +1513,6 @@
         });
 
         function renderCharacterList(filter = '') {
-            // ===== CAMBIO: Se elimina .slice(0, 10) para mostrar la lista completa =====
             const filteredRoster = ROSTER_3RD_STRIKE.filter(char =>
                 char.toLowerCase().includes(filter.toLowerCase())
             ); 
@@ -1537,13 +1532,19 @@
         }
     }
 
-
-    // ===== MODAL DE AÑADIR PARTIDA TOTALMENTE REDISEÑADO =====
+    // ===== MODAL DE AÑADIR PARTIDA CON CARRUSEL INTEGRADO =====
     function showAddMatch(ftType) {
         document.body.classList.add('modal-open');
         if (selectedPlayers.length < 2) { alert('Selecciona 2 jugadores en el ranking primero.'); return; }
 
         const [p1, p2] = selectedPlayers.map(id => players.find(p => p.id === id));
+        
+        let carouselTrackHTML = '';
+        const allCharacterImageUrls = Object.values(CHARACTER_IMAGES);
+        // Duplicar para el efecto infinito
+        [...allCharacterImageUrls, ...allCharacterImageUrls].forEach(url => {
+            carouselTrackHTML += `<img src="${url}" />`;
+        });
 
         const root = document.getElementById('modalRoot');
         root.innerHTML = `
@@ -1621,16 +1622,20 @@
             round.className = 'p-4 rounded-xl bg-slate-800';
             
             round.innerHTML = `
-                <div class="font-semibold mb-3 text-center text-slate-400">Ronda ${currentRound} — ¿Quién ganó?</div>
+                <div class="font-semibold mb-3 text-center text-slate-400">Ronda ${currentRound} — Haz clic en el retrato del ganador</div>
                 <div class="grid grid-cols-11 gap-4 items-start">
-                    
                     <div class="col-span-5 space-y-2">
                         <div class="winner-button character-winner-selector" data-winner="${p1.id}">
-                             <img id="char-img-p1-round-${currentRound}" src="${p1Char ? CHARACTER_IMAGES[p1Char] : CHARACTER_PLACEHOLDER}" class="character-portrait"/>
-                             <div class="font-semibold">${p1.nombre}</div>
+                            <div class="character-portrait-wrapper">
+                                <div class="character-carousel-container" style="display: ${p1Char ? 'none' : 'block'};">
+                                    <div class="carousel-track">${carouselTrackHTML}</div>
+                                </div>
+                                <img id="char-img-p1-round-${currentRound}" class="character-portrait" style="display: ${p1Char ? 'block' : 'none'};" src="${p1Char && CHARACTER_IMAGES[p1Char] ? CHARACTER_IMAGES[p1Char] : ''}" />
+                            </div>
+                            <div class="font-semibold">${p1.nombre}</div>
                         </div>
                         <div class="character-select-container">
-                            <input id="char-p1-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje de ${p1.nombre}" value="${p1Char || ''}"/>
+                            <input id="char-p1-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border" placeholder="Personaje de ${p1.nombre}" value="${p1Char || ''}"/>
                             <ul id="char-list-p1-round-${currentRound}" class="character-list hidden"></ul>
                         </div>
                     </div>
@@ -1639,11 +1644,16 @@
                     
                     <div class="col-span-5 space-y-2">
                          <div class="winner-button character-winner-selector" data-winner="${p2.id}">
-                             <img id="char-img-p2-round-${currentRound}" src="${p2Char ? CHARACTER_IMAGES[p2Char] : CHARACTER_PLACEHOLDER}" class="character-portrait"/>
+                            <div class="character-portrait-wrapper">
+                                <div class="character-carousel-container" style="animation-delay: -20s; display: ${p2Char ? 'none' : 'block'};">
+                                    <div class="carousel-track">${carouselTrackHTML}</div>
+                                </div>
+                                <img id="char-img-p2-round-${currentRound}" class="character-portrait" style="display: ${p2Char ? 'block' : 'none'};" src="${p2Char && CHARACTER_IMAGES[p2Char] ? CHARACTER_IMAGES[p2Char] : ''}" />
+                            </div>
                              <div class="font-semibold">${p2.nombre}</div>
                         </div>
                         <div class="character-select-container">
-                            <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje de ${p2.nombre}" value="${p2Char || ''}"/>
+                            <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border" placeholder="Personaje de ${p2.nombre}" value="${p2Char || ''}"/>
                             <ul id="char-list-p2-round-${currentRound}" class="character-list hidden"></ul>
                         </div>
                     </div>
@@ -1662,8 +1672,8 @@
                     const p1CharRound = document.getElementById(`char-p1-round-${currentRound}`).value.trim();
                     const p2CharRound = document.getElementById(`char-p2-round-${currentRound}`).value.trim();
                     
-                    if (!p1CharRound || !p2CharRound) {
-                        alert('Por favor, selecciona los personajes para ambos jugadores.');
+                    if (!p1CharRound || !p2CharRound || !CHARACTER_IMAGES[p1CharRound] || !CHARACTER_IMAGES[p2CharRound]) {
+                        alert('Por favor, selecciona un personaje válido para ambos jugadores.');
                         return;
                     }
                     
