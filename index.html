@@ -2098,7 +2098,10 @@
                 title.textContent = 'Enfrentamientos vs Personajes (Rondas)';
                 contentEl.appendChild(title);
                 
-                const visibleMatchups = allMatchups.slice(0, VERSUS_CHAR_LIMIT);
+                // ================== INICIO DE LA CORRECCIÓN ==================
+                
+                // Se elimina el límite para mostrar todos los enfrentamientos directamente.
+                const visibleMatchups = allMatchups;
 
                 visibleMatchups.forEach(matchup => {
                     const hasReplay = matchup.matches.some(m => m.nota);
@@ -2109,16 +2112,9 @@
                     contentEl.appendChild(row);
                 });
 
-                if (allMatchups.length > VERSUS_CHAR_LIMIT) {
-                    const moreBtnContainer = document.createElement('div');
-                    moreBtnContainer.className = 'mt-4 text-center';
-                    const moreBtn = document.createElement('button');
-                    moreBtn.className = 'px-4 py-2 rounded-2xl border';
-                    moreBtn.textContent = 'Ver más';
-                    moreBtn.onclick = () => showAllMatchupsModal(p1, p2, allMatchups, modalId, history);
-                    moreBtnContainer.appendChild(moreBtn);
-                    contentEl.appendChild(moreBtnContainer);
-                }
+                // Se elimina el botón "Ver más", ya que ahora se muestran todos los resultados.
+                
+                // =================== FIN DE LA CORRECCIÓN ====================
             }
 
             const allTopOpponents = { ...stats.p1_vs_top5, ...stats.p2_vs_top5 };
