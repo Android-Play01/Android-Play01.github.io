@@ -1464,7 +1464,6 @@
       };
     }
     
-    // ===== LÓGICA DEL BUSCADOR DE PERSONAJES CORREGIDA =====
     function setupCharacterSearch(inputId, listId, charImageEl) {
         const input = document.getElementById(inputId);
         const list = document.getElementById(listId);
@@ -1532,7 +1531,6 @@
         }
     }
 
-    // ===== MODAL DE AÑADIR PARTIDA CON CARRUSEL INTEGRADO =====
     function showAddMatch(ftType) {
         document.body.classList.add('modal-open');
         if (selectedPlayers.length < 2) { alert('Selecciona 2 jugadores en el ranking primero.'); return; }
@@ -1835,8 +1833,7 @@
       renderAll()
     }
     
-    // --- VERSUS FEATURE START ---
-    
+
     function getVersusStats(player1Id, player2Id, matchesHistory) {
         const stats = {
             p1_sets_won: 0,
@@ -1858,21 +1855,33 @@
             else stats.p2_sets_won++;
 
             const isP1Jugador1 = m.jugador1Id === player1Id;
-            stats.p1_rounds_won += isP1Jugador1 ? m.rondas.j1 : m.rondas.j2;
-            stats.p2_rounds_won += isP1Jugador1 ? m.rondas.j2 : m.rondas.j1;
+            const match_p1_rounds = isP1Jugador1 ? m.rondas.j1 : m.rondas.j2;
+            const match_p2_rounds = isP1Jugador1 ? m.rondas.j2 : m.rondas.j1;
+
+            stats.p1_rounds_won += match_p1_rounds;
+            stats.p2_rounds_won += match_p2_rounds;
             
-            if (m.roundsData) {
-                m.roundsData.forEach(round => {
-                    const p1Char = isP1Jugador1 ? round.p1Char : round.p2Char;
-                    const p2Char = isP1Jugador1 ? round.p2Char : round.p1Char;
+            if (m.roundsData && m.roundsData.length > 0) {
+                // Asumimos que los personajes son consistentes durante la partida,
+                // por lo que podemos obtenerlos de la primera ronda registrada.
+                const firstRound = m.roundsData[0];
+                const p1Char = isP1Jugador1 ? firstRound.p1Char : firstRound.p2Char;
+                const p2Char = isP1Jugador1 ? firstRound.p2Char : firstRound.p1Char;
+
+                // Solo proceder si ambos personajes están definidos.
+                if (p1Char && p2Char) {
                     const key = `${p1Char} vs ${p2Char}`;
                     if (!stats.char_matchups[key]) {
                         stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char, matches: {} };
                     }
+                    
+                    // Sumar los totales de ronda de la partida al enfrentamiento de personajes.
+                    stats.char_matchups[key].p1_wins += match_p1_rounds;
+                    stats.char_matchups[key].p2_wins += match_p2_rounds;
+                    
+                    // Guardar la partida para poder ver los detalles.
                     stats.char_matchups[key].matches[m.id] = m;
-                    if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++;
-                    else stats.char_matchups[key].p2_wins++;
-                });
+                }
             }
         });
         
@@ -2098,9 +2107,6 @@
                 title.textContent = 'Enfrentamientos vs Personajes (Rondas)';
                 contentEl.appendChild(title);
                 
-                // ================== INICIO DE LA CORRECCIÓN ==================
-                
-                // Se elimina el límite para mostrar todos los enfrentamientos directamente.
                 const visibleMatchups = allMatchups;
 
                 visibleMatchups.forEach(matchup => {
@@ -2111,10 +2117,6 @@
                     row.onclick = () => showMatchupDetailsModal(p1, p2, matchup, modalId);
                     contentEl.appendChild(row);
                 });
-
-                // Se elimina el botón "Ver más", ya que ahora se muestran todos los resultados.
-                
-                // =================== FIN DE LA CORRECCIÓN ====================
             }
 
             const allTopOpponents = { ...stats.p1_vs_top5, ...stats.p2_vs_top5 };
@@ -2179,7 +2181,6 @@
         }, 10);
     }
     
-    // --- VERSUS FEATURE END ---
 
     // events
     document.getElementById('btnAddPlayer').onclick = showAddPlayer;
@@ -2208,9 +2209,7 @@
       }
     });
 
-    // --- INICIO DE LA MEJORA: Llamar a la función de carga al iniciar la página ---
     document.addEventListener('DOMContentLoaded', loadRemoteDataAndRender);
-    // --- FIN DE LA MEJORA ---
 
   </script>
 </body>
