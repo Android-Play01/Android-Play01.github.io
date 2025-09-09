@@ -185,6 +185,46 @@
     .btn-versus:hover {
       opacity: 0.9;
     }
+
+    /* New styles for clickable matchup rows */
+    .clickable-matchup-row {
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+    .clickable-matchup-row:hover {
+        background-color: rgba(249, 115, 22, 0.1);
+    }
+    .replay-available {
+        color: #60a5fa; /* blue-400 */
+    }
+
+    /* ===== NUEVOS ESTILOS PARA EL MODAL DE REGISTRAR PARTIDA ===== */
+    .character-winner-selector {
+        border: 2px solid transparent;
+        border-radius: 1rem;
+        padding: 0.75rem;
+        background-color: rgba(255, 255, 255, 0.03);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        text-align: center;
+    }
+    .character-winner-selector:hover {
+        background-color: rgba(255, 255, 255, 0.07);
+        transform: translateY(-4px);
+    }
+    .character-winner-selector.selected-winner {
+        border-color: #f97316; /* Naranja */
+        box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+    }
+    .character-portrait {
+        width: 100px;
+        height: 100px;
+        border-radius: 0.75rem;
+        object-fit: cover;
+        margin: 0 auto 0.75rem auto;
+        background-color: rgba(0,0,0,0.2);
+    }
+
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -436,6 +476,9 @@
         'Yang': 'https://i.postimg.cc/rpbm4sWw/yang.png',
         'Q': 'https://i.postimg.cc/Bb2X43jQ/q.png',
     };
+    
+    // ===== NUEVO: Placeholder para personaje no seleccionado =====
+    const CHARACTER_PLACEHOLDER = 'https://i.postimg.cc/138L412L/none.png';
 
     const ROSTER_3RD_STRIKE = [
         'Akuma', 'Alex', 'Chun-Li', 'Dudley', 'Elena', 'Hugo', 'Ibuki', 'Ken', 'Makoto', 'Necro', 'Oro', 'Remy', 'Ryu', 'Sean', 'Twelve', 'Urien', 'Yun', 'Yang', 'Q'
@@ -444,6 +487,7 @@
     // Limits
     const HISTORY_LIMIT = 7;
     const PROFILE_LIST_LIMIT = 4;
+    const VERSUS_CHAR_LIMIT = 4; 
 
     function uid(){return Math.random().toString(36).slice(2,9)}
     function nowISO(){return new Date().toISOString()}
@@ -566,7 +610,6 @@
           const j2 = players.find(p => p.id === m.jugador2Id);
           const g = players.find(p => p.id === m.ganadorId);
           const tr = document.createElement('tr');
-          // CAMBIO: Lógica para mostrar el link del replay
           const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
           tr.innerHTML = `
             <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
@@ -598,7 +641,6 @@
           const j2 = players.find(p=>p.id===m.jugador2Id);
           const g = players.find(p=>p.id===m.ganadorId);
           const tr = document.createElement('tr');
-          // CAMBIO: Lógica para mostrar el link del replay
           const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
           tr.innerHTML = `
             <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
@@ -652,7 +694,6 @@
             const j1 = players.find(p => p.id === m.jugador1Id);
             const j2 = players.find(p => p.id === m.jugador2Id);
             const g = players.find(p => p.id === m.ganadorId);
-            // CAMBIO: Lógica para mostrar el link del replay
             const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
             tableRows += `
                 <tr>
@@ -801,7 +842,6 @@
         const statsTotal = getPlayerStats(player.id, allMatches);
         const playerCharacters = getPlayerCharactersUsed(player.id, allMatches);
         
-        // CAMBIO: Crear HTML para mostrar Discord (sin enlace)
         const discordHTML = player.discordUsername ? `
             <div class="mt-2 flex items-center gap-2 text-slate-300">
                 <img src="https://i.postimg.cc/yN0DgFj7/pngimg-com-discord-PNG7.png" class="w-5 h-5"/>
@@ -1311,6 +1351,21 @@
     }
 
     function closeModal() {
+        const modal = document.querySelector('#modalRoot > div');
+        if (modal) {
+            // Check for nested modals
+            const parentModal = modal.dataset.parent;
+            if (parentModal) {
+                // Restore parent modal instead of closing everything
+                const modals = document.querySelectorAll('#modalRoot > div');
+                modals.forEach(m => {
+                    if(m.id !== parentModal) m.remove();
+                });
+                document.getElementById(parentModal).style.display = 'flex';
+                // No need to remove modal-open from body if another modal is active
+                return; 
+            }
+        }
         document.getElementById('modalRoot').innerHTML = '';
         document.body.classList.remove('modal-open');
     }
@@ -1354,7 +1409,6 @@
         const nombre = document.getElementById('newName').value.trim();
         if(!nombre){ alert('Escribe un nombre.'); return }
         const avatar = document.getElementById('newAvatar').value.trim();
-        // CAMBIO: Obtener valor de Discord
         const discordUsername = document.getElementById('newDiscord').value.trim();
         const rango = document.getElementById('newRank').value;
         const nuevo = { id: uid(), nombre: nombre[0].toUpperCase()+nombre.slice(1), avatarUrl: avatar||undefined, discordUsername: discordUsername || undefined, puntos:0, jugados:0, ganados:0, perdidos:0, rondasGanadas: 0, rondasPerdidas: 0, activos:true, rango: rango||'E' }
@@ -1404,7 +1458,6 @@
         const newName = document.getElementById('editName').value.trim();
         if (!newName) { alert('Escribe un nombre.'); return; }
         const newAvatar = document.getElementById('editAvatar').value.trim();
-        // CAMBIO: Obtener valor de Discord
         const newDiscord = document.getElementById('editDiscord').value.trim();
         const newRank = document.getElementById('editRank').value;
 
@@ -1450,7 +1503,7 @@
         input.addEventListener('change', () => {
             const charName = input.value.trim();
             if (charImageEl) {
-                charImageEl.src = CHARACTER_IMAGES[charName] || 'https://via.placeholder.com/48x48?text=??';
+                charImageEl.src = CHARACTER_IMAGES[charName] || CHARACTER_PLACEHOLDER;
             }
         });
 
@@ -1464,9 +1517,10 @@
         });
 
         function renderCharacterList(filter = '') {
+            // ===== CAMBIO: Se elimina .slice(0, 10) para mostrar la lista completa =====
             const filteredRoster = ROSTER_3RD_STRIKE.filter(char =>
                 char.toLowerCase().includes(filter.toLowerCase())
-            ).slice(0, 10); 
+            ); 
             
             list.innerHTML = '';
             if (filteredRoster.length > 0) {
@@ -1484,7 +1538,7 @@
     }
 
 
-    // New add match modal
+    // ===== MODAL DE AÑADIR PARTIDA TOTALMENTE REDISEÑADO =====
     function showAddMatch(ftType) {
         document.body.classList.add('modal-open');
         if (selectedPlayers.length < 2) { alert('Selecciona 2 jugadores en el ranking primero.'); return; }
@@ -1498,34 +1552,33 @@
                 <div id="addMatchModalContent" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     <h3 class="text-lg font-semibold">Registrar resultado FT${ftType}</h3>
                     <div class="mt-3 flex justify-around text-center border-b pb-4 mb-4">
-                        <div>
-                            <img src="${p1.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
-                            <div class="font-bold text-lg">${p1.nombre}</div>
+                        <div class="flex items-center gap-3">
+                            <img src="${p1.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-12 h-12 rounded-xl" />
+                            <div class="font-bold text-lg text-left">${p1.nombre}</div>
                         </div>
                         <div class="flex items-center text-4xl font-bold">
                             <span id="scoreP1">0</span>
-                            <span class="mx-2">-</span>
+                            <span class="mx-2 small-muted">-</span>
                             <span id="scoreP2">0</span>
                         </div>
-                        <div>
-                            <img src="${p2.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-16 h-16 rounded-xl mx-auto mb-2" />
-                            <div class="font-bold text-lg">${p2.nombre}</div>
+                        <div class="flex items-center gap-3">
+                            <div class="font-bold text-lg text-right">${p2.nombre}</div>
+                            <img src="${p2.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-12 h-12 rounded-xl" />
                         </div>
                     </div>
 
-                    <div id="roundInputContainer" class="space-y-4">
-                        </div>
+                    <div id="roundInputContainer" class="space-y-4"></div>
 
-                    <div id="gameResult" class="mt-4 hidden">
-                        <div class="text-center font-bold text-xl">Partida terminada</div>
+                    <div id="gameResult" class="mt-6 hidden">
+                        <div class="text-center font-bold text-xl text-amber-400">Partida terminada</div>
                     </div>
 
-                    <div class="mt-4" id="noteContainer">
+                    <div class="mt-6" id="noteContainer">
                       <label class="small-muted">Link de la partida (opcional)</label>
                       <input id="mNote" placeholder="URL del replay de Fightcade" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" />
                     </div>
 
-                    <div class="mt-4 flex justify-end gap-2">
+                    <div class="mt-6 flex justify-end gap-2">
                         <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button>
                         <button id="saveMatchBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar partida</button>
                     </div>
@@ -1568,25 +1621,29 @@
             round.className = 'p-4 rounded-xl bg-slate-800';
             
             round.innerHTML = `
-                <div class="font-semibold mb-2">Ronda ${currentRound}</div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2">
-                            <img id="char-img-p1-round-${currentRound}" src="${p1Char ? CHARACTER_IMAGES[p1Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
-                            <button class="winner-button w-full text-left px-3 py-2 rounded-xl border" data-winner="${p1.id}">${p1.nombre} ganó</button>
+                <div class="font-semibold mb-3 text-center text-slate-400">Ronda ${currentRound} — ¿Quién ganó?</div>
+                <div class="grid grid-cols-11 gap-4 items-start">
+                    
+                    <div class="col-span-5 space-y-2">
+                        <div class="winner-button character-winner-selector" data-winner="${p1.id}">
+                             <img id="char-img-p1-round-${currentRound}" src="${p1Char ? CHARACTER_IMAGES[p1Char] : CHARACTER_PLACEHOLDER}" class="character-portrait"/>
+                             <div class="font-semibold">${p1.nombre}</div>
                         </div>
                         <div class="character-select-container">
-                            <input id="char-p1-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p1Char || ''}"/>
+                            <input id="char-p1-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje de ${p1.nombre}" value="${p1Char || ''}"/>
                             <ul id="char-list-p1-round-${currentRound}" class="character-list hidden"></ul>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2">
-                            <img id="char-img-p2-round-${currentRound}" src="${p2Char ? CHARACTER_IMAGES[p2Char] : 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/>
-                            <button class="winner-button w-full text-left px-3 py-2 rounded-xl border" data-winner="${p2.id}">${p2.nombre} ganó</button>
+                    
+                    <div class="col-span-1 text-center pt-12 text-2xl font-bold text-slate-600">VS</div>
+                    
+                    <div class="col-span-5 space-y-2">
+                         <div class="winner-button character-winner-selector" data-winner="${p2.id}">
+                             <img id="char-img-p2-round-${currentRound}" src="${p2Char ? CHARACTER_IMAGES[p2Char] : CHARACTER_PLACEHOLDER}" class="character-portrait"/>
+                             <div class="font-semibold">${p2.nombre}</div>
                         </div>
                         <div class="character-select-container">
-                            <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje" value="${p2Char || ''}"/>
+                            <input id="char-p2-round-${currentRound}" class="char-input w-full px-3 py-2 rounded-xl bg-slate-900 border character-input" placeholder="Personaje de ${p2.nombre}" value="${p2Char || ''}"/>
                             <ul id="char-list-p2-round-${currentRound}" class="character-list hidden"></ul>
                         </div>
                     </div>
@@ -1800,17 +1857,17 @@
                     const p2Char = isP1Jugador1 ? round.p2Char : round.p1Char;
                     const key = `${p1Char} vs ${p2Char}`;
                     if (!stats.char_matchups[key]) {
-                        // CAMBIO: Añadir array de replays
-                        stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char, replays: [] };
+                        stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char, matches: {} };
                     }
-                    // CAMBIO: Guardar el replay si existe
-                    if (m.nota) {
-                        stats.char_matchups[key].replays.push(m.nota);
-                    }
+                    stats.char_matchups[key].matches[m.id] = m;
                     if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++;
                     else stats.char_matchups[key].p2_wins++;
                 });
             }
+        });
+        
+        Object.keys(stats.char_matchups).forEach(key => {
+            stats.char_matchups[key].matches = Object.values(stats.char_matchups[key].matches);
         });
         
         const sortedPlayers = [...players].sort((a,b)=> b.puntos - a.puntos);
@@ -1838,6 +1895,103 @@
         return stats;
     }
     
+    function showMatchupDetailsModal(p1, p2, matchup, parentModalId) {
+        document.getElementById(parentModalId).style.display = 'none';
+
+        const root = document.getElementById('modalRoot');
+        const modalId = `matchup-details-${uid()}`;
+        
+        let tableRowsHTML = '';
+        if (matchup.matches.length > 0) {
+            matchup.matches.forEach(m => {
+                const isP1Jugador1 = m.jugador1Id === p1.id;
+                const p1_score = isP1Jugador1 ? m.marcador.split('-')[0] : m.marcador.split('-')[1];
+                const p2_score = isP1Jugador1 ? m.marcador.split('-')[1] : m.marcador.split('-')[0];
+                const winnerName = m.ganadorId === p1.id ? p1.nombre : p2.nombre;
+                const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
+                tableRowsHTML += `
+                    <tr>
+                        <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                        <td class="px-3 py-2">${p1_score}-${p2_score}</td>
+                        <td class="px-3 py-2 font-semibold text-amber-400">${winnerName}</td>
+                        <td class="px-3 py-2">${replayLink}</td>
+                    </tr>
+                `;
+            });
+        } else {
+            tableRowsHTML = '<tr><td colspan="4" class="px-3 py-6 text-slate-400 text-center">No se encontraron partidas.</td></tr>';
+        }
+
+        const modalDiv = document.createElement('div');
+        modalDiv.id = modalId;
+        modalDiv.dataset.parent = parentModalId;
+        modalDiv.className = "fixed inset-0 z-50 flex items-center justify-center p-4";
+        modalDiv.innerHTML = `
+            <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+            <div class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl">
+                <h3 class="text-lg font-semibold mb-4">Detalle: ${p1.nombre} (${matchup.p1_char}) vs ${p2.nombre} (${matchup.p2_char})</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="text-slate-400 text-xs">
+                            <tr>
+                                <th class="px-3 py-2">Fecha</th>
+                                <th class="px-3 py-2">Marcador</th>
+                                <th class="px-3 py-2">Ganador</th>
+                                <th class="px-3 py-2">Replay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRowsHTML}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-right">
+                    <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button>
+                </div>
+            </div>
+        `;
+        root.appendChild(modalDiv);
+    }
+    
+    function showAllMatchupsModal(p1, p2, allMatchups, parentModalId, history) {
+        document.getElementById(parentModalId).style.display = 'none';
+
+        const root = document.getElementById('modalRoot');
+        const modalId = `all-matchups-${uid()}`;
+
+        let listItemsHTML = '';
+        if (allMatchups.length > 0) {
+            allMatchups.forEach(matchup => {
+                const hasReplay = matchup.matches.some(m => m.nota);
+                const row = document.createElement('div');
+                row.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg clickable-matchup-row';
+                row.innerHTML = createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], hasReplay);
+                row.onclick = () => showMatchupDetailsModal(p1, p2, matchup, modalId);
+                listItemsHTML += row.outerHTML;
+            });
+        } else {
+            listItemsHTML = '<div class="text-center small-muted py-4">No hay enfrentamientos para mostrar.</div>';
+        }
+
+        const modalDiv = document.createElement('div');
+        modalDiv.id = modalId;
+        modalDiv.dataset.parent = parentModalId;
+        modalDiv.className = "fixed inset-0 z-50 flex items-center justify-center p-4";
+        modalDiv.innerHTML = `
+            <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
+            <div class="relative w-full max-w-xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl">
+                <h3 class="text-lg font-semibold mb-4">Enfrentamientos: ${p1.nombre} vs ${p2.nombre}</h3>
+                <div id="allMatchupsContainer" class="space-y-2">
+                    ${listItemsHTML}
+                </div>
+                <div class="mt-4 text-right">
+                    <button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button>
+                </div>
+            </div>
+        `;
+        root.appendChild(modalDiv);
+    }
+
     function showVersusComparisonModal(player1Id, player2Id) {
         const p1 = players.find(p => p.id === player1Id);
         const p2 = players.find(p => p.id === player2Id);
@@ -1845,11 +1999,12 @@
 
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
+        const modalId = 'versusCompareModalContent';
 
         root.innerHTML = `
-            <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div id="${modalId}" class="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div>
-                <div id="versusCompareModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                <div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0">
                     
                     <div class="flex justify-around items-center text-center pb-4 border-b border-slate-700">
                         <div class="flex flex-col items-center">
@@ -1882,8 +2037,7 @@
             </div>
         `;
         
-        // CAMBIO: Acepta un replayUrl para hacer el label un enlace
-        const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img, replayUrl) => {
+        const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img, hasReplay) => {
             const total = p1_wins + p2_wins;
             if (total === 0) return '';
             const p1_wr = total > 0 ? (p1_wins / total * 100) : 0;
@@ -1892,21 +2046,17 @@
             const p1_img_html = p1_img ? `<img src="${p1_img}" class="w-6 h-6 rounded-md"/>` : '';
             const p2_img_html = p2_img ? `<img src="${p2_img}" class="w-6 h-6 rounded-md"/>` : '';
 
-            const labelHTML = replayUrl
-              ? `<a href="${replayUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">${label}</a>`
-              : `<span>${label}</span>`;
+            const labelHTML = `<span class="${hasReplay ? 'replay-available font-semibold' : ''}">${label}</span>`;
 
             return `
-                <div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">
-                    <div class="text-left flex items-center gap-2">
-                        <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
-                        <span class="font-semibold">${p1_wins}-${p2_wins}</span>
-                    </div>
-                    <div class="font-bold flex items-center justify-center gap-2">${p1_img_html}${labelHTML}${p2_img_html}</div>
-                    <div class="text-right flex items-center justify-end gap-2">
-                         <span class="font-semibold">${p2_wins}-${p1_wins}</span>
-                        <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
-                    </div>
+                <div class="text-left flex items-center gap-2">
+                    <span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span>
+                    <span class="font-semibold">${p1_wins}-${p2_wins}</span>
+                </div>
+                <div class="font-bold flex items-center justify-center gap-2">${p1_img_html}${labelHTML}${p2_img_html}</div>
+                <div class="text-right flex items-center justify-end gap-2">
+                     <span class="font-semibold">${p2_wins}-${p1_wins}</span>
+                    <span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span>
                 </div>
             `;
         };
@@ -1918,19 +2068,47 @@
             const history = tabId === 'liga' ? ligaMatches : allMatches;
             const stats = getVersusStats(p1.id, p2.id, history);
             const contentEl = document.getElementById('versusContent');
+            contentEl.innerHTML = ''; // Clear previous content
 
-            let contentHTML = '';
+            let setRow = document.createElement('div');
+            setRow.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg';
+            setRow.innerHTML = createStatRowHTML(stats.p1_sets_won, stats.p2_sets_won, 'Sets');
+            contentEl.appendChild(setRow);
+
+            let roundRow = document.createElement('div');
+            roundRow.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg';
+            roundRow.innerHTML = createStatRowHTML(stats.p1_rounds_won, stats.p2_rounds_won, 'Rondas');
+            contentEl.appendChild(roundRow);
             
-            contentHTML += createStatRowHTML(stats.p1_sets_won, stats.p2_sets_won, 'Sets');
-            contentHTML += createStatRowHTML(stats.p1_rounds_won, stats.p2_rounds_won, 'Rondas');
+            const allMatchups = Object.values(stats.char_matchups).sort((a,b) => (b.p1_wins + b.p2_wins) - (a.p1_wins + a.p2_wins));
+            
+            if (allMatchups.length > 0) {
+                const title = document.createElement('div');
+                title.className = 'font-semibold mt-4 mb-2 px-1';
+                title.textContent = 'Enfrentamientos vs Personajes (Rondas)';
+                contentEl.appendChild(title);
+                
+                const visibleMatchups = allMatchups.slice(0, VERSUS_CHAR_LIMIT);
 
-            if (Object.keys(stats.char_matchups).length > 0) {
-                contentHTML += '<div class="font-semibold mt-4 mb-2 px-1">Enfrentamientos vs Personajes (Rondas)</div>';
-                Object.values(stats.char_matchups).sort((a,b) => (b.p1_wins + b.p2_wins) - (a.p1_wins + a.p2_wins)).forEach(matchup => {
-                    // CAMBIO: Obtener y pasar el primer replay encontrado
-                    const firstReplay = (matchup.replays && matchup.replays.length > 0) ? matchup.replays[0] : null;
-                    contentHTML += createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], firstReplay);
+                visibleMatchups.forEach(matchup => {
+                    const hasReplay = matchup.matches.some(m => m.nota);
+                    const row = document.createElement('div');
+                    row.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg clickable-matchup-row';
+                    row.innerHTML = createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], hasReplay);
+                    row.onclick = () => showMatchupDetailsModal(p1, p2, matchup, modalId);
+                    contentEl.appendChild(row);
                 });
+
+                if (allMatchups.length > VERSUS_CHAR_LIMIT) {
+                    const moreBtnContainer = document.createElement('div');
+                    moreBtnContainer.className = 'mt-4 text-center';
+                    const moreBtn = document.createElement('button');
+                    moreBtn.className = 'px-4 py-2 rounded-2xl border';
+                    moreBtn.textContent = 'Ver más';
+                    moreBtn.onclick = () => showAllMatchupsModal(p1, p2, allMatchups, modalId, history);
+                    moreBtnContainer.appendChild(moreBtn);
+                    contentEl.appendChild(moreBtnContainer);
+                }
             }
 
             const allTopOpponents = { ...stats.p1_vs_top5, ...stats.p2_vs_top5 };
@@ -1968,19 +2146,27 @@
                 });
 
                 if (vsTop5HTML) {
-                    contentHTML += '<div class="font-semibold mt-4 mb-2 px-1">Rendimiento vs. Top 5 (Sets)</div>';
-                    contentHTML += vsTop5HTML;
+                    const title = document.createElement('div');
+                    title.className = 'font-semibold mt-4 mb-2 px-1';
+                    title.textContent = 'Rendimiento vs. Top 5 (Sets)';
+                    contentEl.appendChild(title);
+                    
+                    const top5Container = document.createElement('div');
+                    top5Container.innerHTML = vsTop5HTML;
+                    contentEl.appendChild(top5Container);
                 }
             }
             
-            contentEl.innerHTML = contentHTML || '<div class="text-center small-muted py-8">No hay enfrentamientos registrados entre estos jugadores.</div>';
+            if (contentEl.innerHTML.trim() === '') {
+                 contentEl.innerHTML = '<div class="text-center small-muted py-8">No hay enfrentamientos registrados entre estos jugadores.</div>';
+            }
         };
 
         document.getElementById('vsLigaTab').onclick = () => renderTab('liga');
         document.getElementById('vsTotalTab').onclick = () => renderTab('total');
 
         setTimeout(() => {
-            const modalContent = document.getElementById('versusCompareModalContent');
+            const modalContent = document.getElementById(modalId).querySelector('.relative');
             modalContent.classList.remove('scale-95', 'opacity-0');
             modalContent.classList.add('scale-100', 'opacity-100');
             renderTab('liga'); 
@@ -2006,8 +2192,13 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        selectedPlayers = [];
-        renderAll();
+        const activeModals = document.querySelectorAll('#modalRoot > div');
+        if (activeModals.length > 0) {
+            closeModal();
+        } else {
+            selectedPlayers = [];
+            renderAll();
+        }
       }
     });
 
