@@ -291,7 +291,96 @@
         100% { transform: rotate(360deg); }
     }
     /* =================== FIN BORDE ANIMADO TOP 3 =================== */
+
+    /* ================== INICIO ESTILOS CHECKBOX AZUL ================== */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .container {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      font-size: 18px; /* Tamaño ajustado */
+      user-select: none;
+    }
+
+    .checkmark {
+      position: relative;
+      top: 0;
+      left: 0;
+      height: 1.3em;
+      width: 1.3em;
+      border: 2px solid #414141;
+      border-radius: 5px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .container input:hover ~ .checkmark {
+      border: 2px solid #0974f1;
+    }
+
+    .container input:checked ~ .checkmark {
+      box-shadow: 0 0 20px rgba(9, 117, 241, 0.8);
+      border: 2px solid #0974f1;
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    .container .checkmark:after {
+      left: 0.45em;
+      top: 0.25em;
+      width: 0.25em;
+      height: 0.5em;
+      border: solid white;
+      border-width: 0 0.15em 0.15em 0;
+      transform: rotate(45deg);
+    }
+    /* =================== FIN ESTILOS CHECKBOX AZUL =================== */
     
+    /* ================== INICIO ESTRELLAS FUGACES ================== */
+    .blub {
+      position: absolute;
+      height: calc(3px * var(--j));
+      width: calc(1px * var(--j));
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(173, 216, 230, 1) 100%
+      );
+      box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(173, 216, 230, 0.6);
+      animation: animated-stars linear infinite reverse;
+      animation-duration: calc(40s / var(--i));
+      rotate: 25deg;
+      opacity: 0.8;
+      filter: blur(calc(0.5px * var(--j)));
+      left: calc(var(--i) * 5%);
+    }
+
+    @keyframes animated-stars {
+      from {
+        transform: translateY(300px) scale(1.2) rotate(25deg);
+      }
+      to {
+        transform: translateY(-50px) scale(0.3) rotate(25deg);
+      }
+    }
+    /* =================== FIN ESTRELLAS FUGACES =================== */
+
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -367,40 +456,54 @@
           </div>
         </div>
 
-        <div class="glass card p-4">
-          <h3 class="font-semibold">Esquema de puntuación</h3>
-          <div class="mt-3 text-center small-muted space-y-3">
-            <div>
-              <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
-              <div class="grid grid-cols-3 gap-2">
-                <div class="p-2 rounded-lg border">
-                  <div>FT3</div>
-                  <div class="font-semibold text-white">0.67</div>
-                </div>
-                <div class="p-2 rounded-lg border">
-                  <div>FT5</div>
-                  <div class="font-semibold text-white">0.6</div>
-                </div>
-                <div class="p-2 rounded-lg border">
-                  <div>FT10</div>
-                  <div class="font-semibold text-white">0.5</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="text-sm font-medium text-slate-300 mb-1">Bonificación al Ganador (por Rango)</div>
-              <div class="grid grid-cols-5 gap-2">
-                <div class="p-2 rounded-lg border"><div>A</div><div class="font-semibold text-white">+2.5</div></div>
-                <div class="p-2 rounded-lg border"><div>B</div><div class="font-semibold text-white">+2.0</div></div>
-                <div class="p-2 rounded-lg border"><div>C</div><div class="font-semibold text-white">+1.5</div></div>
-                <div class="p-2 rounded-lg border"><div>D</div><div class="font-semibold text-white">+1.0</div></div>
-                <div class="p-2 rounded-lg border"><div>E</div><div class="font-semibold text-white">+0.5</div></div>
-              </div>
-            </div>
+        <div class="glass card p-4 relative overflow-hidden">
+          <div class="absolute inset-0 z-0">
+             <div style="--i:10;--j:2;" class="blub"></div>
+             <div style="--i:12;--j:1.8;" class="blub"></div>
+             <div style="--i:16;--j:2.2;" class="blub"></div>
+             <div style="--i:9;--j:1.5;" class="blub"></div>
+             <div style="--i:7;--j:1.7;" class="blub"></div>
+             <div style="--i:18;--j:2.5;" class="blub"></div>
+             <div style="--i:20;--j:2;" class="blub"></div>
+             <div style="--i:16;--j:1.9;" class="blub"></div>
+             <div style="--i:21;--j:2.1;" class="blub"></div>
+             <div style="--i:5;--j:1.6;" class="blub"></div>
           </div>
-          <div class="mt-3 small-muted text-center text-xs leading-relaxed">
-            <b>Ganador:</b> (Puntos por W ronda) + Bonificación.<br>
-            <b>Perdedor:</b> (Puntos por W ronda).
+          <div class="relative z-10">
+            <h3 class="font-semibold">Esquema de puntuación</h3>
+            <div class="mt-3 text-center small-muted space-y-3">
+              <div>
+                <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="p-2 rounded-lg border">
+                    <div>FT3</div>
+                    <div class="font-semibold text-white">0.67</div>
+                  </div>
+                  <div class="p-2 rounded-lg border">
+                    <div>FT5</div>
+                    <div class="font-semibold text-white">0.6</div>
+                  </div>
+                  <div class="p-2 rounded-lg border">
+                    <div>FT10</div>
+                    <div class="font-semibold text-white">0.5</div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-slate-300 mb-1">Bonificación al Ganador (por Rango)</div>
+                <div class="grid grid-cols-5 gap-2">
+                  <div class="p-2 rounded-lg border"><div>A</div><div class="font-semibold text-white">+2.5</div></div>
+                  <div class="p-2 rounded-lg border"><div>B</div><div class="font-semibold text-white">+2.0</div></div>
+                  <div class="p-2 rounded-lg border"><div>C</div><div class="font-semibold text-white">+1.5</div></div>
+                  <div class="p-2 rounded-lg border"><div>D</div><div class="font-semibold text-white">+1.0</div></div>
+                  <div class="p-2 rounded-lg border"><div>E</div><div class="font-semibold text-white">+0.5</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 small-muted text-center text-xs leading-relaxed">
+              <b>Ganador:</b> (Puntos por W ronda) + Bonificación.<br>
+              <b>Perdedor:</b> (Puntos por W ronda).
+            </div>
           </div>
         </div>
       </aside>
@@ -541,7 +644,13 @@
           const tr = document.createElement('tr');
           tr.dataset.id = p.id;
           tr.className = `${isSelected ? 'selected-player-row' : ''} ${rankBorderClass} cursor-pointer`;
-          tr.innerHTML = `<td class="px-3 py-3 font-semibold flex items-center gap-2"><input type="checkbox" ${isSelected ? 'checked' : ''} class="pointer-events-none" /><span>${i+1}</span></td><td class="px-3 py-3"><div class="profile-link flex items-center gap-3"><div class="player-avatar-container"><div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center player-avatar-img-zoom">${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div><div class="font-medium text-white player-name-text">${p.nombre}</div></div></div></td><td class="px-3 py-3 font-semibold text-amber-400">${p.puntos.toFixed(2)}</td><td class="px-3 py-3">${p.jugados}</td><td class="px-3 py-3">${p.ganados}</td><td class="px-3 py-3">${p.perdidos}</td><td class="px-3 py-3"><div class="flex gap-2"><button data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button><button data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button></div></td>`;
+          tr.innerHTML = `<td class="px-3 py-3 font-semibold flex items-center gap-2">
+                            <label class="container pointer-events-none">
+                              <input ${isSelected ? 'checked' : ''} type="checkbox">
+                              <div class="checkmark"></div>
+                            </label>
+                            <span>${i+1}</span>
+                          </td><td class="px-3 py-3"><div class="profile-link flex items-center gap-3"><div class="player-avatar-container"><div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center player-avatar-img-zoom">${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div><div class="font-medium text-white player-name-text">${p.nombre}</div></div></div></td><td class="px-3 py-3 font-semibold text-amber-400">${p.puntos.toFixed(2)}</td><td class="px-3 py-3">${p.jugados}</td><td class="px-3 py-3">${p.ganados}</td><td class="px-3 py-3">${p.perdidos}</td><td class="px-3 py-3"><div class="flex gap-2"><button data-id="${p.id}" class="editPlayer px-2 py-1 rounded-xl border">Editar</button><button data-id="${p.id}" class="deletePlayer px-2 py-1 rounded-xl border text-red-300">Borrar</button></div></td>`;
           rankingBody.appendChild(tr);
         })
       }
@@ -1031,13 +1140,11 @@
         root.appendChild(modalDiv);
     }
     
-    // ================== FUNCIÓN CORREGIDA ==================
     function showAllMatchupsModal(p1, p2, allMatchups, parentModalId) {
         document.getElementById(parentModalId).style.display = 'none';
         const root = document.getElementById('modalRoot');
         const modalId = `all-matchups-${uid()}`;
     
-        // Crear el esqueleto del modal y añadirlo al DOM primero.
         const modalDiv = document.createElement('div');
         modalDiv.id = modalId;
         modalDiv.dataset.parent = parentModalId;
@@ -1045,18 +1152,14 @@
         modalDiv.innerHTML = `<div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl"><h3 class="text-lg font-semibold mb-4">Enfrentamientos: ${p1.nombre} vs ${p2.nombre}</h3><div id="allMatchupsContainer" class="space-y-2"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button></div></div>`;
         root.appendChild(modalDiv);
 
-        // Obtener el contenedor de la lista desde el modal que acabamos de añadir.
         const matchupsContainer = modalDiv.querySelector('#allMatchupsContainer');
 
-        // Ahora, crear y añadir cada fila como un elemento del DOM, asignando el evento onclick.
         if (allMatchups.length > 0) {
             allMatchups.forEach(matchup => {
                 const hasReplay = matchup.matches.some(m => m.nota);
                 const row = document.createElement('div');
                 row.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg clickable-matchup-row';
-                // La función createStatRowHTML solo genera el HTML interno del 'row'.
                 row.innerHTML = createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], hasReplay);
-                // El evento se asigna al elemento 'row', que sí se añadirá al DOM.
                 row.onclick = () => showMatchupDetailsModal(p1, p2, matchup, modalId);
                 matchupsContainer.appendChild(row);
             });
@@ -1064,7 +1167,7 @@
             matchupsContainer.innerHTML = '<div class="text-center small-muted py-4">No hay enfrentamientos.</div>';
         }
     }
-    // 
+
 
     function showVersusComparisonModal(player1Id, player2Id) {
         const p1 = players.find(p => p.id === player1Id); const p2 = players.find(p => p.id === player2Id); if (!p1 || !p2) return;
@@ -1124,7 +1227,7 @@
                     const p1Data = stats.p1_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 }, p2Data = stats.p2_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
                     if ((p1Data.wins + p1Data.losses > 0) || (p2Data.wins + p2Data.losses > 0)) {
                         const p1_wr = (p1Data.wins + p1Data.losses) > 0 ? (p1Data.wins / (p1Data.wins + p1Data.losses) * 100) : 0, p2_wr = (p2Data.wins + p2Data.losses) > 0 ? (p2Data.wins / (p2Data.wins + p2Data.losses) * 100) : 0;
-                        vsTop5HTML += `<div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg"><div class="text-left flex items-center gap-2 justify-start"><span class="font-semibold w-12 text-center">${p1Data.wins}-${p1Data.losses}</span><span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span></div><div class="font-bold">${p1Data.name}</div><div class="text-right flex items-center gap-2 justify-end"><span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span><span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span></div></div>`;
+                        vsTop5HTML += `<div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg"><div class="text-left flex items-center gap-2 justify-start"><span class="font-semibold w-12 text-center">${p1Data.wins}-${p1Data.losses}</span><span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span></div><div class="font-bold">${p1Data.name}</div><div class="text-right flex items-center justify-end"><span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span><span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span></div></div>`;
                     }
                 });
                 if (vsTop5HTML) {
@@ -1168,3 +1271,4 @@
   </script>
 </body>
 </html>
+
