@@ -380,7 +380,6 @@
       }
     }
     /* =================== FIN ESTRELLAS FUGACES =================== */
-
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans">
@@ -440,8 +439,7 @@
           </div>
           <div class="mt-2 flex flex-col gap-2">
             <button id="btnVersus" class="btn-versus px-3 py-2 rounded-2xl font-semibold">Versus</button>
-            <button id="resetLiga" class="px-3 py-2 rounded-2xl border hover:text-red-600">Resetear Liga</button>
-            <button id="clearHistory" class="px-3 py-2 rounded-2xl border hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-200">Borrar historial</button>
+            <button id="btnModoTorneo" class="px-3 py-2 rounded-2xl border border-blue-500 text-blue-300 hover:bg-blue-500/80 hover:text-white transition-colors">Modo Torneo</button>
           </div>
         </div>
         
@@ -456,21 +454,16 @@
           </div>
         </div>
 
-        <div class="glass card p-4 relative overflow-hidden">
+        <div id="liga-scheme-card" class="glass card p-4 relative overflow-hidden">
           <div class="absolute inset-0 z-0">
              <div style="--i:10;--j:2;" class="blub"></div>
              <div style="--i:12;--j:1.8;" class="blub"></div>
              <div style="--i:16;--j:2.2;" class="blub"></div>
              <div style="--i:9;--j:1.5;" class="blub"></div>
              <div style="--i:7;--j:1.7;" class="blub"></div>
-             <div style="--i:18;--j:2.5;" class="blub"></div>
-             <div style="--i:20;--j:2;" class="blub"></div>
-             <div style="--i:16;--j:1.9;" class="blub"></div>
-             <div style="--i:21;--j:2.1;" class="blub"></div>
-             <div style="--i:5;--j:1.6;" class="blub"></div>
           </div>
           <div class="relative z-10">
-            <h3 class="font-semibold">Esquema de puntuación</h3>
+            <h3 class="font-semibold">Esquema de puntuación Liga</h3>
             <div class="mt-3 text-center small-muted space-y-3">
               <div>
                 <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
@@ -506,6 +499,39 @@
             </div>
           </div>
         </div>
+
+        <div id="torneo-scheme-card" class="glass card p-4 relative overflow-hidden" style="display: none;">
+            <div class="absolute inset-0 z-0">
+               <div style="--i:18;--j:2.5;" class="blub"></div>
+               <div style="--i:20;--j:2;" class="blub"></div>
+               <div style="--i:16;--j:1.9;" class="blub"></div>
+               <div style="--i:21;--j:2.1;" class="blub"></div>
+               <div style="--i:5;--j:1.6;" class="blub"></div>
+            </div>
+            <div class="relative z-10">
+              <h3 class="font-semibold">Esquema de puntuación Torneo</h3>
+              <div class="mt-3 text-center small-muted space-y-2 px-1">
+                   <div class="grid grid-cols-1 gap-y-2 text-sm">
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">1º</span> Puesto</span> <span class="font-semibold text-white text-lg">12</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">2º</span> Puesto</span> <span class="font-semibold text-white text-lg">10</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">3º</span> Puesto</span> <span class="font-semibold text-white text-lg">8</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">4º</span> Puesto</span> <span class="font-semibold text-white text-lg">7</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">5º</span> Puesto <small class="text-slate-400">(x2)</small></span> <span class="font-semibold text-white text-lg">6</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">7º</span> Puesto <small class="text-slate-400">(x2)</small></span> <span class="font-semibold text-white text-lg">4</span></div>
+                  </div>
+              </div>
+               <div class="mt-3 small-muted text-center text-xs leading-relaxed">
+                Puntuación fija según la posición final en un torneo de doble eliminación.
+              </div>
+            </div>
+        </div>
+        
+        <div class="mt-2 text-center">
+            <button id="toggle-scheme-view-btn" class="px-4 py-2 text-sm rounded-2xl border w-full hover:border-amber-500 transition-colors">
+                Mostrar Ver Esquema de Torneo
+            </button>
+        </div>
+
       </aside>
 
       <section class="lg:col-span-3 glass card p-4">
@@ -515,8 +541,8 @@
             <thead class="text-slate-400 text-xs">
               <tr>
                 <th class="px-3 py-2">Fecha</th>
-                <th class="px-3 py-2">FT</th>
-                <th class="px-3 py-2">Jugador 1</th>
+                <th class="px-3 py-2">Tipo</th>
+                <th class="px-3 py-2">Jugador 1 / Detalle</th>
                 <th class="px-3 py-2">Jugador 2</th>
                 <th class="px-3 py-2">Marcador</th>
                 <th class="px-3 py-2">Rondas</th>
@@ -552,6 +578,28 @@
         </div>
         <div id="allHistoryMoreBtnContainer" class="mt-4 text-center"></div>
       </section>
+      
+      <section class="lg:col-span-3 glass card p-4">
+        <h3 class="font-semibold">Historial de torneo</h3>
+        <div class="mt-3 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-slate-400 text-xs">
+              <tr>
+                <th class="px-3 py-2">Fecha</th>
+                <th class="px-3 py-2">FT</th>
+                <th class="px-3 py-2">Jugador 1</th>
+                <th class="px-3 py-2">Jugador 2</th>
+                <th class="px-3 py-2">Marcador</th>
+                <th class="px-3 py-2">Rondas</th>
+                <th class="px-3 py-2">Ganador</th>
+                <th class="px-3 py-2">Replay</th>
+              </tr>
+            </thead>
+            <tbody id="torneoHistoryBody"></tbody>
+          </table>
+        </div>
+        <div id="torneoMoreBtnContainer" class="mt-4 text-center"></div>
+      </section>
     </main>
 
     <footer class="mt-6 small-muted text-center">Prototipo — Street Fighter III: 3rd Strike • Hecho con ❤️</footer>
@@ -566,6 +614,8 @@
     let ligaMatches = [];
     let allMatches = [];
     let selectedPlayers = [];
+    let modoTorneoActivo = false;
+    let torneoParticipantes = new Set();
     
     async function loadRemoteDataAndRender() {
         try {
@@ -587,6 +637,7 @@
 
     const SCORING = { ft3: { perRound: 0.67 }, ft5: { perRound: 0.6 }, ft10: { perRound: 0.5 } };
     const RANK_BONUS = { 'S': 2.5, 'A': 2.5, 'B': 2.0, 'C': 1.5, 'D': 1.0, 'E': 0.5 };
+    const TOURNAMENT_SCORING = { '1': 12, '2': 10, '3': 8, '4': 7, '5': 6, '7': 4 };
     const RANK_IMAGES = {
         'S': 'https://i.postimg.cc/RFf2SzMD/rank5.png', 'A': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
         'B': 'https://i.postimg.cc/4xxCzM5Y/rank4.png', 'C': 'https://i.postimg.cc/BvRdfvGF/rank3.png',
@@ -617,6 +668,7 @@
     const rankingBody = document.getElementById('rankingBody');
     const ligaHistoryBody = document.getElementById('ligaHistoryBody');
     const historyBody = document.getElementById('historyBody');
+    const torneoHistoryBody = document.getElementById('torneoHistoryBody');
     const metaSummary = document.getElementById('metaSummary');
     const quickAddMatchFT3Btn = document.getElementById('quickAddMatchFT3');
     const quickAddMatchFT5Btn = document.getElementById('quickAddMatchFT5');
@@ -626,6 +678,7 @@
     const top3MoreBtnContainer = document.getElementById('top3MoreBtnContainer');
     const ligaMoreBtnContainer = document.getElementById('ligaMoreBtnContainer');
     const allHistoryMoreBtnContainer = document.getElementById('allHistoryMoreBtnContainer');
+    const torneoMoreBtnContainer = document.getElementById('torneoMoreBtnContainer');
 
     function renderAll(){
       const sorted = [...players].sort((a,b)=> (b.puntos - a.puntos) || (b.ganados - a.ganados) || a.nombre.localeCompare(b.nombre))
@@ -655,14 +708,42 @@
         })
       }
       const top3 = sorted.slice(0, 3);
-      top3Container.innerHTML = top3.length > 0 ? top3.map((p, i) => `<div class="top3-player flex flex-col items-center rank-${i+1} cursor-pointer" data-id="${p.id}"><div class="top3-img-container"><div class="top3-img flex items-center justify-center bg-slate-800">${p.avatarUrl ? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-full player-avatar-img-zoom"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div class="top3-name">${p.nombre}</div><div class="top3-games">${p.ganados}-${p.perdidos}</div><div class="small-muted top3-rounds">${p.rondasGanadas}-${p.rondasPerdidas}</div></div>`).join('') : '<div class="text-center w-full small-muted">No hay jugadores.</div>';
-      top3MoreBtnContainer.innerHTML = players.length > 0 ? `<button id="showPlayerStatsBtn" class="px-4 py-2 rounded-2xl w-full border border-transparent hover:border-white transition-colors">Ver más</button>` : '';
+      top3Container.innerHTML = top3.length > 0 ? top3.map((p, i) => {
+          const playerAllMatchesInLiga = ligaMatches.filter(m => m.type !== 'tournament_placement' && (m.jugador1Id === p.id || m.jugador2Id === p.id));
+          
+          let totalGanados = 0;
+          let totalPerdidos = 0;
+          let totalRondasGanadas = 0;
+          let totalRondasPerdidas = 0;
+
+          playerAllMatchesInLiga.forEach(m => {
+              const isPlayer1 = m.jugador1Id === p.id;
+              if (m.ganadorId === p.id) {
+                  totalGanados++;
+              } else {
+                  totalPerdidos++;
+              }
+              totalRondasGanadas += isPlayer1 ? m.rondas.j1 : m.rondas.j2;
+              totalRondasPerdidas += isPlayer1 ? m.rondas.j2 : m.rondas.j1;
+          });
+
+          return `<div class="top3-player flex flex-col items-center rank-${i+1} cursor-pointer" data-id="${p.id}">
+                      <div class="top3-img-container">
+                          <div class="top3-img flex items-center justify-center bg-slate-800">${p.avatarUrl ? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-full player-avatar-img-zoom"/>` : '👤'}</div>
+                          ${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}
+                      </div>
+                      <div class="top3-name">${p.nombre}</div>
+                      <div class="top3-games">${totalGanados}-${totalPerdidos}</div>
+                      <div class="small-muted top3-rounds">${totalRondasGanadas}-${totalRondasPerdidas}</div>
+                  </div>`;
+      }).join('') : '<div class="text-center w-full small-muted">No hay jugadores.</div>';
 
       ligaHistoryBody.innerHTML = '';
       ligaMoreBtnContainer.innerHTML = '';
-      const recentLigaMatches = ligaMatches.slice(0, HISTORY_LIMIT);
-      if (ligaMatches.length === 0) {
-        ligaHistoryBody.innerHTML = '<tr><td colspan="9" class="px-3 py-6 text-slate-400 text-center">Sin resultados.</td></tr>'
+      const currentLeagueMatches = ligaMatches.filter(m => m.type !== 'tournament_match' && m.type !== 'tournament_placement');
+      const recentLigaMatches = currentLeagueMatches.slice(0, HISTORY_LIMIT);
+      if (currentLeagueMatches.length === 0) {
+        ligaHistoryBody.innerHTML = '<tr><td colspan="9" class="px-3 py-6 text-slate-400 text-center">Sin resultados de liga.</td></tr>'
       } else {
         recentLigaMatches.forEach(m => {
           const j1 = players.find(p => p.id === m.jugador1Id);
@@ -670,13 +751,25 @@
           const g = players.find(p => p.id === m.ganadorId);
           const tr = document.createElement('tr');
           const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
-          tr.innerHTML = `<td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">FT${m.ftType}</td><td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td><td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td><td class="px-3 py-2 font-medium">${m.marcador}</td><td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td><td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td><td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td><td class="px-3 py-2 small-muted">${replayLink}</td>`;
+          
+          let pointsHTML = `+${m.puntosGanador.toFixed(2)}`;
+
+          tr.innerHTML = `<td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                          <td class="px-3 py-2">${m.ftType ? `FT${m.ftType}` : 'Liga'}</td>
+                          <td class="px-3 py-2">${j1 ? j1.nombre : (m.details || '?')}</td>
+                          <td class="px-3 py-2">${j2 ? j2.nombre : ''}</td>
+                          <td class="px-3 py-2 font-medium">${m.marcador || '—'}</td>
+                          <td class="px-3 py-2">${m.rondas ? `${m.rondas.j1}-${m.rondas.j2}` : '—'}</td>
+                          <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>
+                          <td class="px-3 py-2">${pointsHTML}</td>
+                          <td class="px-3 py-2 small-muted">${replayLink}</td>`;
           ligaHistoryBody.appendChild(tr);
         })
-        if (ligaMatches.length > HISTORY_LIMIT) {
+        if (currentLeagueMatches.length > HISTORY_LIMIT) {
             ligaMoreBtnContainer.innerHTML = `<button id="showMoreLigaBtn" class="px-4 py-2 rounded-2xl border">Mostrar más</button>`;
         }
       }
+
       historyBody.innerHTML = '';
       allHistoryMoreBtnContainer.innerHTML = '';
       const recentAllMatches = allMatches.slice(0, HISTORY_LIMIT);
@@ -697,15 +790,46 @@
         }
       }
 
-      metaSummary.textContent = `${players.length} jugadores · ${ligaMatches.length} sets`
+      torneoHistoryBody.innerHTML = '';
+      torneoMoreBtnContainer.innerHTML = '';
+      const tournamentMatches = ligaMatches.filter(m => m.type === 'tournament_match');
+      const recentTournamentMatches = tournamentMatches.slice(0, HISTORY_LIMIT);
+       if (tournamentMatches.length === 0) {
+        torneoHistoryBody.innerHTML = '<tr><td colspan="8" class="px-3 py-6 text-slate-400 text-center">Sin resultados de torneo.</td></tr>';
+      } else {
+        recentTournamentMatches.forEach(m => {
+          const j1 = players.find(p => p.id === m.jugador1Id);
+          const j2 = players.find(p => p.id === m.jugador2Id);
+          const g = players.find(p => p.id === m.ganadorId);
+          const tr = document.createElement('tr');
+          const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
+          tr.innerHTML = `<td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                          <td class="px-3 py-2">FT${m.ftType}</td>
+                          <td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td>
+                          <td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td>
+                          <td class="px-3 py-2 font-medium">${m.marcador}</td>
+                          <td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>
+                          <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>
+                          <td class="px-3 py-2 small-muted">${replayLink}</td>`;
+          torneoHistoryBody.appendChild(tr);
+        });
+        if (tournamentMatches.length > HISTORY_LIMIT) {
+            torneoMoreBtnContainer.innerHTML = `<button id="showMoreTorneoBtn" class="px-4 py-2 rounded-2xl border">Mostrar más</button>`;
+        }
+      }
+
+      metaSummary.textContent = `${players.length} jugadores · ${currentLeagueMatches.length} sets de liga`
 
       document.querySelectorAll('.deletePlayer').forEach(btn=>btn.onclick = ()=>{ if(confirm('¿Borrar jugador? El cambio será temporal.')){ players = players.filter(p=>p.id!==btn.dataset.id); renderAll()} })
       document.querySelectorAll('.editPlayer').forEach(btn=>btn.onclick = ()=>{ showEditPlayer(btn.dataset.id); })
       if(document.getElementById('showMoreLigaBtn')) {
-        document.getElementById('showMoreLigaBtn').onclick = () => showHistoryModal(ligaMatches, 'Historial de liga actual');
+        document.getElementById('showMoreLigaBtn').onclick = () => showHistoryModal(currentLeagueMatches, 'Historial de liga actual');
       }
       if(document.getElementById('showMoreAllHistoryBtn')) {
         document.getElementById('showMoreAllHistoryBtn').onclick = () => showHistoryModal(allMatches, 'Historial de partidas');
+      }
+      if(document.getElementById('showMoreTorneoBtn')) {
+        document.getElementById('showMoreTorneoBtn').onclick = () => showHistoryModal(tournamentMatches, 'Historial de Torneo');
       }
       if(document.getElementById('showPlayerStatsBtn')) {
         document.getElementById('showPlayerStatsBtn').onclick = showPlayerStatsModal;
@@ -714,21 +838,44 @@
         el.onclick = (e) => showPlayerProfile(e.currentTarget.dataset.id);
       });
       updateQuickMatchButtons();
+      updateTorneoButtonState();
     }
 
     function showHistoryModal(history, title) {
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
-        const isLigaHistory = title === 'Historial de liga actual';
+        const showRoundsColumn = title.includes('liga') || title.includes('Torneo');
+        const showPointsColumn = title.includes('liga') || title.includes('partidas');
+
         let tableRows = history.map(m => {
             const j1 = players.find(p => p.id === m.jugador1Id);
             const j2 = players.find(p => p.id === m.jugador2Id);
             const g = players.find(p => p.id === m.ganadorId);
             const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
-            return `<tr><td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">FT${m.ftType}</td><td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td><td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td><td class="px-3 py-2 font-medium">${m.marcador}</td>${isLigaHistory ? `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>` : ''}<td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td><td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td><td class="px-3 py-2 small-muted">${replayLink}</td></tr>`;
+            
+            let pointsHTML = '';
+            if (m.type === 'tournament_placement') {
+                pointsHTML = `<span title="${m.details}">+${m.puntosGanador}</span>`;
+            } else if (m.puntosGanador > 0) {
+                pointsHTML = `+${m.puntosGanador.toFixed(2)}`;
+            } else {
+                pointsHTML = '0';
+            }
+
+            return `<tr>
+                      <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                      <td class="px-3 py-2">${m.ftType ? `FT${m.ftType}` : 'Evento'}</td>
+                      <td class="px-3 py-2">${j1 ? j1.nombre : (m.details || '?')}</td>
+                      <td class="px-3 py-2">${j2 ? j2.nombre : ''}</td>
+                      <td class="px-3 py-2 font-medium">${m.marcador || '—'}</td>
+                      ${showRoundsColumn ? `<td class="px-3 py-2">${m.rondas ? `${m.rondas.j1}-${m.rondas.j2}` : '—'}</td>` : ''}
+                      <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : (m.type === 'tournament_placement' ? 'Varios' : '?')}</td>
+                      ${showPointsColumn ? `<td class="px-3 py-2">${pointsHTML}</td>` : ''}
+                      <td class="px-3 py-2 small-muted">${replayLink}</td>
+                    </tr>`;
         }).join('');
 
-        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="historyModalContent" class="relative w-full max-w-4xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">${title}</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">FT</th><th class="px-3 py-2">Jugador 1</th><th class="px-3 py-2">Jugador 2</th><th class="px-3 py-2">Marcador</th>${isLigaHistory ? `<th class="px-3 py-2">Rondas</th>` : ''}<th class="px-3 py-2">Ganador</th><th class="px-3 py-2">Puntos</th><th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRows}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="historyModalContent" class="relative w-full max-w-4xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">${title}</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">Tipo</th><th class="px-3 py-2">Jugador 1 / Detalle</th><th class="px-3 py-2">Jugador 2</th><th class="px-3 py-2">Marcador</th>${showRoundsColumn ? `<th class="px-3 py-2">Rondas</th>` : ''}<th class="px-3 py-2">Ganador</th>${showPointsColumn ? `<th class="px-3 py-2">Puntos</th>` : ''}<th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRows}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
         setTimeout(() => { document.getElementById('historyModalContent').classList.remove('scale-95', 'opacity-0'); }, 10);
     }
 
@@ -754,12 +901,20 @@
         document.body.classList.add('modal-open');
         const player = players.find(p => p.id === playerId);
         if (!player) return;
-        const statsLiga = getPlayerStats(player.id, ligaMatches);
-        const statsTotal = getPlayerStats(player.id, allMatches);
-        const playerCharacters = getPlayerCharactersUsed(player.id, allMatches);
+
+        const playerAllMatches = ligaMatches.filter(m => m.type !== 'tournament_placement' && (m.jugador1Id === playerId || m.jugador2Id === playerId));
+        const playerCharacters = getPlayerCharactersUsed(player.id, playerAllMatches);
+        
+        const playerLeagueMatches = playerAllMatches.filter(m => m.type !== 'tournament_match');
+        const playerTournamentMatches = playerAllMatches.filter(m => m.type === 'tournament_match');
+
+        const statsLiga = getPlayerStats(player.id, playerLeagueMatches);
+        const statsTorneo = getPlayerStats(player.id, playerTournamentMatches);
+        const statsTotal = getPlayerStats(player.id, playerAllMatches);
+
         const discordHTML = player.discordUsername ? `<div class="mt-2 flex items-center gap-2 text-slate-300"><img src="https://i.postimg.cc/yN0DgFj7/pngimg-com-discord-PNG7.png" class="w-5 h-5"/><span class="font-semibold">${player.discordUsername}</span></div>` : '';
         const root = document.getElementById('modalRoot');
-        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-between items-start pb-4 border-b border-slate-700"><div class="flex items-center gap-6"><div class="flex-shrink-0 relative profile-link"><img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}</div><div><div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>${discordHTML}<div class="mt-2 text-md"><span class="font-bold">Sets:</span> ${statsTotal.sets.ganados}-${statsTotal.sets.perdidos}<span class="mx-2 small-muted">|</span><span class="font-bold">Rondas:</span> ${statsTotal.rondas.ganadas}-${statsTotal.rondas.perdidas}</div></div></div><div id="playerCharactersContainer" class="flex flex-col items-center"><div class="text-xs small-muted">Personajes</div><div class="flex items-center gap-2 mt-2"></div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button><button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button></div><div id="profileContent" class="mt-4"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-between items-start pb-4 border-b border-slate-700"><div class="flex items-center gap-6"><div class="flex-shrink-0 relative profile-link"><img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}</div><div><div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>${discordHTML}<div class="mt-2 text-md"><span class="font-bold">Sets (Liga):</span> ${statsLiga.sets.ganados}-${statsLiga.sets.perdidos}<span class="mx-2 small-muted">|</span><span class="font-bold">Rondas (Liga):</span> ${statsLiga.rondas.ganadas}-${statsLiga.rondas.perdidas}</div></div></div><div id="playerCharactersContainer" class="flex flex-col items-center"><div class="text-xs small-muted">Personajes</div><div class="flex items-center gap-2 mt-2"></div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de Liga</button><button id="torneoTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de Torneo</button><button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial Total</button></div><div id="profileContent" class="mt-4"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
 
         function renderCharacters() {
             const container = document.querySelector('#playerCharactersContainer div.flex');
@@ -767,34 +922,45 @@
         }
 
         function renderTab(tabId) {
-          const stats = tabId === 'ligaTab' ? statsLiga : statsTotal;
-          document.getElementById('ligaTab').classList.toggle('active', tabId === 'ligaTab');
-          document.getElementById('totalTab').classList.toggle('active', tabId !== 'ligaTab');
-          const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
-          const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
-          const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
-          let vsOpponentsHTML = Object.keys(stats.vsOpponents).length > 0 ? `<h4 class="font-semibold mb-2">Vs. Oponentes</h4><div class="space-y-2">${sortedOpponents.slice(0, PROFILE_LIST_LIMIT).map(([oppId, oppStats]) => {
-              const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
-              const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
-              const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
-              return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-id="${oppId}"><img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/><div class="flex-1"><div class="font-bold player-name-text">${opponent.nombre}</div></div><div class="text-right"><div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div><div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div><div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div></div></div>`;
-          }).join('')}</div>${sortedOpponents.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreOpponentsBtn" class="px-4 py-2 rounded-2xl border">Ver más oponentes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de oponentes.</div>';
-          
-          const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
-          let vsCharactersHTML = Object.keys(stats.vsCharacters).length > 0 ? `<h4 class="font-semibold mb-2 mt-4">Vs. Personajes</h4><div class="space-y-2">${sortedCharacters.slice(0, PROFILE_LIST_LIMIT).map(([char, charStats]) => {
-              const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
-              const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
-              return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold">${char}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
-          }).join('')}</div>${sortedCharacters.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreCharactersBtn" class="px-4 py-2 rounded-2xl border">Ver más personajes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de personajes.</div>';
-          
-          document.getElementById('profileContent').innerHTML = `<div class="flex justify-around text-center mb-4"><div><div class="text-xs small-muted">Sets (G/P)</div><div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div><div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div></div><div><div class="text-xs small-muted">Rondas (G/P)</div><div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div><div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div></div></div>${vsOpponentsHTML}${vsCharactersHTML}`;
-          document.querySelectorAll('.clickable-profile-opponent').forEach(el => { el.onclick = () => showPlayerProfile(el.dataset.id); });
-          if(document.getElementById('showMoreOpponentsBtn')) { document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent'); }
-          if(document.getElementById('showMoreCharactersBtn')) { document.getElementById('showMoreCharactersBtn').onclick = () => showDetailedVsModal(player, stats, 'character'); }
+            document.getElementById('ligaTab').classList.toggle('active', tabId === 'liga');
+            document.getElementById('torneoTab').classList.toggle('active', tabId === 'torneo');
+            document.getElementById('totalTab').classList.toggle('active', tabId === 'total');
+            
+            let stats;
+            if (tabId === 'liga') stats = statsLiga;
+            else if (tabId === 'torneo') stats = statsTorneo;
+            else stats = statsTotal;
+
+            const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
+            const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
+            const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos));
+            let vsOpponentsHTML = Object.keys(stats.vsOpponents).length > 0 ? `<h4 class="font-semibold mb-2">Vs. Oponentes</h4><div class="space-y-2">${sortedOpponents.slice(0, PROFILE_LIST_LIMIT).map(([oppId, oppStats]) => {
+                const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
+                const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-id="${oppId}"><img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/><div class="flex-1"><div class="font-bold player-name-text">${opponent.nombre}</div></div><div class="text-right"><div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div><div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div><div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div></div></div>`;
+            }).join('')}</div>${sortedOpponents.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreOpponentsBtn" class="px-4 py-2 rounded-2xl border">Ver más oponentes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de oponentes.</div>';
+            
+            const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos));
+            let vsCharactersHTML = Object.keys(stats.vsCharacters).length > 0 ? `<h4 class="font-semibold mb-2 mt-4">Vs. Personajes</h4><div class="space-y-2">${sortedCharacters.slice(0, PROFILE_LIST_LIMIT).map(([char, charStats]) => {
+                const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold">${char}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
+            }).join('')}</div>${sortedCharacters.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreCharactersBtn" class="px-4 py-2 rounded-2xl border">Ver más personajes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de personajes.</div>';
+            
+            const statsSummaryHTML = `<div class="flex justify-around text-center mb-4"><div><div class="text-xs small-muted">Sets (G/P)</div><div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div><div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div></div><div><div class="text-xs small-muted">Rondas (G/P)</div><div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div><div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div></div></div>`;
+
+            document.getElementById('profileContent').innerHTML = `${statsSummaryHTML}${vsOpponentsHTML}${vsCharactersHTML}`;
+            document.querySelectorAll('.clickable-profile-opponent').forEach(el => { el.onclick = () => showPlayerProfile(el.dataset.id); });
+            if(document.getElementById('showMoreOpponentsBtn')) { document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent'); }
+            if(document.getElementById('showMoreCharactersBtn')) { document.getElementById('showMoreCharactersBtn').onclick = () => showDetailedVsModal(player, stats, 'character'); }
         }
-        document.getElementById('ligaTab').onclick = () => renderTab('ligaTab');
-        document.getElementById('totalTab').onclick = () => renderTab('totalTab');
-        setTimeout(() => { document.getElementById('playerProfileModalContent').classList.remove('scale-95', 'opacity-0'); renderCharacters(); renderTab('ligaTab'); }, 10);
+
+        document.getElementById('ligaTab').onclick = () => renderTab('liga');
+        document.getElementById('torneoTab').onclick = () => renderTab('torneo');
+        document.getElementById('totalTab').onclick = () => renderTab('total');
+
+        setTimeout(() => { document.getElementById('playerProfileModalContent').classList.remove('scale-95', 'opacity-0'); renderCharacters(); renderTab('liga'); }, 10);
     }
     
     function showDetailedVsModal(player, stats, type) {
@@ -803,7 +969,7 @@
         let title, listItemsHTML = '';
         if (type === 'opponent') {
             title = `Historial contra oponentes de ${player.nombre}`;
-            listItemsHTML = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados).map(([oppId, oppStats]) => {
+            listItemsHTML = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos)).map(([oppId, oppStats]) => {
                 const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
                 const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
                 const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
@@ -811,7 +977,7 @@
             }).join('');
         } else if (type === 'character') {
             title = `Historial contra personajes de ${player.nombre}`;
-            listItemsHTML = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados).map(([char, charStats]) => {
+            listItemsHTML = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos)).map(([char, charStats]) => {
                 const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
                 const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
                 return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold">${char}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
@@ -842,17 +1008,29 @@
         matchesHistory.forEach(m => {
             const isPlayer1 = m.jugador1Id === playerId;
             if (!isPlayer1 && m.jugador2Id !== playerId) return;
+
             const isWinner = m.ganadorId === playerId;
-            stats.sets.jugados++; if (isWinner) stats.sets.ganados++; else stats.sets.perdidos++;
-            let playerRoundsWon = 0, playerRoundsLost = 0;
+            
+            stats.sets.jugados++;
+            if (isWinner) stats.sets.ganados++; else stats.sets.perdidos++;
+
+            let playerRoundsWonInSet = isPlayer1 ? m.rondas.j1 : m.rondas.j2;
+            let playerRoundsLostInSet = isPlayer1 ? m.rondas.j2 : m.rondas.j1;
+            stats.rondas.ganadas += playerRoundsWonInSet;
+            stats.rondas.perdidas += playerRoundsLostInSet;
+            
             const opponentId = isPlayer1 ? m.jugador2Id : m.jugador1Id;
-            if (!stats.vsOpponents[opponentId]) stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
-            stats.vsOpponents[opponentId].setsJugados++;
-            if (isWinner) stats.vsOpponents[opponentId].setsGanados++; else stats.vsOpponents[opponentId].setsPerdidos++;
+            if (opponentId) {
+                if (!stats.vsOpponents[opponentId]) stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
+                stats.vsOpponents[opponentId].setsJugados++;
+                if (isWinner) stats.vsOpponents[opponentId].setsGanados++; else stats.vsOpponents[opponentId].setsPerdidos++;
+                stats.vsOpponents[opponentId].rondasGanadas += playerRoundsWonInSet;
+                stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLostInSet;
+            }
+            
             if (m.roundsData) {
                 m.roundsData.forEach(round => {
                     const opponentChar = isPlayer1 ? round.p2Char : round.p1Char;
-                    if (round.winnerId === playerId) playerRoundsWon++; else playerRoundsLost++;
                     if (opponentChar) {
                         if (!stats.vsCharacters[opponentChar]) stats.vsCharacters[opponentChar] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0, setsHandled: new Set() };
                         if (round.winnerId === playerId) stats.vsCharacters[opponentChar].rondasGanadas++; else stats.vsCharacters[opponentChar].rondasPerdidas++;
@@ -864,10 +1042,6 @@
                     }
                 });
             }
-            stats.rondas.ganadas += playerRoundsWon;
-            stats.rondas.perdidas += playerRoundsLost;
-            stats.vsOpponents[opponentId].rondasGanadas += playerRoundsWon;
-            stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLost;
         });
         Object.values(stats.vsCharacters).forEach(charStats => delete charStats.setsHandled);
         return stats;
@@ -995,7 +1169,7 @@
         const [p1, p2] = selectedPlayers.map(id => players.find(p => p.id === id));
         let carouselTrackHTML = [...Object.values(CHARACTER_IMAGES), ...Object.values(CHARACTER_IMAGES)].map(url => `<img src="${url}" />`).join('');
         const root = document.getElementById('modalRoot');
-        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="addMatchModalContent" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold">Registrar resultado FT${ftType}</h3><div class="mt-3 flex justify-around text-center border-b pb-4 mb-4"><div class="flex items-center gap-3"><img src="${p1.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-12 h-12 rounded-xl" /><div class="font-bold text-lg text-left">${p1.nombre}</div></div><div class="flex items-center text-4xl font-bold"><span id="scoreP1">0</span><span class="mx-2 small-muted">-</span><span id="scoreP2">0</span></div><div class="flex items-center gap-3"><div class="font-bold text-lg text-right">${p2.nombre}</div><img src="${p2.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-12 h-12 rounded-xl" /></div></div><div id="roundInputContainer" class="space-y-4"></div><div id="gameResult" class="mt-6 hidden"><div class="text-center font-bold text-xl text-amber-400">Partida terminada</div></div><div class="mt-6" id="noteContainer"><label class="small-muted">Link de la partida (opcional)</label><input id="mNote" placeholder="URL del replay de Fightcade" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" /></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button><button id="saveMatchBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar partida</button></div></div></div>`;
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="addMatchModalContent" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold">Registrar resultado FT${ftType} ${modoTorneoActivo ? '<span class="text-blue-400 font-bold">(TORNEO)</span>' : ''}</h3><div class="mt-3 flex justify-around text-center border-b pb-4 mb-4"><div class="flex items-center gap-3"><img src="${p1.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-12 h-12 rounded-xl" /><div class="font-bold text-lg text-left">${p1.nombre}</div></div><div class="flex items-center text-4xl font-bold"><span id="scoreP1">0</span><span class="mx-2 small-muted">-</span><span id="scoreP2">0</span></div><div class="flex items-center gap-3"><div class="font-bold text-lg text-right">${p2.nombre}</div><img src="${p2.avatarUrl || 'https://via.placeholder.com/60x60?text=👤'}" class="w-12 h-12 rounded-xl" /></div></div><div id="roundInputContainer" class="space-y-4"></div><div id="gameResult" class="mt-6 hidden"><div class="text-center font-bold text-xl text-amber-400">Partida terminada</div></div><div class="mt-6" id="noteContainer"><label class="small-muted">Link de la partida (opcional)</label><input id="mNote" placeholder="URL del replay de Fightcade" class="w-full px-3 py-2 rounded-xl bg-slate-900 border" /></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button><button id="saveMatchBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar partida</button></div></div></div>`;
         setTimeout(() => { document.getElementById('addMatchModalContent').classList.remove('scale-95', 'opacity-0'); }, 10);
         
         const scoreP1El = document.getElementById('scoreP1');
@@ -1043,12 +1217,28 @@
             const rondasGanador = Math.max(roundsWonByP1, roundsWonByP2);
             const rondasPerdedor = Math.min(roundsWonByP1, roundsWonByP2);
             const perdedor = players.find(p => p.id === perdedorId);
-            const puntos = calcularPuntos(ftType, rondasGanador, rondasPerdedor, perdedor.rango);
-            const nuevoMatch = { id: uid(), fechaISO: nowISO(), ftType, jugador1Id: p1.id, jugador2Id: p2.id, marcador: `${roundsWonByP1}-${roundsWonByP2}`, rondas: { j1: roundsWonByP1, j2: roundsWonByP2 }, ganadorId, puntosGanador: puntos.ganador, puntosPerdedor: puntos.perdedor, nota: mNote.value.trim() || undefined, roundsData };
-            ligaMatches.unshift(nuevoMatch); allMatches.unshift(nuevoMatch);
+            
+            let puntos = { ganador: 0, perdedor: 0 };
+            let matchType = 'liga';
+
+            if (modoTorneoActivo) {
+                torneoParticipantes.add(p1.id);
+                torneoParticipantes.add(p2.id);
+                matchType = 'tournament_match';
+            } else {
+                puntos = calcularPuntos(ftType, rondasGanador, rondasPerdedor, perdedor.rango);
+            }
+
+            const nuevoMatch = { id: uid(), fechaISO: nowISO(), ftType, jugador1Id: p1.id, jugador2Id: p2.id, marcador: `${roundsWonByP1}-${roundsWonByP2}`, rondas: { j1: roundsWonByP1, j2: roundsWonByP2 }, ganadorId, puntosGanador: puntos.ganador, puntosPerdedor: puntos.perdedor, nota: mNote.value.trim() || undefined, roundsData, type: matchType };
+            
+            ligaMatches.unshift(nuevoMatch);
+            allMatches.unshift(nuevoMatch);
+
             players = players.map(p => {
-                if (p.id === ganadorId) { p.puntos = (p.puntos || 0) + puntos.ganador; p.ganados = (p.ganados || 0) + 1; p.rondasGanadas = (p.rondasGanadas || 0) + rondasGanador; p.rondasPerdidas = (p.rondasPerdidas || 0) + rondasPerdedor; } 
-                else if (p.id === perdedorId) { p.puntos = (p.puntos || 0) + puntos.perdedor; p.perdidos = (p.perdidos || 0) + 1; p.rondasGanadas = (p.rondasGanadas || 0) + rondasPerdedor; p.rondasPerdidas = (p.rondasPerdidas || 0) + rondasGanador; }
+                if (!modoTorneoActivo) {
+                    if (p.id === ganadorId) { p.puntos = (p.puntos || 0) + puntos.ganador; p.ganados = (p.ganados || 0) + 1; p.rondasGanadas = (p.rondasGanadas || 0) + rondasGanador; p.rondasPerdidas = (p.rondasPerdidas || 0) + rondasPerdedor; } 
+                    else if (p.id === perdedorId) { p.puntos = (p.puntos || 0) + puntos.perdedor; p.perdidos = (p.perdidos || 0) + 1; p.rondasGanadas = (p.rondasGanadas || 0) + rondasPerdedor; p.rondasPerdidas = (p.rondasPerdidas || 0) + rondasGanador; }
+                }
                 if (p.id === p1.id || p.id === p2.id) p.jugados = (p.jugados || 0) + 1;
                 return p;
             });
@@ -1058,10 +1248,12 @@
     function showSettings(){
       document.body.classList.add('modal-open');
       const root = document.getElementById('modalRoot');
-      root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="settingsModalContent" class="relative w-full max-w-xl glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold">Ajustes</h3><div class="mt-3 space-y-2"><div class="flex flex-col gap-2"><button id="exportJson" class="px-3 py-2 rounded-2xl border">Exportar JSON de la Sesión</button><label class="cursor-pointer inline-flex items-center justify-center gap-2 px-3 py-2 rounded-2xl border">Importar JSON para esta Sesión <input id="importFile" type="file" accept="application/json" class="hidden" /></label></div></div><div class="mt-3 small-muted">Los datos importados o exportados solo son válidos para la sesión actual y se perderán al refrescar.</div><div class="mt-4 flex justify-end gap-2"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+      root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="settingsModalContent" class="relative w-full max-w-xl glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold">Ajustes</h3><div class="mt-3 space-y-2"><div class="flex flex-col gap-2"><button id="exportJson" class="px-3 py-2 rounded-2xl border">Exportar JSON de la Sesión</button><label class="cursor-pointer inline-flex items-center justify-center gap-2 px-3 py-2 rounded-2xl border">Importar JSON para esta Sesión <input id="importFile" type="file" accept="application/json" class="hidden" /></label></div></div><div class="mt-3 small-muted">Los datos importados o exportados solo son válidos para la sesión actual y se perderán al refrescar.</div><div class="mt-6 border-t border-slate-700 pt-4"><h4 class="font-semibold text-red-400 mb-2">Acciones de Administrador</h4><div class="flex flex-col gap-2"><button id="resetLigaBtnModal" class="px-3 py-2 rounded-2xl border border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-white transition-colors">Resetear Liga y Torneo Actual</button><button id="clearHistoryBtnModal" class="px-3 py-2 rounded-2xl border border-red-600 text-red-400 hover:bg-red-600 hover:text-white transition-colors">Borrar Historial Completo</button></div><div class="mt-2 small-muted text-xs">Estas acciones son temporales para la sesión actual.</div></div><div class="mt-4 flex justify-end gap-2"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
       setTimeout(() => { document.getElementById('settingsModalContent').classList.remove('scale-95', 'opacity-0'); }, 10);
       document.getElementById('exportJson').onclick = exportJson;
       document.getElementById('importFile').onchange = (e) => { if (e.target.files && e.target.files[0]) importJson(e.target.files[0]); };
+      document.getElementById('resetLigaBtnModal').onclick = () => { if(confirm('¿Resetear puntos y estadísticas de la Liga y Torneo actual? El cambio será temporal.')) { resetLigaYTorneo(); closeModal(); } };
+      document.getElementById('clearHistoryBtnModal').onclick = () => { if(confirm('¿Borrar TODO el historial? El cambio será temporal e irreversible para esta sesión.')) { clearHistory(); closeModal(); } };
     }
     function exportJson(){
       const blob = new Blob([JSON.stringify({players, allMatches, ligaMatches},null,2)],{type:'application/json'});
@@ -1078,14 +1270,12 @@
         }catch(e){alert('No se pudo leer el archivo JSON')}
       }; r.readAsText(file)
     }
-    function resetLiga(){
-      if(!confirm('¿Resetear puntos y estadísticas de la liga actual? El cambio será temporal.')) return;
+    function resetLigaYTorneo(){
       players.forEach(p => { p.puntos=0; p.jugados=0; p.ganados=0; p.perdidos=0; p.rondasGanadas=0; p.rondasPerdidas=0; });
       ligaMatches = [];
       renderAll()
     }
     function clearHistory(){
-      if(!confirm('¿Borrar TODO el historial? El cambio será temporal e irreversible para esta sesión.')) return;
       allMatches=[]; ligaMatches=[];
       players.forEach(p => { p.puntos=0; p.jugados=0; p.ganados=0; p.perdidos=0; p.rondasGanadas=0; p.rondasPerdidas=0; });
       renderAll()
@@ -1250,22 +1440,204 @@
         }, 10);
     }
     
+    function showTournamentModal() {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        
+        const participants = Array.from(torneoParticipantes).map(id => players.find(p => p.id === id));
+        
+        let participantRows = participants.map(player => {
+            return `<tr data-id="${player.id}">
+                      <td class="px-3 py-3"><div class="flex items-center gap-3"><div class="player-avatar-container"><div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center">${player.avatarUrl? `<img src="${player.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}</div></div><div><div class="font-medium text-white">${player.nombre}</div></div></div></td>
+                      <td class="px-3 py-3">
+                        <select class="position-select w-full px-3 py-2 rounded-xl bg-slate-900 border">
+                          <option value="">Asignar Puesto...</option>
+                          <option value="1">1º Puesto (+12 Pts)</option>
+                          <option value="2">2º Puesto (+10 Pts)</option>
+                          <option value="3">3º Puesto (+8 Pts)</option>
+                          <option value="4">4º Puesto (+7 Pts)</option>
+                          <option value="5">5º Puesto (+6 Pts)</option>
+                          <option value="7">7º Puesto (+4 Pts)</option>
+                        </select>
+                      </td>
+                    </tr>`;
+        }).join('');
+
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="tournamentModalContent" class="relative w-full max-w-lg max-h-[90vh] flex flex-col glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-2">Asignar Posiciones de Torneo</h3><p class="small-muted mb-4">Asigna la posición final a los 8 mejores jugadores del torneo.</p><div class="overflow-y-auto"><table class="w-full text-left text-sm"><thead><tr class="text-slate-400 text-xs"><th class="px-3 py-2">Jugador</th><th class="px-3 py-2">Posición</th></tr></thead><tbody>${participantRows}</tbody></table></div><div id="validation-error" class="text-red-400 text-sm mt-2 text-center h-4"></div><div class="mt-auto pt-4 flex justify-end gap-2"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cancelar</button><button id="saveTournamentBtn" class="px-3 py-2 rounded-2xl bg-gray-500 opacity-50 pointer-events-none font-semibold">Guardar Resultados</button></div></div></div>`;
+        setTimeout(() => document.getElementById('tournamentModalContent').classList.remove('scale-95', 'opacity-0'), 10);
+        
+        document.querySelectorAll('.position-select').forEach(select => select.onchange = validatePositions);
+        document.getElementById('saveTournamentBtn').onclick = saveTournamentResults;
+
+        function validatePositions() {
+            const assignments = {};
+            const positionLimits = { '1': 1, '2': 1, '3': 1, '4': 1, '5': 2, '7': 2 };
+            let isValid = true;
+            let totalAssigned = 0;
+            
+            document.querySelectorAll('.position-select').forEach(select => {
+                const pos = select.value;
+                if (pos) {
+                    totalAssigned++;
+                    assignments[pos] = (assignments[pos] || 0) + 1;
+                }
+            });
+
+            const errorDiv = document.getElementById('validation-error');
+            errorDiv.textContent = '';
+            for (const pos in assignments) {
+                if (assignments[pos] > positionLimits[pos]) {
+                    errorDiv.textContent = `Error: Solo puede haber ${positionLimits[pos]} jugador(es) en ${pos}º Puesto.`;
+                    isValid = false;
+                }
+            }
+
+            const saveBtn = document.getElementById('saveTournamentBtn');
+            if (isValid && totalAssigned === 8) {
+                saveBtn.classList.remove('bg-gray-500', 'opacity-50', 'pointer-events-none');
+                saveBtn.classList.add('bg-blue-500', 'text-white');
+            } else {
+                saveBtn.classList.add('bg-gray-500', 'opacity-50', 'pointer-events-none');
+                saveBtn.classList.remove('bg-blue-500', 'text-white');
+                if (isValid && totalAssigned !== 8) {
+                    errorDiv.textContent = `Debes asignar exactamente 8 posiciones. Has asignado ${totalAssigned}.`;
+                }
+            }
+        }
+        
+        function saveTournamentResults() {
+            if (!confirm('¿Estás seguro de que quieres aplicar estos puntos de torneo? Esta acción es temporal para la sesión.')) return;
+            
+            let historyLog = [];
+            document.querySelectorAll('#tournamentModalContent tbody tr').forEach(row => {
+                const playerId = row.dataset.id;
+                const position = row.querySelector('.position-select').value;
+                if (position && TOURNAMENT_SCORING[position]) {
+                    const points = TOURNAMENT_SCORING[position];
+                    const player = players.find(p => p.id === playerId);
+                    if (player) {
+                        player.puntos += points;
+                        historyLog.push({name: player.nombre, pos: position});
+                    }
+                }
+            });
+            
+            historyLog.sort((a,b) => a.pos - b.pos);
+
+            ligaMatches.unshift({
+                id: uid(), fechaISO: nowISO(), type: 'tournament_placement',
+                details: historyLog.map(e => `${e.name} (${e.pos}º)`).join(', '),
+                ganadorId: null, 
+                puntosGanador: historyLog.reduce((sum, p) => sum + (TOURNAMENT_SCORING[p.pos] || 0), 0)
+            });
+
+            closeModal();
+            finalizarTorneo(true);
+        }
+    }
+
+    function toggleModoTorneo() {
+        if (!modoTorneoActivo) {
+            // Activar modo torneo
+            modoTorneoActivo = true;
+            torneoParticipantes.clear();
+            alert('Modo Torneo ACTIVADO. Las partidas registradas no sumarán puntos hasta que finalice el torneo.');
+        } else {
+            // Mostrar modal de acciones de finalización
+            showTournamentActionModal();
+        }
+        updateTorneoButtonState();
+    }
+
+    function showTournamentActionModal() {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="tournamentActionModal" class="relative w-full max-w-sm glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold text-center mb-4">Gestionar Torneo</h3><div class="flex flex-col gap-3"><button id="finalizeBtn" class="px-4 py-3 rounded-2xl bg-blue-500 text-white font-semibold">Finalizar y Asignar Puntos</button><button id="cancelBtn" class="px-4 py-3 rounded-2xl bg-red-600 text-white font-semibold">Cancelar Torneo</button><button onclick="closeModal()" class="px-4 py-3 rounded-2xl border font-semibold">Continuar Torneo</button></div></div></div>`;
+        setTimeout(() => document.getElementById('tournamentActionModal').classList.remove('scale-95', 'opacity-0'), 10);
+
+        document.getElementById('finalizeBtn').onclick = () => {
+            closeModal();
+            if (torneoParticipantes.size === 0) {
+                alert("No se han registrado partidas. No hay participantes para asignar puntos. El torneo se cancelará.");
+                cancelarTorneo();
+            } else {
+                showTournamentModal();
+            }
+        };
+        document.getElementById('cancelBtn').onclick = () => {
+            if (confirm("¿Seguro que quieres cancelar el torneo? Las partidas registradas no sumarán puntos y el modo se desactivará.")) {
+                cancelarTorneo();
+            }
+        };
+    }
+
+    function cancelarTorneo() {
+        modoTorneoActivo = false;
+        torneoParticipantes.clear();
+        alert('Torneo cancelado.');
+        updateTorneoButtonState();
+        closeModal();
+    }
+
+    function finalizarTorneo(puntosAsignados) {
+        modoTorneoActivo = false;
+        torneoParticipantes.clear();
+        if (puntosAsignados) {
+            alert('Modo Torneo FINALIZADO. Los puntos han sido asignados.');
+        }
+        updateTorneoButtonState();
+        renderAll();
+    }
+
+    function updateTorneoButtonState() {
+        const btn = document.getElementById('btnModoTorneo');
+        if (modoTorneoActivo) {
+            btn.textContent = 'Finalizar Torneo';
+            btn.classList.add('bg-blue-500', 'text-white');
+        } else {
+            btn.textContent = 'Modo Torneo';
+            btn.classList.remove('bg-blue-500', 'text-white');
+        }
+    }
+
+
     // --- EVENTOS ---
-    document.addEventListener('DOMContentLoaded', loadRemoteDataAndRender);
-    document.getElementById('btnAddPlayer').onclick = showAddPlayer;
-    document.getElementById('quickAddMatchFT3').onclick = () => showAddMatch(3);
-    document.getElementById('quickAddMatchFT5').onclick = () => showAddMatch(5);
-    document.getElementById('quickAddMatchFT10').onclick = () => showAddMatch(10);
-    document.getElementById('btnSettings').onclick = showSettings;
-    document.getElementById('resetLiga').onclick = resetLiga;
-    document.getElementById('clearHistory').onclick = clearHistory;
-    document.getElementById('btnVersus').onclick = () => { if (selectedPlayers.length === 2) showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]); };
-    document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (document.querySelectorAll('#modalRoot > div').length > 0) closeModal();
-        else { selectedPlayers = []; renderAll(); }
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+        loadRemoteDataAndRender();
+        
+        const toggleSchemeBtn = document.getElementById('toggle-scheme-view-btn');
+        const ligaSchemeCard = document.getElementById('liga-scheme-card');
+        const torneoSchemeCard = document.getElementById('torneo-scheme-card');
+
+        if (toggleSchemeBtn) {
+            toggleSchemeBtn.onclick = () => {
+                const isLigaVisible = ligaSchemeCard.style.display !== 'none';
+                if (isLigaVisible) {
+                    ligaSchemeCard.style.display = 'none';
+                    torneoSchemeCard.style.display = 'block';
+                    toggleSchemeBtn.textContent = 'Mostrar Ver Esquema de Liga';
+                } else {
+                    ligaSchemeCard.style.display = 'block';
+                    torneoSchemeCard.style.display = 'none';
+                    toggleSchemeBtn.textContent = 'Mostrar Ver Esquema de Torneo';
+                }
+            };
+        }
+        
+        document.getElementById('btnAddPlayer').onclick = showAddPlayer;
+        document.getElementById('quickAddMatchFT3').onclick = () => showAddMatch(3);
+        document.getElementById('quickAddMatchFT5').onclick = () => showAddMatch(5);
+        document.getElementById('quickAddMatchFT10').onclick = () => showAddMatch(10);
+        document.getElementById('btnSettings').onclick = showSettings;
+        document.getElementById('btnVersus').onclick = () => { if (selectedPlayers.length === 2) showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]); };
+        document.getElementById('btnModoTorneo').onclick = toggleModoTorneo;
+        document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            if (document.querySelectorAll('#modalRoot > div').length > 0) closeModal();
+            else { selectedPlayers = []; renderAll(); }
+          }
+        });
     });
 
   </script>
